@@ -8,12 +8,9 @@
                     <div class="flex items-center gap-2">
                         <label class="text-sm font-medium text-gray-700">Template:</label>
                         <select x-model="selectedTemplate" class="rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm">
-                            <option value="modern">Modern</option>
-                            <option value="creative">Creative (Premium)</option>
-                            <option value="executive">Executive</option>
-                            <option value="professional">Professional</option>
-                            <option value="classic">Classic</option>
-                            <option value="minimal">Minimal</option>
+                            <option value="executive">The Executive</option>
+                            <option value="modern">The Modern</option>
+                            <option value="creative">The Creative</option>
                         </select>
                     </div>
                     <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition-colors">
@@ -183,65 +180,58 @@
                 <!-- Preview Column (Right) -->
                 <div class="w-full lg:w-1/2 bg-gray-200 rounded-xl p-8 overflow-y-auto h-[calc(100vh-12rem)] shadow-inner flex justify-center">
                     <!-- A4 Resume Page -->
-                    <div class="bg-white w-[210mm] min-h-[297mm] shadow-2xl text-gray-800 text-sm leading-normal transform scale-90 origin-top" id="resume-preview"
-                         :class="{
-                             'p-[20mm]': selectedTemplate === 'modern' || selectedTemplate === 'minimal',
-                             'p-0': selectedTemplate === 'classic'
-                         }">
+                    <div class="bg-white w-[210mm] min-h-[297mm] shadow-2xl text-gray-800 transform scale-90 origin-top" id="resume-preview">
                         
-                        <!-- MODERN TEMPLATE (REDESIGNED) -->
-                        <template x-if="selectedTemplate === 'modern'">
-                            <div class="p-[20mm]">
+                        <!-- THE EXECUTIVE TEMPLATE -->
+                        <template x-if="selectedTemplate === 'executive'">
+                            <div class="p-[25mm] font-serif text-gray-900 h-full">
                                 <!-- Header -->
-                                <div class="mb-8">
-                                    <h1 class="text-4xl font-bold text-gray-900 mb-2" x-text="resume.personal.name || 'Your Name'"></h1>
-                                    <p class="text-xl text-blue-600 font-medium mb-4" x-text="resume.personal.title || 'Professional Title'"></p>
+                                <div class="text-center border-b-2 border-gray-900 pb-6 mb-6">
+                                    <h1 class="text-4xl font-bold tracking-wide uppercase mb-2" x-text="resume.personal.name || 'YOUR NAME'"></h1>
+                                    <p class="text-lg font-medium italic mb-3" x-text="resume.personal.title || 'Professional Title'"></p>
                                     
-                                    <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
+                                    <div class="flex justify-center flex-wrap gap-4 text-sm">
                                         <template x-if="resume.personal.email">
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                            <span class="flex items-center gap-1">
                                                 <span x-text="resume.personal.email"></span>
-                                            </div>
+                                            </span>
                                         </template>
                                         <template x-if="resume.personal.phone">
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                                            <span class="flex items-center gap-1">
+                                                <span>•</span>
                                                 <span x-text="resume.personal.phone"></span>
-                                            </div>
+                                            </span>
                                         </template>
                                         <template x-if="resume.personal.location">
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                                            <span class="flex items-center gap-1">
+                                                <span>•</span>
                                                 <span x-text="resume.personal.location"></span>
-                                            </div>
+                                            </span>
                                         </template>
                                     </div>
                                 </div>
 
-                                <div class="h-px bg-blue-600 mb-6"></div>
-
                                 <!-- Summary -->
                                 <template x-if="resume.personal.summary">
                                     <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Professional Summary</h2>
-                                        <p class="text-sm text-gray-700 leading-relaxed" x-text="resume.personal.summary"></p>
+                                        <h2 class="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 pb-1">Professional Summary</h2>
+                                        <p class="text-sm leading-relaxed text-justify" x-text="resume.personal.summary"></p>
                                     </div>
                                 </template>
 
                                 <!-- Experience -->
                                 <template x-if="resume.experience.length > 0">
                                     <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Work Experience</h2>
+                                        <h2 class="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-4 pb-1">Experience</h2>
                                         <div class="space-y-5">
                                             <template x-for="job in resume.experience">
                                                 <div>
                                                     <div class="flex justify-between items-baseline mb-1">
-                                                        <h3 class="text-base font-bold text-gray-900" x-text="job.title"></h3>
-                                                        <span class="text-xs text-gray-500" x-text="job.date"></span>
+                                                        <h3 class="font-bold text-lg" x-text="job.title"></h3>
+                                                        <span class="text-sm font-medium" x-text="job.date"></span>
                                                     </div>
-                                                    <div class="text-sm text-blue-600 font-medium mb-2" x-text="job.company"></div>
-                                                    <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
+                                                    <div class="text-base italic mb-2" x-text="job.company"></div>
+                                                    <p class="text-sm leading-relaxed text-justify whitespace-pre-line" x-text="job.description"></p>
                                                 </div>
                                             </template>
                                         </div>
@@ -251,15 +241,15 @@
                                 <!-- Education -->
                                 <template x-if="resume.education.length > 0">
                                     <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Education</h2>
+                                        <h2 class="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-4 pb-1">Education</h2>
                                         <div class="space-y-3">
                                             <template x-for="edu in resume.education">
                                                 <div class="flex justify-between items-baseline">
                                                     <div>
-                                                        <h3 class="text-sm font-bold text-gray-900" x-text="edu.degree"></h3>
-                                                        <div class="text-sm text-gray-600" x-text="edu.school"></div>
+                                                        <h3 class="font-bold" x-text="edu.school"></h3>
+                                                        <div class="text-sm italic" x-text="edu.degree"></div>
                                                     </div>
-                                                    <span class="text-xs text-gray-500" x-text="edu.date"></span>
+                                                    <span class="text-sm" x-text="edu.date"></span>
                                                 </div>
                                             </template>
                                         </div>
@@ -269,10 +259,10 @@
                                 <!-- Skills -->
                                 <template x-if="resume.skills.length > 0">
                                     <div>
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Skills</h2>
-                                        <div class="flex flex-wrap gap-2">
+                                        <h2 class="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 pb-1">Core Competencies</h2>
+                                        <div class="flex flex-wrap gap-x-6 gap-y-2">
                                             <template x-for="skill in resume.skills">
-                                                <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full" x-text="skill"></span>
+                                                <span class="text-sm relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-gray-500" x-text="skill"></span>
                                             </template>
                                         </div>
                                     </div>
@@ -280,37 +270,59 @@
                             </div>
                         </template>
 
-                        <!-- CREATIVE TEMPLATE (REDESIGNED) -->
-                        <template x-if="selectedTemplate === 'creative'">
-                            <div class="grid grid-cols-3 gap-0">
+                        <!-- THE MODERN TEMPLATE -->
+                        <template x-if="selectedTemplate === 'modern'">
+                            <div class="grid grid-cols-12 h-full min-h-[297mm]">
                                 <!-- Sidebar -->
-                                <div class="col-span-1 bg-teal-600 text-white p-8">
-                                    <h1 class="text-2xl font-bold mb-1 break-words" x-text="resume.personal.name || 'Your Name'"></h1>
-                                    <p class="text-sm opacity-90 mb-6" x-text="resume.personal.title || 'Professional Title'"></p>
-
-                                    <!-- Contact -->
-                                    <div class="mb-6">
-                                        <h2 class="text-xs font-bold uppercase tracking-wider mb-3 opacity-90">Contact</h2>
-                                        <div class="space-y-2 text-xs">
+                                <div class="col-span-4 bg-slate-100 p-8 pt-12 border-r border-slate-200">
+                                    <!-- Contact Info -->
+                                    <div class="mb-10">
+                                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Contact</h3>
+                                        <div class="space-y-3 text-sm text-slate-700">
                                             <template x-if="resume.personal.email">
-                                                <div class="break-all" x-text="resume.personal.email"></div>
+                                                <div class="flex flex-col">
+                                                    <span class="text-xs text-slate-500">Email</span>
+                                                    <span class="font-medium break-words" x-text="resume.personal.email"></span>
+                                                </div>
                                             </template>
                                             <template x-if="resume.personal.phone">
-                                                <div x-text="resume.personal.phone"></div>
+                                                <div class="flex flex-col">
+                                                    <span class="text-xs text-slate-500">Phone</span>
+                                                    <span class="font-medium" x-text="resume.personal.phone"></span>
+                                                </div>
                                             </template>
                                             <template x-if="resume.personal.location">
-                                                <div x-text="resume.personal.location"></div>
+                                                <div class="flex flex-col">
+                                                    <span class="text-xs text-slate-500">Location</span>
+                                                    <span class="font-medium" x-text="resume.personal.location"></span>
+                                                </div>
                                             </template>
                                         </div>
                                     </div>
 
-                                    <!-- Skills -->
+                                    <!-- Education (Sidebar) -->
+                                    <template x-if="resume.education.length > 0">
+                                        <div class="mb-10">
+                                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Education</h3>
+                                            <div class="space-y-4">
+                                                <template x-for="edu in resume.education">
+                                                    <div>
+                                                        <div class="font-bold text-slate-800 text-sm" x-text="edu.degree"></div>
+                                                        <div class="text-xs text-slate-600" x-text="edu.school"></div>
+                                                        <div class="text-xs text-slate-500 mt-1" x-text="edu.date"></div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <!-- Skills (Sidebar) -->
                                     <template x-if="resume.skills.length > 0">
                                         <div>
-                                            <h2 class="text-xs font-bold uppercase tracking-wider mb-3 opacity-90">Skills</h2>
-                                            <div class="space-y-2">
+                                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Skills</h3>
+                                            <div class="flex flex-wrap gap-2">
                                                 <template x-for="skill in resume.skills">
-                                                    <div class="bg-white/20 px-3 py-1.5 rounded text-xs font-medium" x-text="skill"></div>
+                                                    <span class="px-2 py-1 bg-white border border-slate-200 rounded text-xs font-medium text-slate-700" x-text="skill"></span>
                                                 </template>
                                             </div>
                                         </div>
@@ -318,565 +330,134 @@
                                 </div>
 
                                 <!-- Main Content -->
-                                <div class="col-span-2 p-8">
+                                <div class="col-span-8 p-8 pt-12">
+                                    <!-- Header -->
+                                    <div class="mb-10">
+                                        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-2" x-text="resume.personal.name || 'Your Name'"></h1>
+                                        <p class="text-xl text-primary-600 font-medium" x-text="resume.personal.title || 'Professional Title'"></p>
+                                    </div>
+
                                     <!-- Summary -->
                                     <template x-if="resume.personal.summary">
-                                        <div class="mb-6">
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 pb-2 border-b-2 border-teal-600">Profile</h2>
-                                            <p class="text-sm text-gray-700 leading-relaxed" x-text="resume.personal.summary"></p>
+                                        <div class="mb-8">
+                                            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                                <span class="w-8 h-0.5 bg-primary-600"></span>
+                                                Profile
+                                            </h2>
+                                            <p class="text-sm text-slate-600 leading-relaxed" x-text="resume.personal.summary"></p>
                                         </div>
                                     </template>
 
                                     <!-- Experience -->
                                     <template x-if="resume.experience.length > 0">
-                                        <div class="mb-6">
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 pb-2 border-b-2 border-teal-600">Experience</h2>
-                                            <div class="space-y-4">
+                                        <div>
+                                            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 flex items-center gap-2">
+                                                <span class="w-8 h-0.5 bg-primary-600"></span>
+                                                Experience
+                                            </h2>
+                                            <div class="space-y-8 border-l-2 border-slate-100 ml-3 pl-8 relative">
                                                 <template x-for="job in resume.experience">
-                                                    <div>
+                                                    <div class="relative">
+                                                        <!-- Timeline Dot -->
+                                                        <span class="absolute -left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-primary-600 bg-white"></span>
+                                                        
                                                         <div class="flex justify-between items-baseline mb-1">
-                                                            <h3 class="font-bold text-gray-900" x-text="job.title"></h3>
-                                                            <span class="text-xs text-gray-500 whitespace-nowrap ml-4" x-text="job.date"></span>
+                                                            <h3 class="font-bold text-lg text-slate-900" x-text="job.title"></h3>
+                                                            <span class="text-xs font-bold text-primary-600 bg-primary-50 px-2 py-1 rounded" x-text="job.date"></span>
                                                         </div>
-                                                        <div class="text-sm text-teal-700 font-medium mb-2" x-text="job.company"></div>
-                                                        <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
+                                                        <div class="text-sm font-medium text-slate-500 mb-3" x-text="job.company"></div>
+                                                        <p class="text-sm text-slate-600 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
                                                     </div>
                                                 </template>
                                             </div>
                                         </div>
                                     </template>
+                                </div>
+                            </div>
+                        </template>
 
-                                    <!-- Education -->
-                                    <template x-if="resume.education.length > 0">
-                                        <div>
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 pb-2 border-b-2 border-teal-600">Education</h2>
-                                            <div class="space-y-3">
-                                                <template x-for="edu in resume.education">
-                                                    <div class="flex justify-between items-baseline">
+                        <!-- THE CREATIVE TEMPLATE -->
+                        <template x-if="selectedTemplate === 'creative'">
+                            <div class="h-full min-h-[297mm] bg-white">
+                                <!-- Header Block -->
+                                <div class="bg-gray-900 text-white p-10 flex justify-between items-end">
+                                    <div>
+                                        <h1 class="text-5xl font-black tracking-tighter leading-none mb-2" x-text="resume.personal.name || 'YOUR NAME'"></h1>
+                                        <p class="text-xl font-light tracking-widest text-gray-400" x-text="resume.personal.title || 'PROFESSIONAL TITLE'"></p>
+                                    </div>
+                                    <div class="text-right text-sm font-light text-gray-400 space-y-1">
+                                        <template x-if="resume.personal.email"><div x-text="resume.personal.email"></div></template>
+                                        <template x-if="resume.personal.phone"><div x-text="resume.personal.phone"></div></template>
+                                        <template x-if="resume.personal.location"><div x-text="resume.personal.location"></div></template>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-3 gap-8 p-10">
+                                    <!-- Left Column -->
+                                    <div class="col-span-2 space-y-8">
+                                        <!-- Summary -->
+                                        <template x-if="resume.personal.summary">
+                                            <div>
+                                                <h2 class="text-2xl font-black text-gray-900 mb-4">HELLO.</h2>
+                                                <p class="text-gray-600 leading-relaxed" x-text="resume.personal.summary"></p>
+                                            </div>
+                                        </template>
+
+                                        <!-- Experience -->
+                                        <template x-if="resume.experience.length > 0">
+                                            <div>
+                                                <h2 class="text-2xl font-black text-gray-900 mb-6 border-b-4 border-gray-900 pb-2 inline-block">EXPERIENCE</h2>
+                                                <div class="space-y-8">
+                                                    <template x-for="job in resume.experience">
                                                         <div>
-                                                            <h3 class="text-sm font-bold text-gray-900" x-text="edu.degree"></h3>
-                                                            <div class="text-sm text-gray-600" x-text="edu.school"></div>
+                                                            <div class="flex items-baseline gap-3 mb-1">
+                                                                <h3 class="text-xl font-bold text-gray-900" x-text="job.title"></h3>
+                                                                <span class="text-sm font-bold text-gray-400" x-text="job.date"></span>
+                                                            </div>
+                                                            <div class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2" x-text="job.company"></div>
+                                                            <p class="text-gray-600 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
                                                         </div>
-                                                        <span class="text-xs text-gray-500" x-text="edu.date"></span>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                        </template>
-
-                        <!-- EXECUTIVE TEMPLATE (REDESIGNED) -->
-                        <template x-if="selectedTemplate === 'executive'">
-                            <div class="p-[20mm]">
-                                <!-- Header -->
-                                <div class="text-center mb-8 pb-6 border-b-2 border-gray-900">
-                                    <h1 class="text-4xl font-bold text-gray-900 tracking-tight mb-2" x-text="resume.personal.name || 'Your Name'"></h1>
-                                    <p class="text-lg text-gray-700 font-medium mb-4" x-text="resume.personal.title || 'Professional Title'"></p>
-                                    
-                                    <div class="flex justify-center flex-wrap gap-6 text-xs text-gray-600">
-                                        <template x-if="resume.personal.email">
-                                            <span x-text="resume.personal.email"></span>
-                                        </template>
-                                        <template x-if="resume.personal.phone">
-                                            <span x-text="resume.personal.phone"></span>
-                                        </template>
-                                        <template x-if="resume.personal.location">
-                                            <span x-text="resume.personal.location"></span>
-                                        </template>
-                                    </div>
-                                </div>
-
-                                <!-- Summary -->
-                                <template x-if="resume.personal.summary">
-                                    <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Executive Summary</h2>
-                                        <p class="text-sm text-gray-700 leading-relaxed" x-text="resume.personal.summary"></p>
-                                    </div>
-                                </template>
-
-                                <!-- Experience -->
-                                <template x-if="resume.experience.length > 0">
-                                    <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Professional Experience</h2>
-                                        <div class="space-y-5">
-                                            <template x-for="job in resume.experience">
-                                                <div>
-                                                    <div class="flex justify-between items-baseline mb-1">
-                                                        <h3 class="text-base font-bold text-gray-900" x-text="job.title"></h3>
-                                                        <span class="text-xs text-gray-500 font-medium" x-text="job.date"></span>
-                                                    </div>
-                                                    <div class="text-sm text-gray-700 font-semibold mb-2" x-text="job.company"></div>
-                                                    <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
+                                                    </template>
                                                 </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-
-                                <!-- Education & Skills Grid -->
-                                <div class="grid grid-cols-2 gap-8">
-                                    <template x-if="resume.education.length > 0">
-                                        <div>
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Education</h2>
-                                            <div class="space-y-3">
-                                                <template x-for="edu in resume.education">
-                                                    <div>
-                                                        <h3 class="font-bold text-gray-900 text-sm" x-text="edu.degree"></h3>
-                                                        <div class="text-xs text-gray-600" x-text="edu.school"></div>
-                                                        <div class="text-xs text-gray-500" x-text="edu.date"></div>
-                                                    </div>
-                                                </template>
                                             </div>
-                                        </div>
-                                    </template>
-
-                                    <template x-if="resume.skills.length > 0">
-                                        <div>
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Key Skills</h2>
-                                            <div class="flex flex-wrap gap-2">
-                                                <template x-for="skill in resume.skills">
-                                                    <span class="text-xs text-gray-700 bg-gray-100 px-3 py-1 rounded" x-text="skill"></span>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                        </template>
-
-                        <!-- PROFESSIONAL TEMPLATE (REDESIGNED) -->
-                        <template x-if="selectedTemplate === 'professional'">
-                            <div class="p-[20mm]">
-                                <!-- Header with subtle background -->
-                                <div class="bg-gray-50 p-6 -mx-[20mm] -mt-[20mm] mb-6">
-                                    <div class="max-w-[170mm] mx-auto">
-                                        <h1 class="text-3xl font-bold text-gray-900 mb-1" x-text="resume.personal.name || 'Your Name'"></h1>
-                                        <p class="text-lg text-gray-600" x-text="resume.personal.title || 'Professional Title'"></p>
+                                        </template>
                                     </div>
-                                </div>
 
-                                <!-- Contact Info -->
-                                <div class="flex flex-wrap gap-6 text-sm text-gray-600 mb-6 pb-4 border-b border-gray-300">
-                                    <template x-if="resume.personal.email">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                                            <span x-text="resume.personal.email"></span>
-                                        </div>
-                                    </template>
-                                    <template x-if="resume.personal.phone">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-                                            <span x-text="resume.personal.phone"></span>
-                                        </div>
-                                    </template>
-                                    <template x-if="resume.personal.location">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-                                            <span x-text="resume.personal.location"></span>
-                                        </div>
-                                    </template>
-                                </div>
-
-                                <!-- Summary -->
-                                <template x-if="resume.personal.summary">
-                                    <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Professional Summary</h2>
-                                        <p class="text-sm text-gray-700 leading-relaxed" x-text="resume.personal.summary"></p>
-                                    </div>
-                                </template>
-
-                                <!-- Experience -->
-                                <template x-if="resume.experience.length > 0">
-                                    <div class="mb-6">
-                                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Work Experience</h2>
-                                        <div class="space-y-4">
-                                            <template x-for="job in resume.experience">
-                                                <div class="pl-4 border-l-2 border-gray-300">
-                                                    <div class="flex justify-between items-baseline mb-1">
-                                                        <h3 class="font-bold text-gray-900" x-text="job.title"></h3>
-                                                        <span class="text-xs text-gray-500 whitespace-nowrap ml-4" x-text="job.date"></span>
-                                                    </div>
-                                                    <div class="text-sm text-gray-600 font-medium mb-2" x-text="job.company"></div>
-                                                    <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-
-                                <!-- Education & Skills -->
-                                <div class="grid grid-cols-5 gap-6">
-                                    <template x-if="resume.education.length > 0">
-                                        <div class="col-span-3">
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Education</h2>
-                                            <div class="space-y-2">
-                                                <template x-for="edu in resume.education">
-                                                    <div>
-                                                        <h3 class="font-bold text-gray-900 text-sm" x-text="edu.degree"></h3>
-                                                        <div class="text-xs text-gray-600 flex justify-between">
-                                                            <span x-text="edu.school"></span>
-                                                            <span x-text="edu.date"></span>
+                                    <!-- Right Column -->
+                                    <div class="space-y-8">
+                                        <!-- Education -->
+                                        <template x-if="resume.education.length > 0">
+                                            <div>
+                                                <h2 class="text-lg font-black text-gray-900 mb-4 border-b-2 border-gray-900 pb-1">EDUCATION</h2>
+                                                <div class="space-y-4">
+                                                    <template x-for="edu in resume.education">
+                                                        <div>
+                                                            <div class="font-bold text-gray-900" x-text="edu.degree"></div>
+                                                            <div class="text-sm text-gray-500" x-text="edu.school"></div>
+                                                            <div class="text-xs text-gray-400 mt-1" x-text="edu.date"></div>
                                                         </div>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-
-                                    <template x-if="resume.skills.length > 0">
-                                        <div class="col-span-2">
-                                            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Skills</h2>
-                                            <div class="flex flex-wrap gap-2">
-                                                <template x-for="skill in resume.skills">
-                                                    <span class="bg-gray-900 text-white px-2 py-1 rounded text-xs font-medium" x-text="skill"></span>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                        </template>
-
-                        <!-- CLASSIC TEMPLATE (REDESIGNED) -->
-                        <!-- CLASSIC TEMPLATE (REDESIGNED) -->
-                        <template x-if="selectedTemplate === 'classic'">
-                            <div class="grid grid-cols-3">
-                                <!-- Sidebar -->
-                                <div class="col-span-1 bg-gray-800 text-white p-8">
-                                    <h1 class="text-2xl font-bold mb-2" x-text="resume.personal.name || 'Your Name'"></h1>
-                                    <p class="text-sm opacity-90 mb-6" x-text="resume.personal.title || 'Professional Title'"></p>
-
-                                    <!-- Contact -->
-                                    <div class="mb-6">
-                                        <h2 class="text-xs font-bold uppercase tracking-wider mb-3 opacity-80">Contact</h2>
-                                        <div class="space-y-2 text-xs">
-                                            <template x-if="resume.personal.email">
-                                                <div class="break-all" x-text="resume.personal.email"></div>
-                                            </template>
-                                            <template x-if="resume.personal.phone">
-                                                <div x-text="resume.personal.phone"></div>
-                                            </template>
-                                            <template x-if="resume.personal.location">
-                                                <div x-text="resume.personal.location"></div>
-                                            </template>
-                                        </div>
-                                    </div>
-
-                                    <!-- Skills -->
-                                    <template x-if="resume.skills.length > 0">
-                                        <div>
-                                            <h2 class="text-xs font-bold uppercase tracking-wider mb-3 opacity-80">Skills</h2>
-                                            <div class="space-y-1 text-xs">
-                                                <template x-for="skill in resume.skills">
-                                                    <div class="py-1" x-text="skill"></div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-
-                                <!-- Main Content -->
-                                <div class="col-span-2 p-8">
-                                    <!-- Summary -->
-                                    <template x-if="resume.personal.summary">
-                                        <div class="mb-6">
-                                            <h2 class="text-sm font-bold text-gray-900 mb-3 uppercase">Summary</h2>
-                                            <p class="text-sm text-gray-700 leading-relaxed" x-text="resume.personal.summary"></p>
-                                        </div>
-                                    </template>
-
-                                    <!-- Experience -->
-                                    <template x-if="resume.experience.length > 0">
-                                        <div class="mb-6">
-                                            <h2 class="text-sm font-bold text-gray-900 mb-4 uppercase">Experience</h2>
-                                            <div class="space-y-4">
-                                                <template x-for="job in resume.experience">
-                                                    <div>
-                                                        <h3 class="font-bold text-gray-900" x-text="job.title"></h3>
-                                                        <div class="text-xs text-gray-600 mb-2">
-                                                            <span x-text="job.company"></span> | <span x-text="job.date"></span>
-                                                        </div>
-                                                        <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-
-                                    <!-- Education -->
-                                    <template x-if="resume.education.length > 0">
-                                        <div>
-                                            <h2 class="text-sm font-bold text-gray-900 mb-3 uppercase">Education</h2>
-                                            <div class="space-y-3">
-                                                <template x-for="edu in resume.education">
-                                                    <div>
-                                                        <h3 class="font-bold text-gray-900 text-sm" x-text="edu.degree"></h3>
-                                                        <div class="text-xs text-gray-600">
-                                                            <span x-text="edu.school"></span> | <span x-text="edu.date"></span>
-                                                        </div>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                        </template>
-
-                        <!-- MINIMAL TEMPLATE (REDESIGNED) -->
-                        <template x-if="selectedTemplate === 'minimal'">
-                            <div class="p-[20mm]">
-                                <!-- Header -->
-                                <div class="text-center mb-8 pb-6 border-b border-gray-300">
-                                    <h1 class="text-3xl font-light text-gray-900 tracking-wide mb-2" x-text="resume.personal.name || 'Your Name'"></h1>
-                                    <p class="text-sm text-gray-600 uppercase tracking-widest mb-4" x-text="resume.personal.title || 'Professional Title'"></p>
-                                    
-                                    <div class="flex justify-center gap-4 text-xs text-gray-500">
-                                        <template x-if="resume.personal.email">
-                                            <span x-text="resume.personal.email"></span>
-                                        </template>
-                                        <template x-if="resume.personal.phone">
-                                            <template x-if="resume.personal.email">
-                                                <span>•</span>
-                                            </template>
-                                            <span x-text="resume.personal.phone"></span>
-                                        </template>
-                                        <template x-if="resume.personal.location">
-                                            <template x-if="resume.personal.email || resume.personal.phone">
-                                                <span>•</span>
-                                            </template>
-                                            <span x-text="resume.personal.location"></span>
-                                        </template>
-                                    </div>
-                                </div>
-
-                                <!-- Summary -->
-                                <template x-if="resume.personal.summary">
-                                    <div class="mb-8 text-center">
-                                        <p class="text-sm text-gray-700 italic leading-relaxed" x-text="resume.personal.summary"></p>
-                                    </div>
-                                </template>
-
-                                <!-- Experience -->
-                                <template x-if="resume.experience.length > 0">
-                                    <div class="mb-8">
-                                        <h2 class="text-sm font-light text-gray-900 uppercase tracking-widest mb-6 text-center">Experience</h2>
-                                        <div class="space-y-6">
-                                            <template x-for="job in resume.experience">
-                                                <div class="text-center">
-                                                    <h3 class="font-medium text-gray-900 mb-1" x-text="job.title"></h3>
-                                                    <div class="text-xs text-gray-600 mb-3">
-                                                        <span class="italic" x-text="job.company"></span> • <span x-text="job.date"></span>
-                                                    </div>
-                                                    <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line" x-text="job.description"></p>
+                                                    </template>
                                                 </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
+                                            </div>
+                                        </template>
 
-                                <!-- Education -->
-                                <template x-if="resume.education.length > 0">
-                                    <div class="mb-8">
-                                        <h2 class="text-sm font-light text-gray-900 uppercase tracking-widest mb-6 text-center">Education</h2>
-                                        <div class="space-y-4">
-                                            <template x-for="edu in resume.education">
-                                                <div class="text-center">
-                                                    <h3 class="font-medium text-gray-900" x-text="edu.degree"></h3>
-                                                    <div class="text-xs text-gray-600">
-                                                        <span class="italic" x-text="edu.school"></span> • <span x-text="edu.date"></span>
-                                                    </div>
+                                        <!-- Skills -->
+                                        <template x-if="resume.skills.length > 0">
+                                            <div>
+                                                <h2 class="text-lg font-black text-gray-900 mb-4 border-b-2 border-gray-900 pb-1">SKILLS</h2>
+                                                <div class="flex flex-col gap-2">
+                                                    <template x-for="skill in resume.skills">
+                                                        <span class="text-sm font-medium text-gray-600 border-l-4 border-gray-200 pl-3 py-1" x-text="skill"></span>
+                                                    </template>
                                                 </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-
-                                <!-- Skills -->
-                                <template x-if="resume.skills.length > 0">
-                                    <div>
-                                        <h2 class="text-sm font-light text-gray-900 uppercase tracking-widest mb-4 text-center">Skills</h2>
-                                        <div class="text-center">
-                                            <template x-for="(skill, index) in resume.skills">
-                                                <span>
-                                                    <span class="text-gray-700 text-xs" x-text="skill"></span>
-                                                    <span x-show="index < resume.skills.length - 1" class="text-gray-400 mx-2">•</span>
-                                                </span>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </template>
-                        <template x-if="selectedTemplate === 'classic'">
-                            <div class="grid grid-cols-3">
-                                <!-- Sidebar -->
-                                <div class="col-span-1 bg-gray-800 text-white p-8">
-                                    <div class="mb-8">
-                                        <h1 class="text-2xl font-bold mb-1" x-text="resume.personal.name || 'Your Name'"></h1>
-                                        <p class="text-sm text-gray-300" x-text="resume.personal.title || 'Professional Title'"></p>
-                                    </div>
-
-                                    <!-- Contact -->
-                                    <div class="mb-8">
-                                        <h2 class="text-xs font-bold uppercase tracking-wider mb-3 border-b border-gray-600 pb-1">Contact</h2>
-                                        <div class="space-y-2 text-xs">
-                                            <template x-if="resume.personal.email">
-                                                <div class="break-words" x-text="resume.personal.email"></div>
-                                            </template>
-                                            <template x-if="resume.personal.phone">
-                                                <div x-text="resume.personal.phone"></div>
-                                            </template>
-                                            <template x-if="resume.personal.location">
-                                                <div x-text="resume.personal.location"></div>
-                                            </template>
-                                        </div>
-                                    </div>
-
-                                    <!-- Skills -->
-                                    <template x-if="resume.skills.length > 0">
-                                        <div>
-                                            <h2 class="text-xs font-bold uppercase tracking-wider mb-3 border-b border-gray-600 pb-1">Skills</h2>
-                                            <div class="space-y-1 text-xs">
-                                                <template x-for="skill in resume.skills">
-                                                    <div x-text="skill"></div>
-                                                </template>
                                             </div>
-                                        </div>
-                                    </template>
-                                </div>
-
-                                <!-- Main Content -->
-                                <div class="col-span-2 p-8">
-                                    <!-- Summary -->
-                                    <template x-if="resume.personal.summary">
-                                        <div class="mb-6">
-                                            <h2 class="text-sm font-bold text-gray-900 mb-2">SUMMARY</h2>
-                                            <p class="text-gray-700 text-xs" x-text="resume.personal.summary"></p>
-                                        </div>
-                                    </template>
-
-                                    <!-- Experience -->
-                                    <template x-if="resume.experience.length > 0">
-                                        <div class="mb-6">
-                                            <h2 class="text-sm font-bold text-gray-900 mb-3">EXPERIENCE</h2>
-                                            <div class="space-y-4">
-                                                <template x-for="job in resume.experience">
-                                                    <div>
-                                                        <h3 class="font-bold text-gray-900 text-sm" x-text="job.title"></h3>
-                                                        <div class="text-gray-600 text-xs mb-1">
-                                                            <span x-text="job.company"></span> | <span x-text="job.date"></span>
-                                                        </div>
-                                                        <p class="text-gray-700 text-xs whitespace-pre-line" x-text="job.description"></p>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-
-                                    <!-- Education -->
-                                    <template x-if="resume.education.length > 0">
-                                        <div>
-                                            <h2 class="text-sm font-bold text-gray-900 mb-3">EDUCATION</h2>
-                                            <div class="space-y-3">
-                                                <template x-for="edu in resume.education">
-                                                    <div>
-                                                        <h3 class="font-bold text-gray-900 text-sm" x-text="edu.degree"></h3>
-                                                        <div class="text-gray-600 text-xs">
-                                                            <span x-text="edu.school"></span> | <span x-text="edu.date"></span>
-                                                        </div>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
+                                        </template>
+                                    </div>
                                 </div>
                             </div>
                         </template>
 
-                        <!-- MINIMAL TEMPLATE -->
-                        <template x-if="selectedTemplate === 'minimal'">
-                            <div>
-                                <!-- Header -->
-                                <div class="text-center pb-6 mb-6 border-b border-gray-300">
-                                    <h1 class="text-3xl font-light text-gray-900 tracking-wide" x-text="resume.personal.name || 'Your Name'"></h1>
-                                    <p class="text-sm text-gray-600 mt-2 uppercase tracking-widest" x-text="resume.personal.title || 'Professional Title'"></p>
-                                    
-                                    <div class="flex justify-center gap-3 mt-4 text-gray-500 text-xs">
-                                        <template x-if="resume.personal.email">
-                                            <span x-text="resume.personal.email"></span>
-                                        </template>
-                                        <template x-if="resume.personal.phone">
-                                            <span>|</span>
-                                            <span x-text="resume.personal.phone"></span>
-                                        </template>
-                                        <template x-if="resume.personal.location">
-                                            <span>|</span>
-                                            <span x-text="resume.personal.location"></span>
-                                        </template>
-                                    </div>
-                                </div>
 
-                                <!-- Summary -->
-                                <template x-if="resume.personal.summary">
-                                    <div class="mb-6 text-center">
-                                        <p class="text-gray-700 text-sm italic" x-text="resume.personal.summary"></p>
-                                    </div>
-                                </template>
-
-                                <!-- Experience -->
-                                <template x-if="resume.experience.length > 0">
-                                    <div class="mb-6">
-                                        <h2 class="text-sm font-light text-gray-900 uppercase tracking-widest mb-4 text-center">Experience</h2>
-                                        <div class="space-y-5">
-                                            <template x-for="job in resume.experience">
-                                                <div>
-                                                    <h3 class="font-medium text-gray-900" x-text="job.title"></h3>
-                                                    <div class="text-gray-600 text-xs mb-2">
-                                                        <span class="italic" x-text="job.company"></span> • <span x-text="job.date"></span>
-                                                    </div>
-                                                    <p class="text-gray-700 text-xs whitespace-pre-line" x-text="job.description"></p>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-
-                                <!-- Education -->
-                                <template x-if="resume.education.length > 0">
-                                    <div class="mb-6">
-                                        <h2 class="text-sm font-light text-gray-900 uppercase tracking-widest mb-4 text-center">Education</h2>
-                                        <div class="space-y-3">
-                                            <template x-for="edu in resume.education">
-                                                <div>
-                                                    <h3 class="font-medium text-gray-900" x-text="edu.degree"></h3>
-                                                    <div class="text-gray-600 text-xs">
-                                                        <span class="italic" x-text="edu.school"></span> • <span x-text="edu.date"></span>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-
-                                <!-- Skills -->
-                                <template x-if="resume.skills.length > 0">
-                                    <div>
-                                        <h2 class="text-sm font-light text-gray-900 uppercase tracking-widest mb-4 text-center">Skills</h2>
-                                        <div class="text-center">
-                                            <template x-for="(skill, index) in resume.skills">
-                                                <span>
-                                                    <span class="text-gray-700 text-xs" x-text="skill"></span>
-                                                    <span x-show="index < resume.skills.length - 1" class="text-gray-400 mx-2">•</span>
-                                                </span>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </template>
                     </div>
                 </div>
             </div>
@@ -982,7 +563,7 @@
                 width: 210mm;
                 max-width: 210mm;
                 margin: 0;
-                padding: 20mm;
+                padding: 0;
                 box-shadow: none;
                 transform: none !important;
                 scale: 1 !important;
