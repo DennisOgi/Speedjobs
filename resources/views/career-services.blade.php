@@ -1,13 +1,17 @@
 <x-app-layout>
     <div class="bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 min-h-screen">
         <!-- Hero Section -->
-        <div class="relative bg-gradient-to-r from-blue-900 via-blue-800 to-purple-900 py-24 sm:py-32 overflow-hidden">
-            <!-- Animated Background -->
-            <div class="absolute inset-0 opacity-20">
-                <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-                <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-            </div>
+        <!-- Hero Section -->
+        <div class="relative py-24 sm:py-32 overflow-hidden isolate">
+            <!-- Background Image -->
+            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
             
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-gray-900/80"></div>
+            
+            <!-- Decorative Elements -->
+            <div class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white/5 shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
+
             <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center">
                     <div class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
@@ -16,10 +20,10 @@
                         </svg>
                         <span class="text-sm font-semibold text-white">Premium Career Services</span>
                     </div>
-                    <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-6xl mb-6">
-                        Accelerate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-300">Career Growth</span>
+                    <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-6xl mb-6 drop-shadow-sm">
+                        Accelerate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200">Career Growth</span>
                     </h1>
-                    <p class="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                    <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
                         Get expert guidance, professional tools, and personalized support to land your dream job and advance your career.
                     </p>
                 </div>

@@ -1,13 +1,20 @@
 <x-app-layout>
     <div class="bg-white">
         <!-- Hero Section -->
-        <div class="relative bg-primary-900 py-24 sm:py-32 overflow-hidden">
-            <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply" alt="" class="w-full h-full object-cover">
-            </div>
+        <!-- Hero Section -->
+        <div class="relative py-24 sm:py-32 overflow-hidden isolate">
+            <!-- Background Image -->
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+            
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 -z-10 bg-gradient-to-b from-indigo-900/80 via-indigo-900/60 to-indigo-900/80"></div>
+            
+            <!-- Decorative Elements -->
+            <div class="absolute inset-y-0 left-1/2 -z-10 ml-16 w-[200%] origin-bottom-right skew-x-[30deg] bg-white/5 shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:ml-28 lg:ml-0 xl:ml-16 xl:origin-center"></div>
+
             <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-                <h1 class="text-4xl font-heading font-bold tracking-tight text-white sm:text-6xl">{{ __('content.learning_hub.header.title') }}</h1>
-                <p class="mt-6 text-lg leading-8 text-gray-300 max-w-2xl mx-auto">{{ __('content.learning_hub.header.description') }}</p>
+                <h1 class="text-4xl font-heading font-bold tracking-tight text-white sm:text-6xl drop-shadow-sm">{{ __('content.learning_hub.header.title') }}</h1>
+                <p class="mt-6 text-lg leading-8 text-gray-200 max-w-2xl mx-auto drop-shadow-sm">{{ __('content.learning_hub.header.description') }}</p>
             </div>
         </div>
 
