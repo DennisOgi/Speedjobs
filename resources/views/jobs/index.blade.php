@@ -13,7 +13,7 @@
                         <svg class="w-5 h-5 transform transition-transform" :class="{'rotate-180': showFilters}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-white/20 p-6 lg:sticky lg:top-24 transition-all hover:shadow-xl" :class="{'hidden': !showFilters, 'block': showFilters}" class="lg:block">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-white/20 p-6 lg:sticky lg:top-24 transition-all hover:shadow-xl hidden lg:block" :class="{'!block': showFilters}">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="font-heading font-bold text-xl text-gray-900">Filters</h2>
                             <a href="{{ route('jobs.index') }}" class="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors">Reset</a>
