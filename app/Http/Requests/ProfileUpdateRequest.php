@@ -25,6 +25,13 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'university' => ['nullable', 'string', 'max:255'],
+            'field_of_study' => ['nullable', 'string', 'max:255'],
+            'graduation_year' => ['nullable', 'integer', 'min:1950', 'max:' . (date('Y') + 10)],
+            'experience_level' => ['nullable', 'string', 'in:student,fresh_graduate,entry_level,mid_level,senior_level'],
+            'skills' => ['nullable', 'string', 'max:1000'],
         ];
     }
 }

@@ -74,6 +74,16 @@ class JobseekerDashboardController extends Controller
         // Fetch resources
         $resources = \App\Models\Resource::where('is_active', true)->latest()->get();
 
+        // Calculate profile completion percentage
+        $profileFields = ['name', 'email', 'phone', 'location', 'university', 'field_of_study', 'graduation_year', 'skills', 'experience_level'];
+        $completedFields = 0;
+        foreach ($profileFields as $field) {
+            if (!empty($user->$field)) {
+                $completedFields++;
+            }
+        }
+        $profileCompletion = round(($completedFields / count($profileFields)) * 100);
+
         return view('dashboard', compact(
             'recommendedJobs', 
             'recentApplications', 
@@ -81,7 +91,8 @@ class JobseekerDashboardController extends Controller
             'activeEnrollments',
             'counselingRequests',
             'upcomingBookings',
-            'resources'
+            'resources',
+            'profileCompletion'
         ));
     }
 }

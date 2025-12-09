@@ -26,7 +26,7 @@
 
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <div class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-2xl border border-white/20 p-6 group">
+                <a href="{{ route('applications.index') }}" class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-2xl border border-white/20 p-6 group block">
                     <div class="flex items-center">
                         <div class="p-4 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
@@ -36,19 +36,19 @@
                             <p class="text-3xl font-heading font-bold text-gray-900">{{ count($recentApplications) }}</p>
                         </div>
                     </div>
-                </div>
-                <div class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-2xl border border-white/20 p-6 group">
+                </a>
+                <a href="{{ route('courses.my-courses') }}" class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-2xl border border-white/20 p-6 group block">
                     <div class="flex items-center">
                         <div class="p-4 rounded-2xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         </div>
                         <div class="ml-5">
                             <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Active Courses</p>
                             <p class="text-3xl font-heading font-bold text-gray-900">{{ count($activeEnrollments) }}</p>
                         </div>
                     </div>
-                </div>
-                <div class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-2xl border border-white/20 p-6 group">
+                </a>
+                <a href="{{ route('saved-jobs.index') }}" class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-2xl border border-white/20 p-6 group block">
                     <div class="flex items-center">
                         <div class="p-4 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
@@ -58,7 +58,7 @@
                             <p class="text-3xl font-heading font-bold text-gray-900">{{ count($savedJobs) }}</p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -81,7 +81,7 @@
                                     </div>
                                     <div>
                                         <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
-                                            <a href="#" class="focus:outline-none">
+                                            <a href="{{ route('jobs.show', $job) }}" class="focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 {{ $job->title }}
                                             </a>
@@ -184,23 +184,40 @@
                         <div class="relative pt-1">
                             <div class="flex mb-2 items-center justify-between">
                                 <div>
-                                    <span class="text-xs font-bold inline-block py-1 px-2 uppercase rounded-lg text-primary-700 bg-primary-100">
-                                        In Progress
-                                    </span>
+                                    @if($profileCompletion >= 100)
+                                        <span class="text-xs font-bold inline-block py-1 px-2 uppercase rounded-lg text-green-700 bg-green-100">
+                                            Complete
+                                        </span>
+                                    @elseif($profileCompletion >= 50)
+                                        <span class="text-xs font-bold inline-block py-1 px-2 uppercase rounded-lg text-primary-700 bg-primary-100">
+                                            In Progress
+                                        </span>
+                                    @else
+                                        <span class="text-xs font-bold inline-block py-1 px-2 uppercase rounded-lg text-amber-700 bg-amber-100">
+                                            Getting Started
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-xs font-bold inline-block text-primary-600">
-                                        70%
+                                    <span class="text-xs font-bold inline-block {{ $profileCompletion >= 100 ? 'text-green-600' : 'text-primary-600' }}">
+                                        {{ $profileCompletion }}%
                                     </span>
                                 </div>
                             </div>
                             <div class="overflow-hidden h-2 mb-4 text-xs flex rounded-full bg-gray-100">
-                                <div style="width:70%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-primary-500 to-primary-600 rounded-full"></div>
+                                <div style="width:{{ $profileCompletion }}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center {{ $profileCompletion >= 100 ? 'bg-gradient-to-r from-green-500 to-green-600' : 'bg-gradient-to-r from-primary-500 to-primary-600' }} rounded-full transition-all duration-500"></div>
                             </div>
-                            <p class="text-sm text-gray-500 mb-5 leading-relaxed">Complete your profile to increase your chances of being scouted by top employers.</p>
-                            <a href="{{ route('profile.edit') }}" class="block w-full text-center px-4 py-2.5 border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all">
-                                Complete Profile
-                            </a>
+                            @if($profileCompletion < 100)
+                                <p class="text-sm text-gray-500 mb-5 leading-relaxed">Complete your profile to increase your chances of being scouted by top employers.</p>
+                                <a href="{{ route('profile.edit') }}" class="block w-full text-center px-4 py-2.5 border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all">
+                                    Complete Profile
+                                </a>
+                            @else
+                                <p class="text-sm text-green-600 mb-5 leading-relaxed font-medium">Great job! Your profile is complete. Employers can now find you easily.</p>
+                                <a href="{{ route('profile.edit') }}" class="block w-full text-center px-4 py-2.5 border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all">
+                                    Edit Profile
+                                </a>
+                            @endif
                         </div>
                     </div>
 
@@ -210,9 +227,9 @@
                         
                         <h3 class="font-heading font-bold text-xl mb-2 relative z-10">Need Career Advice?</h3>
                         <p class="text-primary-100 text-sm mb-6 relative z-10 leading-relaxed">Get expert guidance on your CV, interview skills, and career path from industry professionals.</p>
-                        <button class="w-full py-3 bg-white text-primary-900 font-bold rounded-xl hover:bg-primary-50 transition-colors shadow-lg relative z-10">
+                        <a href="{{ route('counseling.create') }}" class="block w-full py-3 bg-white text-primary-900 font-bold rounded-xl hover:bg-primary-50 transition-colors shadow-lg relative z-10 text-center">
                             Book a Session
-                        </button>
+                        </a>
                     </div>
 
 
