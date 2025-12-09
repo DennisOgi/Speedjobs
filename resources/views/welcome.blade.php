@@ -290,4 +290,114 @@
             </div>
         </div>
     </div>
+
+    <!-- Recent Job Listings -->
+    <div class="py-24 bg-gray-50/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-gray-900 tracking-tight">Latest Opportunities</h2>
+                    <p class="mt-3 text-lg text-gray-600 font-light max-w-2xl">Fresh job openings from top employers across Africa.</p>
+                </div>
+                <a href="{{ route('jobs.index') }}" class="mt-4 md:mt-0 inline-flex items-center text-primary-600 font-bold hover:text-primary-700 transition-colors">
+                    View All Jobs
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @forelse($recentJobs as $job)
+                <a href="{{ route('jobs.show', $job) }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-100 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center text-lg font-bold text-gray-400 shadow-inner border border-gray-100">
+                                {{ substr($job->company, 0, 1) }}
+                            </div>
+                            @if($job->is_featured)
+                                <span class="px-2 py-1 bg-accent-100 text-accent-700 text-xs font-bold rounded-full">Featured</span>
+                            @endif
+                        </div>
+                        
+                        <h3 class="font-bold text-lg text-gray-900 group-hover:text-primary-600 transition-colors mb-2">{{ $job->title }}</h3>
+                        <p class="text-gray-600 text-sm mb-4">{{ $job->company }} • {{ $job->location }}</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-medium rounded-lg">{{ $job->type }}</span>
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg">{{ $job->category }}</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <span class="text-sm font-bold text-gray-900">{{ $job->salary_range }}</span>
+                            <span class="text-xs text-gray-500">{{ $job->created_at->diffForHumans() }}</span>
+                        </div>
+                    </div>
+                </a>
+                @empty
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-500">No jobs available at the moment. Check back soon!</p>
+                </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Employers / Partners -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-heading font-bold text-gray-900 tracking-tight">Trusted by Leading Organizations</h2>
+                <p class="mt-3 text-lg text-gray-600 font-light">Partner companies and institutions that trust SpeedJobs Africa</p>
+            </div>
+
+            <!-- Partner Logos Slider -->
+            <div class="relative overflow-hidden">
+                <div class="flex items-center justify-center gap-12 flex-wrap opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <!-- Placeholder logos - replace with actual partner logos -->
+                    <div class="w-32 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 font-bold text-sm">Partner 1</span>
+                    </div>
+                    <div class="w-32 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 font-bold text-sm">Partner 2</span>
+                    </div>
+                    <div class="w-32 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 font-bold text-sm">Partner 3</span>
+                    </div>
+                    <div class="w-32 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 font-bold text-sm">Partner 4</span>
+                    </div>
+                    <div class="w-32 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 font-bold text-sm">Partner 5</span>
+                    </div>
+                    <div class="w-32 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 font-bold text-sm">Partner 6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-500 text-sm">Want to partner with us? <a href="{{ route('contact') }}" class="text-primary-600 font-medium hover:text-primary-700">Get in touch</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter CTA -->
+    <div class="py-20 bg-gradient-to-r from-primary-600 to-primary-800 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Get Job Alerts Straight to Your Inbox</h2>
+            <p class="text-primary-100 text-lg mb-8 max-w-2xl mx-auto">Be the first to know about new opportunities that match your skills and interests.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                <input type="email" placeholder="Enter your email address" class="flex-1 px-6 py-4 rounded-xl border-0 focus:ring-2 focus:ring-white/50 text-gray-900 placeholder-gray-400 shadow-lg">
+                <button type="submit" class="px-8 py-4 bg-white text-primary-700 font-bold rounded-xl hover:bg-primary-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    Subscribe
+                </button>
+            </form>
+            
+            <p class="text-primary-200 text-sm mt-4">Join 10,000+ job seekers. Unsubscribe anytime.</p>
+        </div>
+    </div>
 </x-app-layout>

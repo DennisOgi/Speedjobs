@@ -23,6 +23,12 @@
                     <x-nav-link :href="route('skill-up')" :active="request()->routeIs('skill-up')" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">
                         {{ __('Skill Up') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">
+                        {{ __('About') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">
+                        {{ __('Contact') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -93,6 +99,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('skill-up')" :active="request()->routeIs('skill-up')">
                 {{ __('Skill Up') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                {{ __('About') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                {{ __('Contact') }}
             </x-responsive-nav-link>
         </div>
 

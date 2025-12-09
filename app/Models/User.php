@@ -75,4 +75,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(CounselorBooking::class);
     }
+
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
+    public function savedJobs()
+    {
+        return $this->hasMany(SavedJob::class);
+    }
+
+    public function hasAppliedTo(Job $job): bool
+    {
+        return $this->jobApplications()->where('job_id', $job->id)->exists();
+    }
+
+    public function hasSaved(Job $job): bool
+    {
+        return $this->savedJobs()->where('job_id', $job->id)->exists();
+    }
 }

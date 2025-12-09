@@ -57,9 +57,19 @@ class JobseekerDashboardController extends Controller
             ->get();
 
 
-        // Applications and saved jobs features not yet implemented
-        $recentApplications = []; 
-        $savedJobs = []; 
+        // Fetch recent job applications
+        $recentApplications = $user->jobApplications()
+            ->with('job')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        // Fetch saved jobs
+        $savedJobs = $user->savedJobs()
+            ->with('job')
+            ->latest()
+            ->take(5)
+            ->get(); 
 
         // Fetch resources
         $resources = \App\Models\Resource::where('is_active', true)->latest()->get();

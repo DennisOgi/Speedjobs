@@ -85,14 +85,90 @@
                         <h3 class="font-bold text-gray-900 text-lg mb-2">Interested in this job?</h3>
                         <p class="text-gray-500 text-sm mb-6">Review the requirements and apply now.</p>
                         
-                        <button class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 mb-4">
-                            Apply Now
-                        </button>
-                        
-                        <button class="w-full py-4 bg-white hover:bg-gray-50 text-gray-700 font-bold rounded-xl border border-gray-200 transition-colors flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                            Save Job
-                        </button>
+                        @if(session('success'))
+                            <div class="mb-4 p-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm font-medium">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        @auth
+                            @if(auth()->user()->hasAppliedTo($job))
+                                <div class="w-full py-4 bg-green-50 text-green-700 font-bold rounded-xl border border-green-200 flex items-center justify-center gap-2 mb-4">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Applied
+                                </div>
+                            @else
+                                <div x-data="{ showModal: false }">
+                                    <button @click="showModal = true" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 mb-4">
+                                        Apply Now
+                                    </button>
+
+                                    <!-- Application Modal -->
+                                    <div x-show="showModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="showModal = false"></div>
+
+                                            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+                                            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                                <form action="{{ route('jobs.apply', $job) }}" method="POST">
+                                                    @csrf
+                                                    <div class="bg-white px-6 pt-6 pb-4">
+                                                        <h3 class="text-xl font-bold text-gray-900 mb-2">Apply for {{ $job->title }}</h3>
+                                                        <p class="text-gray-500 text-sm mb-6">at {{ $job->company }}</p>
+                                                        
+                                                        <div>
+                                                            <label for="cover_letter" class="block text-sm font-bold text-gray-700 mb-2">Cover Letter (Optional)</label>
+                                                            <textarea name="cover_letter" id="cover_letter" rows="6" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white shadow-sm focus:border-primary-500 focus:ring-primary-500 transition-all resize-none" placeholder="Tell the employer why you're a great fit for this role..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-gray-50 px-6 py-4 flex flex-col sm:flex-row-reverse gap-3">
+                                                        <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all">
+                                                            Submit Application
+                                                        </button>
+                                                        <button type="button" @click="showModal = false" class="w-full sm:w-auto px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 font-bold rounded-xl border border-gray-200 transition-colors">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if(auth()->user()->hasSaved($job))
+                                <form action="{{ route('jobs.unsave', $job) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="w-full py-4 bg-primary-50 hover:bg-primary-100 text-primary-700 font-bold rounded-xl border border-primary-200 transition-colors flex items-center justify-center gap-2">
+                                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                        Saved
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('jobs.save', $job) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="w-full py-4 bg-white hover:bg-gray-50 text-gray-700 font-bold rounded-xl border border-gray-200 transition-colors flex items-center justify-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                        Save Job
+                                    </button>
+                                </form>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 mb-4 flex items-center justify-center">
+                                Login to Apply
+                            </a>
+                            <a href="{{ route('register') }}" class="w-full py-4 bg-white hover:bg-gray-50 text-gray-700 font-bold rounded-xl border border-gray-200 transition-colors flex items-center justify-center gap-2">
+                                Create Account
+                            </a>
+                        @endauth
 
                         <div class="mt-6 pt-6 border-t border-gray-100">
                             <h4 class="font-bold text-gray-900 text-sm mb-4">Share this job</h4>

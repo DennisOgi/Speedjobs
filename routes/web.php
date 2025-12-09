@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $banners = \App\Models\Banner::active()->get();
-    return view('welcome', compact('banners'));
+    $recentJobs = \App\Models\Job::latest()->take(6)->get();
+    $featuredJobs = \App\Models\Job::where('is_featured', true)->latest()->take(4)->get();
+    return view('welcome', compact('banners', 'recentJobs', 'featuredJobs'));
 })->name('welcome');
 
 Route::get('/dashboard', [\App\Http\Controllers\JobseekerDashboardController::class, 'index'])
@@ -56,6 +58,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/counseling', [\App\Http\Controllers\CounselingRequestController::class, 'index'])->name('counseling.index');
     Route::get('/counseling/apply', [\App\Http\Controllers\CounselingRequestController::class, 'create'])->name('counseling.create');
     Route::post('/counseling', [\App\Http\Controllers\CounselingRequestController::class, 'store'])->name('counseling.store');
+
+    // Job Applications
+    Route::get('/my-applications', [\App\Http\Controllers\JobApplicationController::class, 'index'])->name('applications.index');
+    Route::post('/jobs/{job}/apply', [\App\Http\Controllers\JobApplicationController::class, 'store'])->name('jobs.apply');
+    Route::post('/applications/{application}/withdraw', [\App\Http\Controllers\JobApplicationController::class, 'withdraw'])->name('applications.withdraw');
+
+    // Saved Jobs
+    Route::get('/saved-jobs', [\App\Http\Controllers\SavedJobController::class, 'index'])->name('saved-jobs.index');
+    Route::post('/jobs/{job}/save', [\App\Http\Controllers\SavedJobController::class, 'store'])->name('jobs.save');
+    Route::delete('/jobs/{job}/unsave', [\App\Http\Controllers\SavedJobController::class, 'destroy'])->name('jobs.unsave');
 });
 
 // Admin Routes
@@ -93,5 +105,9 @@ Route::get('/courses/{course:slug}', [\App\Http\Controllers\CourseController::cl
 Route::view('/browse-candidates', 'browse-candidates')->name('browse-candidates');
 
 Route::view('/about', 'about')->name('about');
+
+// Contact Routes
+Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
 
 require __DIR__.'/auth.php';
