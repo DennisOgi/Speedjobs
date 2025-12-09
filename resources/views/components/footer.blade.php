@@ -5,7 +5,7 @@
             <div class="space-y-4">
                 <div class="flex items-center gap-2">
                     <a href="{{ route('welcome') }}">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs Africa" class="h-20 w-auto">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs Africa" class="h-28 w-auto">
                     </a>
                 </div>
                 <p class="text-gray-400 text-sm leading-relaxed">

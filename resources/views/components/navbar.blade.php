@@ -5,7 +5,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}" class="flex items-center gap-2">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs Africa" class="h-12 w-auto">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs Africa" class="h-20 w-auto">
                     </a>
                 </div>
 
