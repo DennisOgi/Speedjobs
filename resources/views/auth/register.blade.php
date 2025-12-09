@@ -4,8 +4,32 @@
         <p class="mt-2 text-sm text-gray-600">Join SpeedJobs Africa and accelerate your career</p>
     </div>
 
-    <form method="POST" action="{{ route('register') }}" class="space-y-5">
+    <form method="POST" action="{{ route('register') }}" class="space-y-5" x-data="{ role: '{{ old('role', 'jobseeker') }}' }">
         @csrf
+
+        <!-- Account Type Selection -->
+        <div class="space-y-4">
+            <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2">I want to</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <label class="relative cursor-pointer">
+                    <input type="radio" name="role" value="jobseeker" x-model="role" class="sr-only peer">
+                    <div class="p-4 border-2 rounded-xl text-center transition-all peer-checked:border-primary-500 peer-checked:bg-primary-50 border-gray-200 hover:border-gray-300">
+                        <svg class="w-8 h-8 mx-auto mb-2 text-gray-400 peer-checked:text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <p class="font-bold text-gray-900">Find a Job</p>
+                        <p class="text-xs text-gray-500 mt-1">I'm looking for opportunities</p>
+                    </div>
+                </label>
+                <label class="relative cursor-pointer">
+                    <input type="radio" name="role" value="employer" x-model="role" class="sr-only peer">
+                    <div class="p-4 border-2 rounded-xl text-center transition-all peer-checked:border-primary-500 peer-checked:bg-primary-50 border-gray-200 hover:border-gray-300">
+                        <svg class="w-8 h-8 mx-auto mb-2 text-gray-400 peer-checked:text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <p class="font-bold text-gray-900">Hire Talent</p>
+                        <p class="text-xs text-gray-500 mt-1">I want to post jobs</p>
+                    </div>
+                </label>
+            </div>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
 
         <!-- Personal Information Section -->
         <div class="space-y-4">
@@ -40,8 +64,8 @@
             </div>
         </div>
 
-        <!-- Education & Experience Section -->
-        <div class="space-y-4">
+        <!-- Education & Experience Section (Jobseekers Only) -->
+        <div class="space-y-4" x-show="role === 'jobseeker'" x-transition>
             <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2">Education & Experience</h3>
             
             <!-- University -->

@@ -33,6 +33,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:jobseeker,employer'],
             'university' => ['nullable', 'string', 'max:255'],
             'field_of_study' => ['nullable', 'string', 'max:255'],
             'graduation_year' => ['nullable', 'integer', 'min:0', 'max:' . (date('Y') + 10)],
@@ -46,11 +47,12 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'university' => $request->university,
-            'field_of_study' => $request->field_of_study,
-            'graduation_year' => $request->graduation_year,
-            'skills' => $request->skills,
-            'experience_level' => $request->experience_level ?? 'entry',
+            'role' => $request->role,
+            'university' => $request->role === 'jobseeker' ? $request->university : null,
+            'field_of_study' => $request->role === 'jobseeker' ? $request->field_of_study : null,
+            'graduation_year' => $request->role === 'jobseeker' ? $request->graduation_year : null,
+            'skills' => $request->role === 'jobseeker' ? $request->skills : null,
+            'experience_level' => $request->role === 'jobseeker' ? ($request->experience_level ?? 'entry') : null,
             'phone' => $request->phone,
             'location' => $request->location,
         ]);
@@ -58,6 +60,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        // Redirect based on role
+        if ($user->role === 'employer') {
+            return redirect(route('employer.dashboard', absolute: false));
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

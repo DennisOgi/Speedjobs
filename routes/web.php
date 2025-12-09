@@ -22,6 +22,12 @@ Route::middleware('auth')->group(function () {
 
     // Employer Routes
     Route::get('/employer/dashboard', [\App\Http\Controllers\EmployerDashboardController::class, 'index'])->name('employer.dashboard');
+    Route::get('/employer/jobs', [\App\Http\Controllers\EmployerDashboardController::class, 'jobs'])->name('employer.jobs.index');
+    Route::get('/employer/jobs/{job}/edit', [\App\Http\Controllers\EmployerDashboardController::class, 'editJob'])->name('employer.jobs.edit');
+    Route::put('/employer/jobs/{job}', [\App\Http\Controllers\EmployerDashboardController::class, 'updateJob'])->name('employer.jobs.update');
+    Route::delete('/employer/jobs/{job}', [\App\Http\Controllers\EmployerDashboardController::class, 'destroyJob'])->name('employer.jobs.destroy');
+    Route::get('/employer/applications/{job?}', [\App\Http\Controllers\EmployerDashboardController::class, 'applications'])->name('employer.applications');
+    Route::patch('/employer/applications/{application}/status', [\App\Http\Controllers\EmployerDashboardController::class, 'updateApplicationStatus'])->name('employer.applications.status');
 
     // Resume Builder
     Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
