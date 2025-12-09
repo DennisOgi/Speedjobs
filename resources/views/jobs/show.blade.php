@@ -58,22 +58,10 @@
                         <div class="prose prose-blue max-w-none text-gray-600">
                             <p class="whitespace-pre-line">{{ $job->description }}</p>
                             
-                            <!-- Placeholder for structured content if we had it -->
-                            <h3 class="text-lg font-bold text-gray-900 mt-8 mb-4">Requirements</h3>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>Proven experience in a similar role</li>
-                                <li>Strong problem-solving skills</li>
-                                <li>Excellent communication abilities</li>
-                                <li>Bachelor's degree in related field</li>
-                            </ul>
-
-                            <h3 class="text-lg font-bold text-gray-900 mt-8 mb-4">Benefits</h3>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>Competitive salary package</li>
-                                <li>Health insurance</li>
-                                <li>Remote work options</li>
-                                <li>Professional development budget</li>
-                            </ul>
+                            @if($job->requirements)
+                                <h3 class="text-lg font-bold text-gray-900 mt-8 mb-4">Requirements</h3>
+                                <div class="whitespace-pre-line">{{ $job->requirements }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>

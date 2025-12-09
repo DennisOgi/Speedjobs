@@ -57,7 +57,9 @@ class JobController extends Controller
         ]);
 
         $validated['user_id'] = auth()->id();
-        $validated['is_featured'] = false; // Assuming default to false
+        $validated['is_featured'] = false;
+
+        Job::create($validated);
 
         return redirect()->route('employer.dashboard')->with('success', 'Job posted successfully!');
     }
