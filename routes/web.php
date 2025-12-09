@@ -50,14 +50,37 @@ Route::middleware('auth')->group(function () {
     Route::post('/counselors/{counselor}/book', [\App\Http\Controllers\BookingController::class, 'store'])->name('counselors.book');
     Route::get('/my-bookings', [\App\Http\Controllers\BookingController::class, 'myBookings'])->name('counselors.my-bookings');
 
-    // Career Planning
-    Route::get('/career-planning', [\App\Http\Controllers\CareerPlanningController::class, 'index'])->name('career-planning.index');
-    Route::post('/career-planning', [\App\Http\Controllers\CareerPlanningController::class, 'store'])->name('career-planning.store');
-
-    // Counseling Requests (User)
+    // Counseling Requests (User) - Requires auth only, paid check in view
     Route::get('/counseling', [\App\Http\Controllers\CounselingRequestController::class, 'index'])->name('counseling.index');
     Route::get('/counseling/apply', [\App\Http\Controllers\CounselingRequestController::class, 'create'])->name('counseling.create');
     Route::post('/counseling', [\App\Http\Controllers\CounselingRequestController::class, 'store'])->name('counseling.store');
+});
+
+// Premium Features - Paid Users Only
+Route::middleware(['auth', 'paid'])->group(function () {
+    // Career Planning Tool
+    Route::get('/career-planning', [\App\Http\Controllers\CareerPlanningController::class, 'index'])->name('career-planning.index');
+    Route::post('/career-planning', [\App\Http\Controllers\CareerPlanningController::class, 'store'])->name('career-planning.store');
+
+    // Career Assessment
+    Route::get('/career-assessment', function () {
+        return view('career-assessment');
+    })->name('career-assessment');
+
+    // Interview Coaching
+    Route::get('/interview-coaching', function () {
+        return view('interview-coaching');
+    })->name('interview-coaching');
+
+    // Mentorship Program
+    Route::get('/mentorship', function () {
+        return view('mentorship');
+    })->name('mentorship');
+
+    // Career Workshops
+    Route::get('/workshops', function () {
+        return view('workshops');
+    })->name('workshops');
 
     // Job Applications
     Route::get('/my-applications', [\App\Http\Controllers\JobApplicationController::class, 'index'])->name('applications.index');
