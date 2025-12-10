@@ -95,4 +95,21 @@ class User extends Authenticatable
     {
         return $this->savedJobs()->where('job_id', $job->id)->exists();
     }
+
+    public function workshopRegistrations()
+    {
+        return $this->hasMany(WorkshopRegistration::class);
+    }
+
+    public function registeredWorkshops()
+    {
+        return $this->belongsToMany(Workshop::class, 'workshop_registrations')
+            ->withPivot('status', 'notes', 'approved_at')
+            ->withTimestamps();
+    }
+
+    public function hasRegisteredForWorkshop(Workshop $workshop): bool
+    {
+        return $this->workshopRegistrations()->where('workshop_id', $workshop->id)->exists();
+    }
 }

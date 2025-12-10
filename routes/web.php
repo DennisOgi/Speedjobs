@@ -8,7 +8,8 @@ Route::get('/', function () {
     $banners = \App\Models\Banner::active()->get();
     $recentJobs = \App\Models\Job::latest()->take(6)->get();
     $featuredJobs = \App\Models\Job::where('is_featured', true)->latest()->take(4)->get();
-    return view('welcome', compact('banners', 'recentJobs', 'featuredJobs'));
+    $workshops = \App\Models\Workshop::active()->upcoming()->ordered()->take(5)->get();
+    return view('welcome', compact('banners', 'recentJobs', 'featuredJobs', 'workshops'));
 })->name('welcome');
 
 Route::get('/dashboard', [\App\Http\Controllers\JobseekerDashboardController::class, 'index'])
@@ -83,10 +84,10 @@ Route::middleware(['auth', 'paid'])->group(function () {
         return view('mentorship');
     })->name('mentorship');
 
-    // Career Workshops
-    Route::get('/workshops', function () {
-        return view('workshops');
-    })->name('workshops');
+    // Career Workshops (legacy route - redirects to new workshops)
+    // Route::get('/workshops', function () {
+    //     return view('workshops');
+    // })->name('workshops.legacy');
 
     // Job Applications
     Route::get('/my-applications', [\App\Http\Controllers\JobApplicationController::class, 'index'])->name('applications.index');
@@ -138,5 +139,24 @@ Route::view('/about', 'about')->name('about');
 // Contact Routes
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+
+// Workshop Routes (Public)
+Route::get('/workshops', [\App\Http\Controllers\WorkshopController::class, 'index'])->name('workshops.index');
+Route::get('/workshops/{workshop}', [\App\Http\Controllers\WorkshopController::class, 'show'])->name('workshops.show');
+
+// Workshop Registration (Auth required)
+Route::middleware('auth')->group(function () {
+    Route::post('/workshops/{workshop}/register', [\App\Http\Controllers\WorkshopController::class, 'register'])->name('workshops.register');
+    Route::post('/workshops/{workshop}/cancel', [\App\Http\Controllers\WorkshopController::class, 'cancelRegistration'])->name('workshops.cancel');
+});
+
+// Admin Workshop Routes
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('workshops', \App\Http\Controllers\Admin\WorkshopController::class);
+    Route::get('workshop-registrations', [\App\Http\Controllers\Admin\WorkshopController::class, 'registrations'])->name('workshop-registrations.index');
+    Route::get('workshops/{workshop}/registrations', [\App\Http\Controllers\Admin\WorkshopController::class, 'workshopRegistrations'])->name('workshops.registrations');
+    Route::post('workshop-registrations/{registration}/approve', [\App\Http\Controllers\Admin\WorkshopController::class, 'approveRegistration'])->name('workshop-registrations.approve');
+    Route::post('workshop-registrations/{registration}/reject', [\App\Http\Controllers\Admin\WorkshopController::class, 'rejectRegistration'])->name('workshop-registrations.reject');
+});
 
 require __DIR__.'/auth.php';

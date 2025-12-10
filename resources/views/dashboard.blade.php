@@ -175,6 +175,43 @@
                         @endif
                     </div>
 
+                    <!-- My Workshops -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-sm border border-white/20 p-6">
+                        <h3 class="font-heading font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            My Workshops
+                        </h3>
+
+                        <div class="space-y-3">
+                            @forelse($workshopRegistrations ?? [] as $registration)
+                                <a href="{{ route('workshops.show', $registration->workshop) }}" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900 truncate">{{ $registration->workshop->title }}</p>
+                                            <p class="text-xs text-gray-500 mt-1">{{ $registration->workshop->start_date->format('M d, Y • h:i A') }}</p>
+                                        </div>
+                                        @if($registration->status === 'pending')
+                                            <span class="px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-800 shrink-0">Pending</span>
+                                        @elseif($registration->status === 'approved')
+                                            <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-100 text-green-800 shrink-0">Approved</span>
+                                        @elseif($registration->status === 'rejected')
+                                            <span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800 shrink-0">Rejected</span>
+                                        @else
+                                            <span class="px-2 py-0.5 rounded text-xs font-bold bg-gray-100 text-gray-800 shrink-0">{{ ucfirst($registration->status) }}</span>
+                                        @endif
+                                    </div>
+                                </a>
+                            @empty
+                                <p class="text-sm text-gray-500">No workshop registrations yet.</p>
+                                <a href="{{ route('workshops.index') }}" class="text-sm font-bold text-green-600 hover:text-green-700">Browse Workshops</a>
+                            @endforelse
+                        </div>
+                        
+                        @if(isset($workshopRegistrations) && $workshopRegistrations->count() > 0)
+                            <a href="{{ route('workshops.index') }}" class="block mt-4 text-center text-sm font-bold text-gray-500 hover:text-gray-700">View All Workshops</a>
+                        @endif
+                    </div>
+
                     <!-- Profile Completion -->
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-sm border border-white/20 p-6">
                         <h3 class="font-heading font-bold text-gray-900 mb-4 flex items-center gap-2">
