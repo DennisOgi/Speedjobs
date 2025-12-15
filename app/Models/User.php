@@ -112,4 +112,9 @@ class User extends Authenticatable
     {
         return $this->workshopRegistrations()->where('workshop_id', $workshop->id)->exists();
     }
+
+    public function resumes()
+    {
+        return $this->hasMany(Resume::class)->orderBy('updated_at', 'desc');
+    }
 }

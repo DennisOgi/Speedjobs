@@ -1,6 +1,6 @@
 @include('resume.builder', [
-    'resume' => null,
+    'resume' => $resume,
     'templates' => $templates,
     'colorSchemes' => $colorSchemes,
-    'defaultData' => $defaultData
+    'defaultData' => []
 ])

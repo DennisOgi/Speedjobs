@@ -31,7 +31,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/employer/applications/{application}/status', [\App\Http\Controllers\EmployerDashboardController::class, 'updateApplicationStatus'])->name('employer.applications.status');
 
     // Resume Builder
+    Route::get('/resume', [ResumeController::class, 'index'])->name('resume.index');
     Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
+    Route::post('/resume', [ResumeController::class, 'store'])->name('resume.store');
+    Route::get('/resume/{resume}/edit', [ResumeController::class, 'edit'])->name('resume.edit');
+    Route::put('/resume/{resume}', [ResumeController::class, 'update'])->name('resume.update');
+    Route::delete('/resume/{resume}', [ResumeController::class, 'destroy'])->name('resume.destroy');
+    Route::post('/resume/{resume}/autosave', [ResumeController::class, 'autosave'])->name('resume.autosave');
+    Route::post('/resume/{resume}/photo', [ResumeController::class, 'uploadPhoto'])->name('resume.photo.upload');
+    Route::delete('/resume/{resume}/photo', [ResumeController::class, 'removePhoto'])->name('resume.photo.remove');
+    Route::post('/resume/{resume}/duplicate', [ResumeController::class, 'duplicate'])->name('resume.duplicate');
+    Route::get('/resume/{resume}/preview', [ResumeController::class, 'preview'])->name('resume.preview');
+    Route::get('/resume/{resume}/download', [ResumeController::class, 'download'])->name('resume.download');
 });
 
 // Admin Routes

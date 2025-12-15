@@ -43,19 +43,25 @@ class RegisteredUserController extends Controller
             'location' => ['nullable', 'string', 'max:255'],
         ]);
 
-        $user = User::create([
+        $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'university' => $request->role === 'jobseeker' ? $request->university : null,
-            'field_of_study' => $request->role === 'jobseeker' ? $request->field_of_study : null,
-            'graduation_year' => $request->role === 'jobseeker' ? $request->graduation_year : null,
-            'skills' => $request->role === 'jobseeker' ? $request->skills : null,
-            'experience_level' => $request->role === 'jobseeker' ? ($request->experience_level ?? 'entry') : null,
             'phone' => $request->phone,
             'location' => $request->location,
-        ]);
+        ];
+
+        // Only add jobseeker-specific fields if role is jobseeker
+        if ($request->role === 'jobseeker') {
+            $userData['university'] = $request->university;
+            $userData['field_of_study'] = $request->field_of_study;
+            $userData['graduation_year'] = $request->graduation_year;
+            $userData['skills'] = $request->skills;
+            $userData['experience_level'] = $request->experience_level ?? 'entry';
+        }
+
+        $user = User::create($userData);
 
         event(new Registered($user));
 
