@@ -296,7 +296,16 @@
     <x-workshop-slider :workshops="$workshops" />
 
     <!-- Advertisement Banner Slider -->
-    <x-banner-slider :banners="$banners" />
+    <div class="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+            <div class="text-center">
+                <span class="inline-block px-4 py-1.5 bg-primary-100 text-primary-700 text-sm font-semibold rounded-full mb-4">Featured Programmes</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-gray-900 tracking-tight">Workforce <span class="text-primary-600">Development</span></h2>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">Apply to our training programmes and career development initiatives</p>
+            </div>
+        </div>
+        <x-banner-slider :banners="$banners" />
+    </div>
 
     <!-- Featured Categories - Redesigned -->
     <div class="py-16 md:py-24 bg-white relative overflow-hidden">

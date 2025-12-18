@@ -18,7 +18,7 @@ class CounselingRequestController extends Controller
     public function show(CounselingRequest $counselingRequest)
     {
         $counselingRequest->load(['user', 'assignedCounselor']);
-        $counselors = Counselor::with('user')->where('is_active', true)->get();
+        $counselors = Counselor::with('user')->where('is_available', true)->get();
         
         return view('admin.counseling.show', compact('counselingRequest', 'counselors'));
     }

@@ -11,45 +11,57 @@ class BannerSeeder extends Seeder
     {
         $banners = [
             [
-                'title' => 'Web Development Workshop',
-                'description' => 'Join our intensive 3-day workshop on modern web development. Learn React, Node.js, and build real-world projects.',
-                'type' => 'workshop',
+                'title' => 'BEYOND 2030',
+                'description' => 'A workforce development programme - TEEN WORKFORCE PREPARATORY PROGRAMME',
+                'type' => 'training',
                 'is_active' => true,
                 'order' => 1,
-                'start_date' => now(),
-                'end_date' => now()->addDays(30),
+                'image' => 'banners/beyond2030.png',
+                'link' => null,
             ],
             [
-                'title' => 'Data Science Training Program',
-                'description' => 'Master Python, Machine Learning, and Data Analysis in our comprehensive 6-week training program.',
+                'title' => 'CARE FOR THE CARETAKERS',
+                'description' => 'A workforce development programme in Healthcare sector - BUILDING STATE PUBLIC HEALTH WORKFORCE',
                 'type' => 'training',
                 'is_active' => true,
                 'order' => 2,
-                'start_date' => now(),
-                'end_date' => now()->addDays(45),
+                'image' => 'banners/care-for-the-caretakers.png',
+                'link' => null,
             ],
             [
-                'title' => 'Tech Career Fair 2025',
-                'description' => 'Connect with top employers across Africa. Network, interview, and land your dream tech job.',
+                'title' => 'AFRICA BILATERAL TALENT EXCHANGE PROGRAMME',
+                'description' => 'Africa workforce development initiative',
                 'type' => 'event',
                 'is_active' => true,
                 'order' => 3,
-                'start_date' => now()->addDays(7),
-                'end_date' => now()->addDays(8),
+                'image' => 'banners/africa-bilateral.png',
+                'link' => null,
             ],
             [
-                'title' => 'Free Resume Review Session',
-                'description' => 'Get your resume reviewed by industry experts. Limited slots available!',
-                'type' => 'announcement',
+                'title' => 'YOUTH ENERGY',
+                'description' => "Powering Abia's green workforce - Renewable energy skills development programme",
+                'type' => 'training',
                 'is_active' => true,
                 'order' => 4,
-                'start_date' => now(),
-                'end_date' => now()->addDays(14),
+                'image' => 'banners/youth-energy.png',
+                'link' => null,
+            ],
+            [
+                'title' => 'University Career Center',
+                'description' => 'Empowering Students for the Job Market, One Career at a Time',
+                'type' => 'announcement',
+                'is_active' => true,
+                'order' => 5,
+                'image' => 'banners/university-career-center.png',
+                'link' => null,
             ],
         ];
 
         foreach ($banners as $banner) {
-            Banner::create($banner);
+            Banner::updateOrCreate(
+                ['title' => $banner['title']],
+                $banner
+            );
         }
     }
 }

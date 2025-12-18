@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Banner extends Model
 {
@@ -43,5 +43,15 @@ class Banner extends Model
                     ->orWhere('end_date', '>=', now());
             })
             ->orderBy('order');
+    }
+
+    public function applications(): HasMany
+    {
+        return $this->hasMany(BannerApplication::class);
+    }
+
+    public function pendingApplications(): HasMany
+    {
+        return $this->hasMany(BannerApplication::class)->where('status', 'pending');
     }
 }

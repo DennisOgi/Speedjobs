@@ -159,6 +159,10 @@ Route::get('/workshops/{workshop}', [\App\Http\Controllers\WorkshopController::c
 Route::middleware('auth')->group(function () {
     Route::post('/workshops/{workshop}/register', [\App\Http\Controllers\WorkshopController::class, 'register'])->name('workshops.register');
     Route::post('/workshops/{workshop}/cancel', [\App\Http\Controllers\WorkshopController::class, 'cancelRegistration'])->name('workshops.cancel');
+    
+    // Banner Applications (User)
+    Route::post('/banners/{banner}/apply', [\App\Http\Controllers\BannerApplicationController::class, 'apply'])->name('banners.apply');
+    Route::get('/my-applications', [\App\Http\Controllers\BannerApplicationController::class, 'myApplications'])->name('banner-applications.index');
 });
 
 // Admin Workshop Routes
@@ -168,6 +172,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('workshops/{workshop}/registrations', [\App\Http\Controllers\Admin\WorkshopController::class, 'workshopRegistrations'])->name('workshops.registrations');
     Route::post('workshop-registrations/{registration}/approve', [\App\Http\Controllers\Admin\WorkshopController::class, 'approveRegistration'])->name('workshop-registrations.approve');
     Route::post('workshop-registrations/{registration}/reject', [\App\Http\Controllers\Admin\WorkshopController::class, 'rejectRegistration'])->name('workshop-registrations.reject');
+    
+    // Banner Applications (Admin)
+    Route::get('banner-applications', [\App\Http\Controllers\Admin\BannerApplicationController::class, 'index'])->name('banner-applications.index');
+    Route::get('banner-applications/{application}', [\App\Http\Controllers\Admin\BannerApplicationController::class, 'show'])->name('banner-applications.show');
+    Route::post('banner-applications/{application}/approve', [\App\Http\Controllers\Admin\BannerApplicationController::class, 'approve'])->name('banner-applications.approve');
+    Route::post('banner-applications/{application}/reject', [\App\Http\Controllers\Admin\BannerApplicationController::class, 'reject'])->name('banner-applications.reject');
 });
 
 require __DIR__.'/auth.php';

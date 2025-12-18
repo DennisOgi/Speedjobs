@@ -59,6 +59,10 @@
                                 {{ __('My Bookings') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('banner-applications.index')">
+                                {{ __('My Applications') }}
+                            </x-dropdown-link>
+
                             @if(Auth::user()->is_admin)
                                 <x-dropdown-link :href="route('admin.dashboard')">
                                     <span class="flex items-center">
@@ -148,6 +152,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                @if(Auth::user()->is_admin)
+                    <x-responsive-nav-link :href="route('admin.dashboard')">
+                        {{ __('Admin Dashboard') }}
+                    </x-responsive-nav-link>
+                @endif
+
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
