@@ -16,7 +16,7 @@ class BannerSeeder extends Seeder
                 'type' => 'training',
                 'is_active' => true,
                 'order' => 1,
-                'image' => 'banners/beyond2030.png',
+                'image' => 'assets/images/banners/beyond2030.png',
                 'link' => null,
             ],
             [
@@ -25,7 +25,7 @@ class BannerSeeder extends Seeder
                 'type' => 'training',
                 'is_active' => true,
                 'order' => 2,
-                'image' => 'banners/care-for-the-caretakers.png',
+                'image' => 'assets/images/banners/care-for-the-caretakers.png',
                 'link' => null,
             ],
             [
@@ -34,7 +34,7 @@ class BannerSeeder extends Seeder
                 'type' => 'event',
                 'is_active' => true,
                 'order' => 3,
-                'image' => 'banners/africa-bilateral.png',
+                'image' => 'assets/images/banners/africa-bilateral.png',
                 'link' => null,
             ],
             [
@@ -43,7 +43,7 @@ class BannerSeeder extends Seeder
                 'type' => 'training',
                 'is_active' => true,
                 'order' => 4,
-                'image' => 'banners/youth-energy.png',
+                'image' => 'assets/images/banners/youth-energy.png',
                 'link' => null,
             ],
             [
@@ -52,7 +52,7 @@ class BannerSeeder extends Seeder
                 'type' => 'announcement',
                 'is_active' => true,
                 'order' => 5,
-                'image' => 'banners/university-career-center.png',
+                'image' => 'assets/images/banners/university-career-center.png',
                 'link' => null,
             ],
         ];
