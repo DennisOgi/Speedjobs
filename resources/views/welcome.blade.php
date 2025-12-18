@@ -175,109 +175,262 @@
                     </div>
                 </div>
                 
-                <!-- Right Side - Enhanced Visual Element -->
+                <!-- Right Side - Sandwich Layout: 3 Cards Top, Banner Middle, 3 Cards Bottom -->
                 <div class="hidden lg:block relative animate-fade-in-up animation-delay-500">
-                    <!-- Floating Job Cards - Improved layout and animations -->
-                    <div class="relative w-full h-[550px]">
+                    <div class="flex flex-col gap-5 h-full" x-data="{
+                        currentBanner: 0,
+                        bannerCount: {{ $banners->count() }},
+                        autoplay: null,
+                        init() {
+                            if (this.bannerCount > 1) {
+                                this.autoplay = setInterval(() => this.next(), 5000);
+                            }
+                        },
+                        next() {
+                            this.currentBanner = (this.currentBanner + 1) % this.bannerCount;
+                        },
+                        prev() {
+                            this.currentBanner = (this.currentBanner - 1 + this.bannerCount) % this.bannerCount;
+                        },
+                        goTo(index) {
+                            this.currentBanner = index;
+                        }
+                    }">
                         
-                        <!-- Decorative Ring -->
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-white/5 rounded-full"></div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-white/5 rounded-full"></div>
-                        
-                        <!-- Main Featured Card -->
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] bg-white/[0.08] backdrop-blur-2xl rounded-3xl p-6 border border-white/15 shadow-2xl shadow-black/30 transform hover:scale-105 hover:bg-white/[0.12] transition-all duration-500 group">
-                            <!-- Card Glow Effect -->
-                            <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-500/20 to-emerald-500/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            
-                            <div class="relative">
-                                <div class="flex items-center gap-4 mb-5">
-                                    <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary-500/30">G</div>
-                                    <div>
-                                        <h4 class="font-bold text-white text-lg">Senior Developer</h4>
-                                        <p class="text-sm text-gray-400">Google Africa</p>
+                        <!-- TOP SECTION: 3 Job Cards -->
+                        <div class="space-y-3">
+                            <!-- Row 1: 2 Cards -->
+                            <div class="flex gap-3">
+                                <!-- Job Card 1 -->
+                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/30">M</div>
+                                        <div class="flex-1 min-w-0">
+                                            <h5 class="font-semibold text-white text-sm truncate">Product Manager</h5>
+                                            <p class="text-xs text-gray-500">Microsoft • Lagos</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-wrap gap-2 mb-5">
-                                    <span class="px-3 py-1.5 bg-primary-500/20 text-primary-300 text-xs font-semibold rounded-full border border-primary-500/20">Remote</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-gray-300 text-xs font-semibold rounded-full">$80k - $120k</span>
+                                
+                                <!-- Job Card 2 -->
+                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-500">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 bg-gradient-to-br from-primary-500 to-emerald-500 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-primary-500/30">G</div>
+                                        <div class="flex-1 min-w-0">
+                                            <h5 class="font-semibold text-white text-sm truncate">Senior Developer</h5>
+                                            <p class="text-xs text-gray-500">Google • Remote</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                    <span class="text-sm text-gray-500">Posted 2 hours ago</span>
-                                    <button class="px-5 py-2.5 bg-white text-gray-900 text-sm font-bold rounded-xl hover:bg-primary-50 hover:text-primary-700 transition-all shadow-lg">Apply</button>
+                            </div>
+                            
+                            <!-- Row 2: 1 Card (centered) -->
+                            <div class="flex justify-center">
+                                <!-- Job Card 3 -->
+                                <div class="w-[48%] bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-1000">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-purple-500/30">F</div>
+                                        <div class="flex-1 min-w-0">
+                                            <h5 class="font-semibold text-white text-sm truncate">UX Designer</h5>
+                                            <p class="text-xs text-gray-500">Flutterwave • Remote</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Floating Card - Top Left -->
-                        <div class="absolute top-4 left-4 w-[240px] bg-white/[0.06] backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-float shadow-xl">
-                            <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30">M</div>
+                        <!-- MIDDLE SECTION: Programme Banner Carousel -->
+                        @if($banners->count() > 0)
+                        <div class="relative h-[220px] flex-shrink-0">
+                            @foreach($banners as $index => $banner)
+                                <div x-show="currentBanner === {{ $index }}"
+                                     x-transition:enter="transition ease-out duration-500"
+                                     x-transition:enter-start="opacity-0"
+                                     x-transition:enter-end="opacity-100"
+                                     x-transition:leave="transition ease-in duration-300"
+                                     x-transition:leave-start="opacity-100"
+                                     x-transition:leave-end="opacity-0"
+                                     class="absolute inset-0 flex rounded-2xl overflow-hidden border border-white/15 shadow-2xl shadow-black/30
+                                        @if($banner->type === 'training') bg-gradient-to-r from-emerald-600 to-teal-700
+                                        @elseif($banner->type === 'event') bg-gradient-to-r from-violet-600 to-purple-700
+                                        @elseif($banner->type === 'workshop') bg-gradient-to-r from-blue-600 to-indigo-700
+                                        @else bg-gradient-to-r from-slate-600 to-slate-700
+                                        @endif"
+                                     x-cloak>
+                                    <!-- Left: Content -->
+                                    <div class="flex-1 p-4 flex flex-col">
+                                        <!-- Type Badge -->
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">{{ $banner->type }}</span>
+                                            <span class="text-white/50 text-xs">Programme</span>
+                                        </div>
+                                        
+                                        <!-- Title & Description -->
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-white text-base leading-tight mb-1.5">{{ $banner->title }}</h4>
+                                            <p class="text-white/70 text-sm leading-relaxed line-clamp-2">{{ Str::limit($banner->description, 70) }}</p>
+                                        </div>
+                                        
+                                        <!-- Action Button + Navigation -->
+                                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
+                                            @auth
+                                                @php
+                                                    $hasApplied = \App\Models\BannerApplication::where('banner_id', $banner->id)->where('user_id', auth()->id())->exists();
+                                                @endphp
+                                                @if($hasApplied)
+                                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/20 text-white text-xs font-semibold rounded-lg">
+                                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                        Applied
+                                                    </span>
+                                                @else
+                                                    <button onclick="document.getElementById('hero-apply-modal-{{ $banner->id }}').showModal()" 
+                                                            class="px-4 py-1.5 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
+                                                        Apply Now
+                                                    </button>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('login') }}" class="inline-block px-4 py-1.5 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
+                                                    Login to Apply
+                                                </a>
+                                            @endauth
+                                            
+                                            <!-- Navigation Dots -->
+                                            @if($banners->count() > 1)
+                                            <div class="flex gap-1.5">
+                                                @foreach($banners as $dotIndex => $dotBanner)
+                                                    <button @click="goTo({{ $dotIndex }})" 
+                                                            :class="currentBanner === {{ $dotIndex }} ? 'bg-white w-4' : 'bg-white/30 w-1.5 hover:bg-white/50'"
+                                                            class="h-1.5 rounded-full transition-all duration-300">
+                                                    </button>
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Right: Image -->
+                                    @if($banner->image)
+                                    <div class="w-[42%] relative">
+                                        <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="absolute inset-0 w-full h-full object-cover">
+                                        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+                                    </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                        @endif
+                        
+                        <!-- BOTTOM SECTION: 3 Job Cards -->
+                        <div class="space-y-3">
+                            <!-- Row 1: 1 Card (centered) -->
+                            <div class="flex justify-center">
+                                <!-- Job Card 4 -->
+                                <div class="w-[48%] bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-1500">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-emerald-500/30">S</div>
+                                        <div class="flex-1 min-w-0">
+                                            <h5 class="font-semibold text-white text-sm truncate">Data Analyst</h5>
+                                            <p class="text-xs text-gray-500">Safaricom • Nairobi</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Row 2: 2 Cards -->
+                            <div class="flex gap-3">
+                                <!-- Job Card 5 -->
+                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-2000">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-amber-500/30">A</div>
+                                        <div class="flex-1 min-w-0">
+                                            <h5 class="font-semibold text-white text-sm truncate">Marketing Lead</h5>
+                                            <p class="text-xs text-gray-500">Amazon • Cape Town</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Job Card 6 -->
+                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-2500">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-rose-500/30">P</div>
+                                        <div class="flex-1 min-w-0">
+                                            <h5 class="font-semibold text-white text-sm truncate">Finance Manager</h5>
+                                            <p class="text-xs text-gray-500">Paystack • Lagos</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FOOTER: Notifications & Active Users -->
+                        <div class="flex items-center justify-between mt-auto">
+                            <!-- Success Notification -->
+                            <div class="flex items-center gap-2 px-2.5 py-1.5 bg-gradient-to-r from-emerald-500/20 to-green-500/20 backdrop-blur-xl rounded-lg border border-emerald-500/30">
+                                <div class="w-6 h-6 bg-gradient-to-br from-emerald-500 to-green-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
                                 <div>
-                                    <h5 class="font-semibold text-white text-sm">Product Manager</h5>
-                                    <p class="text-xs text-gray-500">Microsoft • Lagos</p>
+                                    <p class="text-[10px] font-bold text-white">Applied!</p>
+                                    <p class="text-[9px] text-emerald-400">Just now</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Floating Card - Bottom Right -->
-                        <div class="absolute bottom-8 right-0 w-[240px] bg-white/[0.06] backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-float animation-delay-2000 shadow-xl">
-                            <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-emerald-500/30">S</div>
-                                <div>
-                                    <h5 class="font-semibold text-white text-sm">Data Analyst</h5>
-                                    <p class="text-xs text-gray-500">Safaricom • Nairobi</p>
+                            
+                            <!-- Active Users -->
+                            <div class="flex items-center gap-2 px-2.5 py-1.5 bg-white/[0.06] backdrop-blur-xl rounded-full border border-white/10">
+                                <div class="flex -space-x-1">
+                                    <div class="w-4 h-4 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full border border-slate-900 flex items-center justify-center text-[7px] text-white font-bold">A</div>
+                                    <div class="w-4 h-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full border border-slate-900 flex items-center justify-center text-[7px] text-white font-bold">K</div>
+                                    <div class="w-4 h-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full border border-slate-900 flex items-center justify-center text-[7px] text-white font-bold">F</div>
                                 </div>
+                                <span class="text-[9px] text-gray-400">+2.4k online</span>
                             </div>
-                        </div>
-                        
-                        <!-- Floating Card - Middle Left -->
-                        <div class="absolute top-1/2 -left-4 -translate-y-1/2 w-[220px] bg-white/[0.06] backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-float animation-delay-3000 shadow-xl">
-                            <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-purple-500/30">F</div>
-                                <div>
-                                    <h5 class="font-semibold text-white text-sm">UX Designer</h5>
-                                    <p class="text-xs text-gray-500">Flutterwave • Remote</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Success Notification - Enhanced -->
-                        <div class="absolute top-20 right-4 px-4 py-3 bg-gradient-to-r from-emerald-500/20 to-green-500/20 backdrop-blur-xl rounded-2xl border border-emerald-500/30 animate-float animation-delay-1000 shadow-xl shadow-emerald-500/10">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 bg-gradient-to-br from-emerald-500 to-green-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/40">
-                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            
+                            <!-- Interview Notification -->
+                            <div class="flex items-center gap-2 px-2.5 py-1.5 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 backdrop-blur-xl rounded-lg border border-blue-500/30">
+                                <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold text-white">Application Sent!</p>
-                                    <p class="text-xs text-emerald-400">Just now</p>
+                                    <p class="text-[10px] font-bold text-white">Interview</p>
+                                    <p class="text-[9px] text-blue-400">2 min ago</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- New Message Notification -->
-                        <div class="absolute bottom-32 left-8 px-4 py-3 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 backdrop-blur-xl rounded-2xl border border-blue-500/30 animate-float animation-delay-2000 shadow-xl shadow-blue-500/10">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40">
-                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-white">Interview Request</p>
-                                    <p class="text-xs text-blue-400">2 min ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Active Users Indicator -->
-                        <div class="absolute bottom-4 right-1/3 flex items-center gap-2 px-3 py-2 bg-white/[0.06] backdrop-blur-xl rounded-full border border-white/10">
-                            <div class="flex -space-x-2">
-                                <div class="w-6 h-6 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full border-2 border-slate-900 flex items-center justify-center text-[10px] text-white font-bold">A</div>
-                                <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full border-2 border-slate-900 flex items-center justify-center text-[10px] text-white font-bold">K</div>
-                                <div class="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full border-2 border-slate-900 flex items-center justify-center text-[10px] text-white font-bold">F</div>
-                            </div>
-                            <span class="text-xs text-gray-400">+2.4k online</span>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Hero Apply Modals -->
+                @auth
+                    @foreach($banners as $banner)
+                        <dialog id="hero-apply-modal-{{ $banner->id }}" class="rounded-2xl shadow-2xl backdrop:bg-black/50 p-0 max-w-md w-full">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-bold text-gray-900">Apply to {{ Str::limit($banner->title, 30) }}</h3>
+                                    <button onclick="document.getElementById('hero-apply-modal-{{ $banner->id }}').close()" class="text-gray-400 hover:text-gray-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </div>
+                                <form action="{{ route('banners.apply', $banner) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="space-y-3">
+                                        <div>
+                                            <label class="block text-xs font-medium text-gray-700 mb-1">Why are you interested? (Optional)</label>
+                                            <textarea name="cover_letter" rows="3" class="w-full text-sm rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Tell us about yourself..."></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-gray-700 mb-1">Resume (Optional)</label>
+                                            <input type="file" name="resume" accept=".pdf,.doc,.docx" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100">
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 mt-4">
+                                        <button type="button" onclick="document.getElementById('hero-apply-modal-{{ $banner->id }}').close()" class="flex-1 px-3 py-2 bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-200 transition">Cancel</button>
+                                        <button type="submit" class="flex-1 px-3 py-2 bg-primary-600 text-white text-sm font-semibold rounded-lg hover:bg-primary-700 transition">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </dialog>
+                    @endforeach
+                @endauth
             </div>
         </div>
         
@@ -292,20 +445,159 @@
         </div>
     </div>
 
+    <!-- Mobile Banner Carousel (visible only on mobile/tablet) -->
+    @if($banners->count() > 0)
+    <div class="lg:hidden bg-gradient-to-b from-slate-900 to-slate-800 py-8 px-4" x-data="{
+        currentBanner: 0,
+        bannerCount: {{ $banners->count() }},
+        autoplay: null,
+        init() {
+            if (this.bannerCount > 1) {
+                this.autoplay = setInterval(() => this.next(), 5000);
+            }
+        },
+        next() {
+            this.currentBanner = (this.currentBanner + 1) % this.bannerCount;
+        },
+        prev() {
+            this.currentBanner = (this.currentBanner - 1 + this.bannerCount) % this.bannerCount;
+        },
+        goTo(index) {
+            this.currentBanner = index;
+        }
+    }">
+        <div class="max-w-lg mx-auto">
+            <!-- Section Header -->
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-white font-bold text-lg">Featured Programmes</h3>
+                <span class="text-xs text-gray-400">Swipe to explore</span>
+            </div>
+            
+            <!-- Banner Carousel -->
+            <div class="relative h-[280px] sm:h-[260px]">
+                @foreach($banners as $index => $banner)
+                    <div x-show="currentBanner === {{ $index }}"
+                         x-transition:enter="transition ease-out duration-400"
+                         x-transition:enter-start="opacity-0 transform translate-x-4"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform -translate-x-4"
+                         class="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 shadow-xl
+                            @if($banner->type === 'training') bg-gradient-to-br from-emerald-600 to-teal-700
+                            @elseif($banner->type === 'event') bg-gradient-to-br from-violet-600 to-purple-700
+                            @elseif($banner->type === 'workshop') bg-gradient-to-br from-blue-600 to-indigo-700
+                            @else bg-gradient-to-br from-slate-600 to-slate-700
+                            @endif"
+                         x-cloak>
+                        
+                        <!-- Banner Image (top portion) -->
+                        @if($banner->image)
+                        <div class="h-[120px] sm:h-[110px] relative">
+                            <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <!-- Type Badge -->
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">{{ $banner->type }}</span>
+                            </div>
+                        </div>
+                        @endif
+                        
+                        <!-- Content -->
+                        <div class="p-4 flex flex-col h-[160px] sm:h-[150px]">
+                            <h4 class="font-bold text-white text-base leading-tight mb-1.5">{{ $banner->title }}</h4>
+                            <p class="text-white/70 text-sm leading-relaxed line-clamp-2 flex-1">{{ Str::limit($banner->description, 80) }}</p>
+                            
+                            <!-- Action Button + Navigation -->
+                            <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                                @auth
+                                    @php
+                                        $hasApplied = \App\Models\BannerApplication::where('banner_id', $banner->id)->where('user_id', auth()->id())->exists();
+                                    @endphp
+                                    @if($hasApplied)
+                                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/20 text-white text-xs font-semibold rounded-lg">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            Applied
+                                        </span>
+                                    @else
+                                        <button onclick="document.getElementById('mobile-apply-modal-{{ $banner->id }}').showModal()" 
+                                                class="px-4 py-2 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
+                                            Apply Now
+                                        </button>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="inline-block px-4 py-2 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
+                                        Login to Apply
+                                    </a>
+                                @endauth
+                                
+                                <!-- Navigation Dots -->
+                                @if($banners->count() > 1)
+                                <div class="flex gap-1.5">
+                                    @foreach($banners as $dotIndex => $dotBanner)
+                                        <button @click="goTo({{ $dotIndex }})" 
+                                                :class="currentBanner === {{ $dotIndex }} ? 'bg-white w-5' : 'bg-white/30 w-2 hover:bg-white/50'"
+                                                class="h-2 rounded-full transition-all duration-300">
+                                        </button>
+                                    @endforeach
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            
+            <!-- Navigation Arrows (for touch devices) -->
+            @if($banners->count() > 1)
+            <div class="flex justify-center gap-4 mt-4">
+                <button @click="prev()" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button @click="next()" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+            @endif
+        </div>
+        
+        <!-- Mobile Apply Modals -->
+        @auth
+            @foreach($banners as $banner)
+                <dialog id="mobile-apply-modal-{{ $banner->id }}" class="rounded-2xl shadow-2xl backdrop:bg-black/50 p-0 max-w-md w-full mx-4">
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900">Apply to {{ Str::limit($banner->title, 25) }}</h3>
+                            <button onclick="document.getElementById('mobile-apply-modal-{{ $banner->id }}').close()" class="text-gray-400 hover:text-gray-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+                        <form action="{{ route('banners.apply', $banner) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Why are you interested? (Optional)</label>
+                                    <textarea name="cover_letter" rows="3" class="w-full text-sm rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Tell us about yourself..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Resume (Optional)</label>
+                                    <input type="file" name="resume" accept=".pdf,.doc,.docx" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100">
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mt-4">
+                                <button type="button" onclick="document.getElementById('mobile-apply-modal-{{ $banner->id }}').close()" class="flex-1 px-3 py-2 bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-200 transition">Cancel</button>
+                                <button type="submit" class="flex-1 px-3 py-2 bg-primary-600 text-white text-sm font-semibold rounded-lg hover:bg-primary-700 transition">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </dialog>
+            @endforeach
+        @endauth
+    </div>
+    @endif
+
     <!-- Sponsored Workshops Slider -->
     <x-workshop-slider :workshops="$workshops" />
-
-    <!-- Advertisement Banner Slider -->
-    <div class="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-            <div class="text-center">
-                <span class="inline-block px-4 py-1.5 bg-primary-100 text-primary-700 text-sm font-semibold rounded-full mb-4">Featured Programmes</span>
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-gray-900 tracking-tight">Workforce <span class="text-primary-600">Development</span></h2>
-                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">Apply to our training programmes and career development initiatives</p>
-            </div>
-        </div>
-        <x-banner-slider :banners="$banners" />
-    </div>
 
     <!-- Featured Categories - Redesigned -->
     <div class="py-16 md:py-24 bg-white relative overflow-hidden">
