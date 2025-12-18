@@ -41,7 +41,7 @@
                     <!-- Logo -->
                     <div class="flex items-center justify-between">
                         <a href="/" class="inline-flex items-center gap-3">
-                            <img src="{{ asset('assets/logo.png') }}" alt="SpeedJobs" class="h-8 w-auto brightness-0 invert">
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs" class="h-8 w-auto brightness-0 invert">
                         </a>
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
@@ -148,7 +148,7 @@
                 <!-- Mobile Header -->
                 <div class="lg:hidden p-6 bg-gradient-to-r from-primary-600 to-primary-700">
                     <a href="/" class="inline-flex items-center gap-3">
-                        <img src="{{ asset('assets/logo.png') }}" alt="SpeedJobs" class="h-10 w-auto brightness-0 invert">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs" class="h-10 w-auto brightness-0 invert">
                     </a>
                 </div>
 
