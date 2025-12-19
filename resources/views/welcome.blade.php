@@ -92,25 +92,14 @@
             <!-- Grid Pattern -->
             <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
             
-            <!-- Floating Particles -->
-            <div class="absolute top-20 left-[10%] w-2 h-2 bg-primary-400 rounded-full animate-float opacity-40"></div>
-            <div class="absolute top-40 right-[20%] w-3 h-3 bg-primary-300 rounded-full animate-float animation-delay-1000 opacity-30"></div>
-            <div class="absolute bottom-32 left-[30%] w-2 h-2 bg-primary-400 rounded-full animate-float animation-delay-2000 opacity-25"></div>
-            <div class="absolute top-1/2 right-[10%] w-4 h-4 bg-primary-400/30 rounded-full animate-float animation-delay-3000 opacity-20"></div>
-            <div class="absolute top-1/3 left-[5%] w-1.5 h-1.5 bg-primary-400 rounded-full animate-float animation-delay-1000 opacity-35"></div>
-            <div class="absolute bottom-1/4 right-[15%] w-2.5 h-2.5 bg-primary-300 rounded-full animate-float animation-delay-2000 opacity-25"></div>
-        </div>
+            </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 md:pt-32 pb-16 md:pb-20">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 md:pt-24 pb-12 md:pb-16">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <!-- Left Content -->
                 <div class="text-center lg:text-left space-y-6 md:space-y-8">
                     <!-- Badge - Enhanced -->
                     <div class="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 animate-fade-in-up shadow-lg shadow-black/10">
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-500"></span>
-                        </span>
                         <span class="text-sm font-medium text-gray-300">{{ __('content.brand.secondary_tagline') }} • Powering Africa's Future</span>
                     </div>
                     
@@ -134,16 +123,16 @@
                     <!-- Search Bar - Enhanced -->
                     <div class="animate-fade-in-up animation-delay-300">
                         <form action="{{ route('jobs.index') }}" method="GET" class="relative">
-                            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 p-2 sm:p-2.5 bg-white/[0.07] backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl shadow-black/30">
-                                <div class="flex-1 flex items-center gap-3 px-4 py-3 sm:py-3.5 bg-white/[0.05] rounded-xl hover:bg-white/[0.08] transition-colors">
-                                    <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                    <input type="text" name="search" placeholder="Job title, keywords..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-gray-500 text-base p-0">
+                            <div class="flex flex-col sm:flex-row gap-2 p-1.5 sm:p-2 bg-white/[0.07] backdrop-blur-2xl rounded-xl border border-white/10 shadow-xl shadow-black/20">
+                                <div class="flex-1 flex items-center gap-2 px-3 py-2.5 sm:py-2.5 bg-white/[0.05] rounded-lg hover:bg-white/[0.08] transition-colors">
+                                    <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                    <input type="text" name="search" placeholder="Job title, keywords..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-gray-500 text-sm p-0">
                                 </div>
-                                <div class="flex-1 flex items-center gap-3 px-4 py-3 sm:py-3.5 bg-white/[0.05] rounded-xl hover:bg-white/[0.08] transition-colors">
-                                    <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    <input type="text" name="location" placeholder="Lagos, Nairobi..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-gray-500 text-base p-0">
+                                <div class="flex-1 flex items-center gap-2 px-3 py-2.5 sm:py-2.5 bg-white/[0.05] rounded-lg hover:bg-white/[0.08] transition-colors">
+                                    <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    <input type="text" name="location" placeholder="Lagos, Nairobi..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-gray-500 text-sm p-0">
                                 </div>
-                                <button type="submit" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all transform hover:-translate-y-0.5 hover:scale-[1.02] whitespace-nowrap">
+                                <button type="submit" class="px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 text-white font-bold text-sm rounded-lg shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all transform hover:-translate-y-0.5 hover:scale-[1.02] whitespace-nowrap">
                                     Search Jobs
                                 </button>
                             </div>
@@ -176,8 +165,8 @@
                 </div>
                 
                 <!-- Right Side - Sandwich Layout: 3 Cards Top, Banner Middle, 3 Cards Bottom -->
-                <div class="hidden lg:block relative animate-fade-in-up animation-delay-500">
-                    <div class="flex flex-col gap-5 h-full" x-data="{
+                <div class="hidden lg:block relative animate-fade-in-up animation-delay-500 -mt-8">
+                    <div class="flex flex-col gap-3 h-full" x-data="{
                         currentBanner: 0,
                         bannerCount: {{ $banners->count() }},
                         autoplay: null,
@@ -198,27 +187,27 @@
                     }">
                         
                         <!-- TOP SECTION: 3 Job Cards -->
-                        <div class="space-y-3">
+                        <div class="space-y-2">
                             <!-- Row 1: 2 Cards -->
-                            <div class="flex gap-3">
+                            <div class="flex gap-2 justify-center">
                                 <!-- Job Card 1 -->
-                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/30">M</div>
-                                        <div class="flex-1 min-w-0">
-                                            <h5 class="font-semibold text-white text-sm truncate">Product Manager</h5>
-                                            <p class="text-xs text-gray-500">Microsoft • Lagos</p>
+                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-blue-500/30">M</div>
+                                        <div>
+                                            <h5 class="font-semibold text-white text-[11px]">Product Manager</h5>
+                                            <p class="text-[9px] text-gray-500">Microsoft • Lagos</p>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <!-- Job Card 2 -->
-                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-500">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 bg-gradient-to-br from-primary-500 to-emerald-500 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-primary-500/30">G</div>
-                                        <div class="flex-1 min-w-0">
-                                            <h5 class="font-semibold text-white text-sm truncate">Senior Developer</h5>
-                                            <p class="text-xs text-gray-500">Google • Remote</p>
+                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-500">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-gradient-to-br from-primary-500 to-emerald-500 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-primary-500/30">G</div>
+                                        <div>
+                                            <h5 class="font-semibold text-white text-[11px]">Senior Developer</h5>
+                                            <p class="text-[9px] text-gray-500">Google • Remote</p>
                                         </div>
                                     </div>
                                 </div>
@@ -227,12 +216,12 @@
                             <!-- Row 2: 1 Card (centered) -->
                             <div class="flex justify-center">
                                 <!-- Job Card 3 -->
-                                <div class="w-[48%] bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-1000">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-purple-500/30">F</div>
-                                        <div class="flex-1 min-w-0">
-                                            <h5 class="font-semibold text-white text-sm truncate">UX Designer</h5>
-                                            <p class="text-xs text-gray-500">Flutterwave • Remote</p>
+                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-1000">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-gradient-to-br from-purple-500 to-violet-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-purple-500/30">F</div>
+                                        <div>
+                                            <h5 class="font-semibold text-white text-[11px]">UX Designer</h5>
+                                            <p class="text-[9px] text-gray-500">Flutterwave • Remote</p>
                                         </div>
                                     </div>
                                 </div>
@@ -321,41 +310,41 @@
                         @endif
                         
                         <!-- BOTTOM SECTION: 3 Job Cards -->
-                        <div class="space-y-3">
+                        <div class="space-y-2 mt-2">
                             <!-- Row 1: 1 Card (centered) -->
                             <div class="flex justify-center">
-                                <!-- Job Card 4 -->
-                                <div class="w-[48%] bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-1500">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-emerald-500/30">S</div>
-                                        <div class="flex-1 min-w-0">
-                                            <h5 class="font-semibold text-white text-sm truncate">Data Analyst</h5>
-                                            <p class="text-xs text-gray-500">Safaricom • Nairobi</p>
+                                <!-- Job Card 4 - Data Analyst -->
+                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float-gentle animation-delay-1500">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-emerald-500/30">S</div>
+                                        <div>
+                                            <h5 class="font-semibold text-white text-[11px]">Data Analyst</h5>
+                                            <p class="text-[9px] text-gray-500">Safaricom • Nairobi</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Row 2: 2 Cards -->
-                            <div class="flex gap-3">
+                            <div class="flex gap-2 justify-center">
                                 <!-- Job Card 5 -->
-                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-2000">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-amber-500/30">A</div>
-                                        <div class="flex-1 min-w-0">
-                                            <h5 class="font-semibold text-white text-sm truncate">Marketing Lead</h5>
-                                            <p class="text-xs text-gray-500">Amazon • Cape Town</p>
+                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-2000">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-gradient-to-br from-amber-500 to-orange-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-amber-500/30">A</div>
+                                        <div>
+                                            <h5 class="font-semibold text-white text-[11px]">Marketing Lead</h5>
+                                            <p class="text-[9px] text-gray-500">Amazon • Cape Town</p>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <!-- Job Card 6 -->
-                                <div class="flex-1 bg-white/[0.08] backdrop-blur-xl rounded-xl p-3 border border-white/10 shadow-xl hover:bg-white/[0.12] transition-all animate-float animation-delay-2500">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-rose-500/30">P</div>
-                                        <div class="flex-1 min-w-0">
-                                            <h5 class="font-semibold text-white text-sm truncate">Finance Manager</h5>
-                                            <p class="text-xs text-gray-500">Paystack • Lagos</p>
+                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-2500">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-gradient-to-br from-rose-500 to-pink-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-rose-500/30">P</div>
+                                        <div>
+                                            <h5 class="font-semibold text-white text-[11px]">Finance Manager</h5>
+                                            <p class="text-[9px] text-gray-500">Paystack • Lagos</p>
                                         </div>
                                     </div>
                                 </div>
@@ -434,16 +423,7 @@
             </div>
         </div>
         
-        <!-- Scroll Indicator - Enhanced -->
-        <div class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <div class="flex flex-col items-center gap-2">
-                <span class="text-xs text-gray-500 uppercase tracking-widest">Scroll</span>
-                <div class="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
-                    <div class="w-1 h-2 bg-primary-400 rounded-full animate-pulse"></div>
-                </div>
-            </div>
         </div>
-    </div>
 
     <!-- Mobile Banner Carousel (visible only on mobile/tablet) -->
     @if($banners->count() > 0)
@@ -600,10 +580,14 @@
     <x-workshop-slider :workshops="$workshops" />
 
     <!-- Featured Categories - Redesigned -->
-    <div class="py-16 md:py-24 bg-white relative overflow-hidden">
+    <div class="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+        <!-- Subtle Dot Pattern Background -->
+        <div class="absolute inset-0 bg-[radial-gradient(#10b98120_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+        <!-- Grid Lines Pattern -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         <!-- Background decoration -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-green-50 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-40 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-40 translate-y-1/2 -translate-x-1/2"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16">

@@ -25,7 +25,7 @@
             @include('components.navbar')
 
             <!-- Page Content -->
-            <main class="flex-grow pt-20">
+            <main class="flex-grow {{ request()->routeIs('welcome') ? '' : 'pt-20' }}">
                 {{ $slot }}
             </main>
 
