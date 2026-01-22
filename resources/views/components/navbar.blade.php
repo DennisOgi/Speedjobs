@@ -1,6 +1,6 @@
 <nav x-data="{ open: false, scrolled: false, isHome: {{ request()->routeIs('welcome') ? 'true' : 'false' }} }" 
      x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
-     :class="scrolled || !isHome ? 'bg-white/70 backdrop-blur-lg border-b border-white/20 shadow-sm' : 'bg-transparent border-b border-white/10'"
+     :class="isHome ? (scrolled ? 'bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm' : 'bg-white border-b border-gray-200') : 'bg-white/70 backdrop-blur-lg border-b border-white/20 shadow-sm'"
      class="fixed w-full z-50 top-0 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
@@ -15,32 +15,32 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a href="{{ route('welcome') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-600 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-600 hover:text-primary-600'"
                        class="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors {{ request()->routeIs('welcome') ? 'text-primary-500' : '' }}">
                         Home
                     </a>
                     <a href="{{ route('jobs.index') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-600 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-600 hover:text-primary-600'"
                        class="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors {{ request()->routeIs('jobs.*') ? 'text-primary-500' : '' }}">
                         Find a Job
                     </a>
                     <a href="{{ route('career-services') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-600 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-600 hover:text-primary-600'"
                        class="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors {{ request()->routeIs('career-services') ? 'text-primary-500' : '' }}">
                         Career Services
                     </a>
                     <a href="{{ route('skill-up') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-600 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-600 hover:text-primary-600'"
                        class="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors {{ request()->routeIs('skill-up') ? 'text-primary-500' : '' }}">
                         Skill Up
                     </a>
                     <a href="{{ route('about') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-600 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-600 hover:text-primary-600'"
                        class="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors {{ request()->routeIs('about') ? 'text-primary-500' : '' }}">
                         About
                     </a>
                     <a href="{{ route('contact') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-600 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-600 hover:text-primary-600'"
                        class="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors {{ request()->routeIs('contact') ? 'text-primary-500' : '' }}">
                         Contact
                     </a>
@@ -92,7 +92,7 @@
                     </x-dropdown>
                 @else
                     <a href="{{ route('login') }}" 
-                       :class="scrolled || !isHome ? 'text-gray-700 hover:text-primary-600' : 'text-white hover:text-primary-300'"
+                       :class="isHome ? 'text-gray-700 hover:text-primary-600' : 'text-gray-700 hover:text-primary-600'"
                        class="text-sm font-medium transition-colors">Log in</a>
                     <a href="{{ route('register') }}" class="inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all transform hover:scale-105">
                         Get Started
@@ -103,7 +103,7 @@
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" 
-                        :class="scrolled || !isHome ? 'text-gray-400 hover:text-gray-500 hover:bg-gray-100' : 'text-white hover:text-gray-200 hover:bg-white/10'"
+                        :class="isHome ? 'text-gray-400 hover:text-gray-500 hover:bg-gray-100' : 'text-gray-400 hover:text-gray-500 hover:bg-gray-100'"
                         class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />

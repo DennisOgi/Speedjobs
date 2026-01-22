@@ -94,7 +94,7 @@
             
             </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 md:pt-24 pb-12 md:pb-16">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 md:pt-28 pb-12 md:pb-16">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <!-- Left Content -->
                 <div class="text-center lg:text-left space-y-6 md:space-y-8">
@@ -105,14 +105,14 @@
                     
                     <!-- Headline - Enhanced typography -->
                     <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-heading font-black text-white leading-[1.05] tracking-tight animate-fade-in-up animation-delay-100">
-                        Find Your 
+                        Find your dream job.
+                        <br class="hidden sm:block"><span class="sm:hidden"> </span>
                         <span class="relative inline-block">
-                            <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-emerald-400 to-primary-400 bg-[length:200%_auto] animate-gradient">Dream Career</span>
+                            <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-emerald-400 to-primary-400 bg-[length:200%_auto] animate-gradient">Build a career.</span>
                             <svg class="absolute -bottom-1 md:-bottom-2 left-0 w-full h-3 md:h-4 text-primary-500/40" viewBox="0 0 200 12" preserveAspectRatio="none">
                                 <path d="M0,8 Q50,0 100,8 T200,8" stroke="currentColor" stroke-width="3" fill="none" class="animate-draw-line"/>
                             </svg>
                         </span>
-                        <br class="hidden sm:block"><span class="sm:hidden"> </span><span class="text-gray-100">in Africa</span>
                     </h1>
                     
                     <!-- Subheadline -->
@@ -139,11 +139,13 @@
                         </form>
                         
                         <!-- Popular Searches -->
-                        <div class="flex flex-wrap items-center gap-2 mt-4 justify-center lg:justify-start">
-                            <span class="text-sm text-gray-500">Popular:</span>
-                            @foreach(['Software Engineer', 'Marketing', 'Remote', 'Finance'] as $tag)
-                                <a href="{{ route('jobs.index', ['search' => $tag]) }}" class="px-3 py-1.5 text-sm text-gray-400 bg-white/[0.05] hover:bg-white/[0.1] hover:text-white rounded-full border border-white/10 transition-all hover:border-white/20">{{ $tag }}</a>
-                            @endforeach
+                        <div class="flex flex-col sm:flex-row gap-3 mt-5 justify-center lg:justify-start">
+                            <a href="{{ route('jobs.index') }}" class="inline-flex items-center justify-center px-6 py-3 bg-white text-slate-900 font-bold text-sm rounded-lg shadow-lg hover:bg-gray-100 transition-all">
+                                {{ __('content.home.hero.cta_primary') }}
+                            </a>
+                            <a href="{{ route('browse-candidates') }}" class="inline-flex items-center justify-center px-6 py-3 bg-white/10 text-white font-bold text-sm rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                                {{ __('content.home.hero.cta_secondary') }}
+                            </a>
                         </div>
                     </div>
                     
@@ -187,50 +189,10 @@
                     }">
                         
                         <!-- TOP SECTION: 3 Job Cards -->
-                        <div class="space-y-2">
-                            <!-- Row 1: 2 Cards -->
-                            <div class="flex gap-2 justify-center">
-                                <!-- Job Card 1 -->
-                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-blue-500/30">M</div>
-                                        <div>
-                                            <h5 class="font-semibold text-white text-[11px]">Product Manager</h5>
-                                            <p class="text-[9px] text-gray-500">Microsoft • Lagos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Job Card 2 -->
-                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-500">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-gradient-to-br from-primary-500 to-emerald-500 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-primary-500/30">G</div>
-                                        <div>
-                                            <h5 class="font-semibold text-white text-[11px]">Senior Developer</h5>
-                                            <p class="text-[9px] text-gray-500">Google • Remote</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Row 2: 1 Card (centered) -->
-                            <div class="flex justify-center">
-                                <!-- Job Card 3 -->
-                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-1000">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-gradient-to-br from-purple-500 to-violet-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-purple-500/30">F</div>
-                                        <div>
-                                            <h5 class="font-semibold text-white text-[11px]">UX Designer</h5>
-                                            <p class="text-[9px] text-gray-500">Flutterwave • Remote</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         <!-- MIDDLE SECTION: Programme Banner Carousel -->
                         @if($banners->count() > 0)
-                        <div class="relative h-[220px] flex-shrink-0">
+                        <div class="relative h-[420px] xl:h-[460px] flex-shrink-0">
                             @foreach($banners as $index => $banner)
                                 <div x-show="currentBanner === {{ $index }}"
                                      x-transition:enter="transition ease-out duration-500"
@@ -239,7 +201,7 @@
                                      x-transition:leave="transition ease-in duration-300"
                                      x-transition:leave-start="opacity-100"
                                      x-transition:leave-end="opacity-0"
-                                     class="absolute inset-0 flex rounded-2xl overflow-hidden border border-white/15 shadow-2xl shadow-black/30
+                                     class="absolute inset-0 flex rounded-3xl overflow-hidden border border-white/15 shadow-2xl shadow-black/40
                                         @if($banner->type === 'training') bg-gradient-to-r from-emerald-600 to-teal-700
                                         @elseif($banner->type === 'event') bg-gradient-to-r from-violet-600 to-purple-700
                                         @elseif($banner->type === 'workshop') bg-gradient-to-r from-blue-600 to-indigo-700
@@ -247,21 +209,21 @@
                                         @endif"
                                      x-cloak>
                                     <!-- Left: Content -->
-                                    <div class="flex-1 p-4 flex flex-col">
+                                    <div class="flex-1 p-7 flex flex-col">
                                         <!-- Type Badge -->
-                                        <div class="flex items-center gap-2 mb-2">
-                                            <span class="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">{{ $banner->type }}</span>
-                                            <span class="text-white/50 text-xs">Programme</span>
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <span class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">{{ $banner->type }}</span>
+                                            <span class="text-white/60 text-xs">Programme</span>
                                         </div>
                                         
                                         <!-- Title & Description -->
                                         <div class="flex-1">
-                                            <h4 class="font-bold text-white text-base leading-tight mb-1.5">{{ $banner->title }}</h4>
-                                            <p class="text-white/70 text-sm leading-relaxed line-clamp-2">{{ Str::limit($banner->description, 70) }}</p>
+                                            <h4 class="font-black text-white text-2xl leading-tight mb-3">{{ $banner->title }}</h4>
+                                            <p class="text-white/75 text-base leading-relaxed line-clamp-3">{{ Str::limit($banner->description, 120) }}</p>
                                         </div>
                                         
                                         <!-- Action Button + Navigation -->
-                                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
+                                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
                                             @auth
                                                 @php
                                                     $hasApplied = \App\Models\BannerApplication::where('banner_id', $banner->id)->where('user_id', auth()->id())->exists();
@@ -278,7 +240,7 @@
                                                     </button>
                                                 @endif
                                             @else
-                                                <a href="{{ route('login') }}" class="inline-block px-4 py-1.5 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
+                                                <a href="{{ route('login') }}" class="inline-block px-4 py-2 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
                                                     Login to Apply
                                                 </a>
                                             @endauth
@@ -299,9 +261,9 @@
                                     
                                     <!-- Right: Image -->
                                     @if($banner->image)
-                                    <div class="w-[42%] relative">
+                                    <div class="w-1/2 relative">
                                         <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="absolute inset-0 w-full h-full object-cover">
-                                        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-black/5"></div>
                                     </div>
                                     @endif
                                 </div>
@@ -310,81 +272,8 @@
                         @endif
                         
                         <!-- BOTTOM SECTION: 3 Job Cards -->
-                        <div class="space-y-2 mt-2">
-                            <!-- Row 1: 1 Card (centered) -->
-                            <div class="flex justify-center">
-                                <!-- Job Card 4 - Data Analyst -->
-                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float-gentle animation-delay-1500">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-emerald-500/30">S</div>
-                                        <div>
-                                            <h5 class="font-semibold text-white text-[11px]">Data Analyst</h5>
-                                            <p class="text-[9px] text-gray-500">Safaricom • Nairobi</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Row 2: 2 Cards -->
-                            <div class="flex gap-2 justify-center">
-                                <!-- Job Card 5 -->
-                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-2000">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-gradient-to-br from-amber-500 to-orange-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-amber-500/30">A</div>
-                                        <div>
-                                            <h5 class="font-semibold text-white text-[11px]">Marketing Lead</h5>
-                                            <p class="text-[9px] text-gray-500">Amazon • Cape Town</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Job Card 6 -->
-                                <div class="bg-white/[0.08] backdrop-blur-xl rounded-lg px-3 py-2 border border-white/10 shadow-lg hover:bg-white/[0.12] transition-all animate-float animation-delay-2500">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-gradient-to-br from-rose-500 to-pink-600 rounded-md flex items-center justify-center text-white font-bold text-[10px] shadow-md shadow-rose-500/30">P</div>
-                                        <div>
-                                            <h5 class="font-semibold text-white text-[11px]">Finance Manager</h5>
-                                            <p class="text-[9px] text-gray-500">Paystack • Lagos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         <!-- FOOTER: Notifications & Active Users -->
-                        <div class="flex items-center justify-between mt-auto">
-                            <!-- Success Notification -->
-                            <div class="flex items-center gap-2 px-2.5 py-1.5 bg-gradient-to-r from-emerald-500/20 to-green-500/20 backdrop-blur-xl rounded-lg border border-emerald-500/30">
-                                <div class="w-6 h-6 bg-gradient-to-br from-emerald-500 to-green-500 rounded-full flex items-center justify-center shadow-lg">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] font-bold text-white">Applied!</p>
-                                    <p class="text-[9px] text-emerald-400">Just now</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Active Users -->
-                            <div class="flex items-center gap-2 px-2.5 py-1.5 bg-white/[0.06] backdrop-blur-xl rounded-full border border-white/10">
-                                <div class="flex -space-x-1">
-                                    <div class="w-4 h-4 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full border border-slate-900 flex items-center justify-center text-[7px] text-white font-bold">A</div>
-                                    <div class="w-4 h-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full border border-slate-900 flex items-center justify-center text-[7px] text-white font-bold">K</div>
-                                    <div class="w-4 h-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full border border-slate-900 flex items-center justify-center text-[7px] text-white font-bold">F</div>
-                                </div>
-                                <span class="text-[9px] text-gray-400">+2.4k online</span>
-                            </div>
-                            
-                            <!-- Interview Notification -->
-                            <div class="flex items-center gap-2 px-2.5 py-1.5 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 backdrop-blur-xl rounded-lg border border-blue-500/30">
-                                <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] font-bold text-white">Interview</p>
-                                    <p class="text-[9px] text-blue-400">2 min ago</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 

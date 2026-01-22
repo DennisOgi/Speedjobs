@@ -262,15 +262,6 @@
                         <p class="text-primary-600 font-semibold text-sm mb-4">Director, Learning Hub</p>
                         <p class="text-sm text-gray-600 leading-relaxed">HR professional with MBA from Rome Business School. Mentored 100+ graduates and leads workforce optimization initiatives.</p>
                     </div>
-                    <!-- Amina Loretta Mohammed -->
-                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all">
-                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 mx-auto flex items-center justify-center text-3xl font-bold text-white mb-6">
-                            AM
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-900">Amina Loretta Mohammed</h3>
-                        <p class="text-primary-600 font-semibold text-sm mb-4">Director, Media</p>
-                        <p class="text-sm text-gray-600 leading-relaxed">Communications expert with 10+ years in corporate events and branding. Fluent in English, Hausa, and Yoruba.</p>
-                    </div>
                 </div>
             </div>
         </div>

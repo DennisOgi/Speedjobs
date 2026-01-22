@@ -12,7 +12,7 @@ return [
     'home' => [
         'hero' => [
             'headline' => 'Unlock Your Potential. Power Africa’s Future.',
-            'subheadline' => 'We bridge the gap between education and the labor market. Join the platform empowering the next generation of African talent.',
+            'subheadline' => 'We bridge the gap between education and the labor market.',
             'cta_primary' => 'Find a Job',
             'cta_secondary' => 'Hire Talent',
         ],
@@ -90,11 +90,6 @@ return [
                 'name' => 'Nsikak John Essien',
                 'role' => 'Director, Learning Hub',
                 'bio' => 'HR professional specializing in Talent Development and Strategy. Mentored over 100 graduates and leads our initiatives to position workplaces as learning organizations.',
-            ],
-            [
-                'name' => 'Amina Loretta Mohammed',
-                'role' => 'Director, Media',
-                'bio' => 'Communications expert with a decade of experience in high-profile corporate events and branding. Fluent in English, Hausa, and Yoruba, driving our brand visibility.',
             ],
         ],
     ],
