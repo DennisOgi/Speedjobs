@@ -268,7 +268,7 @@ TEXT;
                     <div class="lg:col-span-2">
                         <svg class="w-12 h-12 text-primary-400 mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                         <p class="text-xl leading-relaxed text-primary-100 mb-6">{{ \Illuminate\Support\Str::words($ibemBio, 70, '...') }}</p>
-                        <button type="button" x-on:click.prevent="$dispatch('open-modal', 'leader-ibem')" class="inline-flex items-center justify-center px-6 py-3 bg-white/10 hover:bg-white/15 text-white font-bold text-sm rounded-lg border border-white/20 transition-all">Read full profile</button>
+                        <button type="button" x-data x-on:click.prevent="$dispatch('open-modal', 'leader-ibem')" class="inline-flex items-center justify-center px-6 py-3 bg-white/10 hover:bg-white/15 text-white font-bold text-sm rounded-lg border border-white/20 transition-all">Read full profile</button>
                     </div>
                 </div>
             </div>
@@ -294,7 +294,7 @@ TEXT;
                             <p class="text-sm text-gray-600 leading-relaxed max-h-20 overflow-hidden">{{ \Illuminate\Support\Str::words($edithBio, 28, '...') }}</p>
                             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
                         </div>
-                        <button type="button" x-on:click.prevent="$dispatch('open-modal', 'leader-edith')" class="mt-5 inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition">Read full bio</button>
+                        <button type="button" x-data x-on:click.prevent="$dispatch('open-modal', 'leader-edith')" class="mt-5 inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition">Read full bio</button>
                     </div>
                     <!-- Francisca Yetunde Armon -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all h-full flex flex-col">
@@ -307,7 +307,7 @@ TEXT;
                             <p class="text-sm text-gray-600 leading-relaxed max-h-20 overflow-hidden">{{ \Illuminate\Support\Str::words($yetundeBio, 28, '...') }}</p>
                             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
                         </div>
-                        <button type="button" x-on:click.prevent="$dispatch('open-modal', 'leader-yetunde')" class="mt-5 inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition">Read full bio</button>
+                        <button type="button" x-data x-on:click.prevent="$dispatch('open-modal', 'leader-yetunde')" class="mt-5 inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition">Read full bio</button>
                     </div>
                     <!-- Nsikak John Essien -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all h-full flex flex-col">
@@ -320,79 +320,87 @@ TEXT;
                             <p class="text-sm text-gray-600 leading-relaxed max-h-20 overflow-hidden">{{ \Illuminate\Support\Str::words($johnBio, 28, '...') }}</p>
                             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
                         </div>
-                        <button type="button" x-on:click.prevent="$dispatch('open-modal', 'leader-john')" class="mt-5 inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition">Read full bio</button>
+                        <button type="button" x-data x-on:click.prevent="$dispatch('open-modal', 'leader-john')" class="mt-5 inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition">Read full bio</button>
                     </div>
                 </div>
 
                 <x-modal name="leader-ibem" maxWidth="2xl">
-                    <div class="p-6 sm:p-8">
-                        <div class="flex items-start justify-between gap-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-14 h-14 rounded-full overflow-hidden ring-2 ring-gray-100 shadow">
-                                    <img src="{{ asset('assets/images/ibem.png') }}" alt="Ibem Kalu Idika" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-900">Ibem Kalu Idika</h3>
-                                    <p class="text-sm font-semibold text-primary-600">MD/CEO</p>
-                                </div>
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white dark:ring-gray-700 shadow-sm">
+                                <img src="{{ asset('assets/images/ibem.png') }}" alt="Ibem Kalu Idika" class="w-full h-full object-cover">
                             </div>
-                            <button type="button" x-on:click="$dispatch('close-modal', 'leader-ibem')" class="text-gray-400 hover:text-gray-600">&times;</button>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Ibem Kalu Idika</h3>
+                                <p class="text-sm font-medium text-primary-600 dark:text-primary-400">MD/CEO</p>
+                            </div>
                         </div>
-                        <div class="mt-6 text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ $ibemBio }}</div>
+                        <button type="button" x-on:click="$dispatch('close-modal', 'leader-ibem')" class="p-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-6 sm:p-8 max-h-[70vh] overflow-y-auto">
+                        <div class="text-base text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">{{ $ibemBio }}</div>
                     </div>
                 </x-modal>
 
                 <x-modal name="leader-edith" maxWidth="2xl">
-                    <div class="p-6 sm:p-8">
-                        <div class="flex items-start justify-between gap-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-14 h-14 rounded-full overflow-hidden ring-2 ring-gray-100 shadow">
-                                    <img src="{{ asset('assets/images/edith.png') }}" alt="Edith Egube" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-900">Edith Egube</h3>
-                                    <p class="text-sm font-semibold text-primary-600">Managing Partner, SPEED Consulting Limited</p>
-                                </div>
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white dark:ring-gray-700 shadow-sm">
+                                <img src="{{ asset('assets/images/edith.png') }}" alt="Edith Egube" class="w-full h-full object-cover">
                             </div>
-                            <button type="button" x-on:click="$dispatch('close-modal', 'leader-edith')" class="text-gray-400 hover:text-gray-600">&times;</button>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Edith Egube</h3>
+                                <p class="text-sm font-medium text-primary-600 dark:text-primary-400">Managing Partner, SPEED Consulting Limited</p>
+                            </div>
                         </div>
-                        <div class="mt-6 text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ $edithBio }}</div>
+                        <button type="button" x-on:click="$dispatch('close-modal', 'leader-edith')" class="p-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-6 sm:p-8 max-h-[70vh] overflow-y-auto">
+                        <div class="text-base text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">{{ $edithBio }}</div>
                     </div>
                 </x-modal>
 
                 <x-modal name="leader-yetunde" maxWidth="2xl">
-                    <div class="p-6 sm:p-8">
-                        <div class="flex items-start justify-between gap-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-14 h-14 rounded-full overflow-hidden ring-2 ring-gray-100 shadow">
-                                    <img src="{{ asset('assets/images/yetunde.png') }}" alt="Francisca Yetunde Armon" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-900">Francisca Yetunde Armon</h3>
-                                    <p class="text-sm font-semibold text-primary-600">Managing Partner, Work Culture</p>
-                                </div>
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white dark:ring-gray-700 shadow-sm">
+                                <img src="{{ asset('assets/images/yetunde.png') }}" alt="Francisca Yetunde Armon" class="w-full h-full object-cover">
                             </div>
-                            <button type="button" x-on:click="$dispatch('close-modal', 'leader-yetunde')" class="text-gray-400 hover:text-gray-600">&times;</button>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Francisca Yetunde Armon</h3>
+                                <p class="text-sm font-medium text-primary-600 dark:text-primary-400">Managing Partner, Work Culture</p>
+                            </div>
                         </div>
-                        <div class="mt-6 text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ $yetundeBio }}</div>
+                        <button type="button" x-on:click="$dispatch('close-modal', 'leader-yetunde')" class="p-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-6 sm:p-8 max-h-[70vh] overflow-y-auto">
+                        <div class="text-base text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">{{ $yetundeBio }}</div>
                     </div>
                 </x-modal>
 
                 <x-modal name="leader-john" maxWidth="2xl">
-                    <div class="p-6 sm:p-8">
-                        <div class="flex items-start justify-between gap-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-14 h-14 rounded-full overflow-hidden ring-2 ring-gray-100 shadow">
-                                    <img src="{{ asset('assets/images/john.png') }}" alt="Nsikak John Essien" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-900">Nsikak John Essien</h3>
-                                    <p class="text-sm font-semibold text-primary-600">Director, Learning Hub</p>
-                                </div>
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white dark:ring-gray-700 shadow-sm">
+                                <img src="{{ asset('assets/images/john.png') }}" alt="Nsikak John Essien" class="w-full h-full object-cover">
                             </div>
-                            <button type="button" x-on:click="$dispatch('close-modal', 'leader-john')" class="text-gray-400 hover:text-gray-600">&times;</button>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Nsikak John Essien</h3>
+                                <p class="text-sm font-medium text-primary-600 dark:text-primary-400">Director, Learning Hub</p>
+                            </div>
                         </div>
-                        <div class="mt-6 text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ $johnBio }}</div>
+                        <button type="button" x-on:click="$dispatch('close-modal', 'leader-john')" class="p-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-6 sm:p-8 max-h-[70vh] overflow-y-auto">
+                        <div class="text-base text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">{{ $johnBio }}</div>
                     </div>
                 </x-modal>
             </div>
