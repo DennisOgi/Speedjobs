@@ -55,14 +55,14 @@
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="grid md:grid-cols-2 gap-12">
                     <div class="bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl p-10 text-white">
-                        <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                         </div>
                         <h3 class="text-sm font-bold uppercase tracking-wider text-primary-200 mb-3">Our Vision</h3>
                         <p class="text-2xl font-bold leading-relaxed">To be Africa's leading platform for connecting people, skills, and opportunities for inclusive economic growth.</p>
                     </div>
                     <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-3xl p-10 text-white">
-                        <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6 mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
                         <h3 class="text-sm font-bold uppercase tracking-wider text-amber-200 mb-3">Our Mission</h3>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all group">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 mb-3">Employment Services</h3>
@@ -94,7 +94,7 @@
                         </ul>
                     </div>
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all group">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 mb-3">Training & Development</h3>
@@ -106,7 +106,7 @@
                         </ul>
                     </div>
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all group">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 mb-3">Career Services</h3>
@@ -118,7 +118,7 @@
                         </ul>
                     </div>
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all group">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 mb-3">Funds Management</h3>
@@ -285,8 +285,8 @@ TEXT;
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Edith Egube -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all h-full flex flex-col">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-6 shrink-0 overflow-hidden ring-4 ring-white shadow">
-                            <img src="{{ asset('assets/images/edith.png') }}" alt="Edith Egube" class="w-full h-full object-cover">
+                        <div class="w-32 h-32 rounded-full mx-auto mb-6 shrink-0 overflow-hidden ring-4 ring-white shadow">
+                            <img src="{{ asset('assets/images/edith.png') }}" alt="Edith Egube" class="w-full h-full object-cover object-top">
                         </div>
                         <h3 class="text-lg font-bold text-gray-900">Edith Egube</h3>
                         <p class="text-primary-600 font-semibold text-sm mb-4">Managing Partner, SPEED Consulting Limited</p>
@@ -298,8 +298,8 @@ TEXT;
                     </div>
                     <!-- Francisca Yetunde Armon -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all h-full flex flex-col">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-6 shrink-0 overflow-hidden ring-4 ring-white shadow">
-                            <img src="{{ asset('assets/images/yetunde.png') }}" alt="Francisca Yetunde Armon" class="w-full h-full object-cover">
+                        <div class="w-32 h-32 rounded-full mx-auto mb-6 shrink-0 overflow-hidden ring-4 ring-white shadow">
+                            <img src="{{ asset('assets/images/yetunde.png') }}" alt="Francisca Yetunde Armon" class="w-full h-full object-cover object-top">
                         </div>
                         <h3 class="text-lg font-bold text-gray-900">Francisca Yetunde Armon</h3>
                         <p class="text-primary-600 font-semibold text-sm mb-4">Managing Partner, Work Culture</p>
@@ -311,8 +311,8 @@ TEXT;
                     </div>
                     <!-- Nsikak John Essien -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all h-full flex flex-col">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-6 shrink-0 overflow-hidden ring-4 ring-white shadow">
-                            <img src="{{ asset('assets/images/john.png') }}" alt="Nsikak John Essien" class="w-full h-full object-cover">
+                        <div class="w-32 h-32 rounded-full mx-auto mb-6 shrink-0 overflow-hidden ring-4 ring-white shadow">
+                            <img src="{{ asset('assets/images/john.png') }}" alt="Nsikak John Essien" class="w-full h-full object-cover object-top">
                         </div>
                         <h3 class="text-lg font-bold text-gray-900">Nsikak John Essien</h3>
                         <p class="text-primary-600 font-semibold text-sm mb-4">Director, Learning Hub</p>
