@@ -28,45 +28,140 @@
                             Together, we can transform challenges into opportunities and build a continent where talent meets opportunity — at SPEED.
                         </p>
                     </div>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
-                            <div class="text-4xl font-bold text-primary-600 mb-2">2.5B</div>
-                            <p class="text-sm text-gray-600">Africa's projected population by 2050</p>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
-                            <div class="text-4xl font-bold text-primary-600 mb-2">62%</div>
-                            <p class="text-sm text-gray-600">Will be of working age (15-64 years)</p>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
-                            <div class="text-4xl font-bold text-amber-500 mb-2">75%</div>
-                            <p class="text-sm text-gray-600">Under 35 years old by 2030</p>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
-                            <div class="text-4xl font-bold text-amber-500 mb-2">94M</div>
-                            <p class="text-sm text-gray-600">Nigerian youth by 2030</p>
-                        </div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-amber-200 rounded-3xl transform rotate-3"></div>
+                        <img src="{{ asset('assets/images/youth energy.png') }}" alt="Africa's Youth Energy" class="relative rounded-3xl shadow-xl w-full object-cover transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Vision & Mission -->
-        <div class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl p-10 text-white">
-                        <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6 mx-auto">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+        <div class="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+            <!-- Background decorative elements -->
+            <div class="absolute inset-0 opacity-30">
+                <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-200 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-200 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <span class="inline-block px-4 py-1.5 bg-primary-100 text-primary-700 text-sm font-bold rounded-full mb-4">What Drives Us</span>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Purpose & Direction</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Guided by a clear vision and mission, we're committed to transforming Africa's workforce landscape.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Vision Card -->
+                    <div class="group relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-800 rounded-3xl transform group-hover:scale-[1.02] transition-transform duration-300"></div>
+                        <div class="relative bg-gradient-to-br from-primary-600 to-primary-800 rounded-3xl p-10 lg:p-12 text-white overflow-hidden">
+                            <!-- Decorative pattern -->
+                            <div class="absolute top-0 right-0 w-64 h-64 opacity-10">
+                                <svg viewBox="0 0 200 200" class="w-full h-full">
+                                    <defs>
+                                        <pattern id="vision-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                            <circle cx="2" cy="2" r="1.5" fill="currentColor"/>
+                                        </pattern>
+                                    </defs>
+                                    <rect width="200" height="200" fill="url(#vision-grid)"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- Large quote mark -->
+                            <div class="absolute -top-4 -left-2 text-white/10 pointer-events-none">
+                                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                                </svg>
+                            </div>
+                            
+                            <div class="relative">
+                                <!-- Icon -->
+                                <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-8 ring-1 ring-white/20">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Label -->
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="w-8 h-0.5 bg-primary-300"></div>
+                                    <h3 class="text-sm font-bold uppercase tracking-widest text-primary-200">Our Vision</h3>
+                                </div>
+                                
+                                <!-- Statement -->
+                                <p class="text-2xl lg:text-3xl font-bold leading-relaxed">
+                                    To be Africa's <span class="text-primary-200">leading platform</span> for connecting people, skills, and opportunities for inclusive economic growth.
+                                </p>
+                                
+                                <!-- Bottom accent -->
+                                <div class="mt-8 flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-primary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-primary-200 font-medium">Empowering Africa's Future</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-sm font-bold uppercase tracking-wider text-primary-200 mb-3">Our Vision</h3>
-                        <p class="text-2xl font-bold leading-relaxed">To be Africa's leading platform for connecting people, skills, and opportunities for inclusive economic growth.</p>
                     </div>
-                    <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-3xl p-10 text-white">
-                        <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6 mx-auto">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    
+                    <!-- Mission Card -->
+                    <div class="group relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-500 to-amber-700 rounded-3xl transform group-hover:scale-[1.02] transition-transform duration-300"></div>
+                        <div class="relative bg-gradient-to-br from-amber-500 to-amber-700 rounded-3xl p-10 lg:p-12 text-white overflow-hidden">
+                            <!-- Decorative pattern -->
+                            <div class="absolute top-0 right-0 w-64 h-64 opacity-10">
+                                <svg viewBox="0 0 200 200" class="w-full h-full">
+                                    <defs>
+                                        <pattern id="mission-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                            <circle cx="2" cy="2" r="1.5" fill="currentColor"/>
+                                        </pattern>
+                                    </defs>
+                                    <rect width="200" height="200" fill="url(#mission-grid)"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- Large quote mark -->
+                            <div class="absolute -top-4 -left-2 text-white/10 pointer-events-none">
+                                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                                </svg>
+                            </div>
+                            
+                            <div class="relative">
+                                <!-- Icon -->
+                                <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-8 ring-1 ring-white/20">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Label -->
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="w-8 h-0.5 bg-amber-300"></div>
+                                    <h3 class="text-sm font-bold uppercase tracking-widest text-amber-200">Our Mission</h3>
+                                </div>
+                                
+                                <!-- Statement -->
+                                <p class="text-2xl lg:text-3xl font-bold leading-relaxed">
+                                    To provide <span class="text-amber-200">career services</span>, job matching, and workforce development solutions that prepare young people for the future of work.
+                                </p>
+                                
+                                <!-- Bottom accent -->
+                                <div class="mt-8 flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-amber-200 font-medium">Driving Workforce Excellence</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-sm font-bold uppercase tracking-wider text-amber-200 mb-3">Our Mission</h3>
-                        <p class="text-2xl font-bold leading-relaxed">To provide career services, job matching, and workforce development solutions that prepare young people for the future of work.</p>
                     </div>
                 </div>
             </div>

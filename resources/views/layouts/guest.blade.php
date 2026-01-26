@@ -16,8 +16,8 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex">
-            <!-- Left Side - Branding & Visual -->
-            <div class="hidden lg:flex lg:w-[45%] xl:w-1/2 relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900">
+            <!-- Left Side - Branding & Visual (Hidden on mobile, compact on desktop) -->
+            <div class="hidden lg:flex lg:w-[40%] xl:w-[42%] relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900">
                 <!-- Animated Background Elements -->
                 <div class="absolute inset-0">
                     <div class="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Content -->
-                <div class="relative z-10 flex flex-col justify-between p-6 lg:p-8 xl:p-10 w-full">
+                <div class="relative z-10 flex flex-col justify-between p-6 lg:p-8 w-full">
                     <!-- Logo -->
                     <div class="flex items-center justify-between">
                         <a href="/" class="inline-flex items-center gap-3">
@@ -50,7 +50,7 @@
                     </div>
 
                     <!-- Main Content -->
-                    <div class="flex-1 flex flex-col justify-center py-6 space-y-5">
+                    <div class="flex-1 flex flex-col justify-center py-6 space-y-4">
                         <div>
                             <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full text-white/80 text-xs font-medium mb-3">
                                 <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
@@ -58,7 +58,7 @@
                                 </svg>
                                 #1 Job Platform in Africa
                             </div>
-                            <h1 class="text-2xl lg:text-3xl xl:text-4xl font-extrabold text-white leading-tight">
+                            <h1 class="text-2xl lg:text-3xl font-extrabold text-white leading-tight">
                                 Accelerate Your<br>
                                 <span class="text-emerald-300">Career Journey</span>
                             </h1>
@@ -68,7 +68,7 @@
                         </div>
 
                         <!-- Feature Cards - 2x2 Grid -->
-                        <div class="grid grid-cols-2 gap-2.5">
+                        <div class="grid grid-cols-2 gap-2">
                             <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/10">
                                 <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center mb-2">
                                     <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,19 +108,19 @@
                         </div>
 
                         <!-- Stats Row -->
-                        <div class="flex items-center justify-between bg-white/5 rounded-xl p-4 border border-white/10">
-                            <div class="text-center">
-                                <p class="text-xl font-bold text-white">10K+</p>
+                        <div class="flex items-center justify-between bg-white/5 rounded-xl p-3 border border-white/10">
+                            <div class="text-center flex-1">
+                                <p class="text-lg font-bold text-white">10K+</p>
                                 <p class="text-[10px] text-white/50">Active Jobs</p>
                             </div>
                             <div class="w-px h-8 bg-white/20"></div>
-                            <div class="text-center">
-                                <p class="text-xl font-bold text-white">50K+</p>
+                            <div class="text-center flex-1">
+                                <p class="text-lg font-bold text-white">50K+</p>
                                 <p class="text-[10px] text-white/50">Job Seekers</p>
                             </div>
                             <div class="w-px h-8 bg-white/20"></div>
-                            <div class="text-center">
-                                <p class="text-xl font-bold text-white">2K+</p>
+                            <div class="text-center flex-1">
+                                <p class="text-lg font-bold text-white">2K+</p>
                                 <p class="text-[10px] text-white/50">Companies</p>
                             </div>
                         </div>
@@ -144,23 +144,23 @@
             </div>
 
             <!-- Right Side - Form -->
-            <div class="w-full lg:w-[55%] xl:w-1/2 flex flex-col">
+            <div class="w-full lg:w-[60%] xl:w-[58%] flex flex-col">
                 <!-- Mobile Header -->
-                <div class="lg:hidden p-6 bg-gradient-to-r from-primary-600 to-primary-700">
+                <div class="lg:hidden p-4 sm:p-6 bg-gradient-to-r from-primary-600 to-primary-700">
                     <a href="/" class="inline-flex items-center gap-3">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs" class="h-10 w-auto brightness-0 invert">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="SpeedJobs" class="h-8 sm:h-10 w-auto brightness-0 invert">
                     </a>
                 </div>
 
                 <!-- Form Container -->
-                <div class="flex-1 flex items-center justify-center p-6 sm:p-8 lg:p-12 xl:p-16 bg-white">
-                    <div class="w-full max-w-md">
+                <div class="flex-1 flex items-start lg:items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-12 bg-white overflow-y-auto">
+                    <div class="w-full max-w-lg py-4 lg:py-0">
                         {{ $slot }}
                     </div>
                 </div>
 
                 <!-- Footer -->
-                <div class="p-6 text-center text-sm text-slate-400 bg-white border-t border-slate-100">
+                <div class="p-4 sm:p-6 text-center text-sm text-slate-400 bg-white border-t border-slate-100">
                     <p>&copy; {{ date('Y') }} SpeedJobs Africa. All rights reserved.</p>
                 </div>
             </div>

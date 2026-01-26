@@ -10,27 +10,18 @@ class JobseekerDashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Fetch personalized job recommendations based on user profile
-        $query = \App\Models\Job::query();
-        
-        // Match by field of study or skills if available
-        if ($user->field_of_study) {
-            $query->where(function($q) use ($user) {
-                $q->where('title', 'like', '%' . $user->field_of_study . '%')
-                  ->orWhere('description', 'like', '%' . $user->field_of_study . '%');
-            });
-        }
-        
-        // Match by location if available
-        if ($user->location) {
-            $query->orWhere('location', 'like', '%' . $user->location . '%');
-        }
-        
-        $recommendedJobs = $query->latest()->take(4)->get();
+        // Get IDs of jobs the user has already applied to (to exclude them)
+        $appliedJobIds = $user->jobApplications()->pluck('job_id')->toArray();
+
+        // Build personalized job recommendations with relevance scoring
+        $recommendedJobs = $this->getRecommendedJobs($user, $appliedJobIds);
         
         // Fallback to latest jobs if no personalized matches
         if ($recommendedJobs->isEmpty()) {
-            $recommendedJobs = \App\Models\Job::latest()->take(4)->get();
+            $recommendedJobs = \App\Models\Job::whereNotIn('id', $appliedJobIds)
+                ->latest()
+                ->take(6)
+                ->get();
         }
         
         // Fetch active course enrollments
@@ -105,5 +96,131 @@ class JobseekerDashboardController extends Controller
             'workshopRegistrations',
             'profileCompletion'
         ));
+    }
+
+    /**
+     * Get personalized job recommendations based on user profile with relevance scoring
+     */
+    private function getRecommendedJobs($user, array $excludeJobIds = []): \Illuminate\Support\Collection
+    {
+        // Get all jobs not already applied to
+        $jobs = \App\Models\Job::whereNotIn('id', $excludeJobIds)->get();
+        
+        if ($jobs->isEmpty()) {
+            return collect([]);
+        }
+
+        // Prepare user data for matching
+        $userSkills = $user->skills ? array_map('trim', array_map('strtolower', explode(',', $user->skills))) : [];
+        $userFieldOfStudy = $user->field_of_study ? strtolower($user->field_of_study) : null;
+        $userLocation = $user->location ? strtolower($user->location) : null;
+        $userExperienceLevel = $user->experience_level ?? null;
+
+        // Map of field of study to related job categories and keywords
+        $fieldToCategories = [
+            'computer science' => ['technology', 'software', 'developer', 'engineer', 'programming', 'it', 'tech'],
+            'engineering' => ['engineering', 'engineer', 'technical', 'infrastructure', 'manufacturing'],
+            'business administration' => ['business', 'management', 'marketing', 'sales', 'finance', 'administration'],
+            'economics' => ['finance', 'banking', 'economics', 'analyst', 'investment', 'accounting'],
+            'law' => ['legal', 'law', 'compliance', 'lawyer', 'attorney', 'paralegal'],
+            'medicine' => ['healthcare', 'medical', 'health', 'hospital', 'clinical', 'nursing', 'pharmaceutical'],
+            'marketing' => ['marketing', 'advertising', 'digital', 'brand', 'communications', 'social media'],
+            'accounting' => ['accounting', 'finance', 'audit', 'tax', 'bookkeeping', 'financial'],
+        ];
+
+        // Score each job based on relevance
+        $scoredJobs = $jobs->map(function ($job) use ($userSkills, $userFieldOfStudy, $userLocation, $userExperienceLevel, $fieldToCategories) {
+            $score = 0;
+            $jobTitle = strtolower($job->title);
+            $jobDescription = strtolower($job->description ?? '');
+            $jobRequirements = strtolower($job->requirements ?? '');
+            $jobCategory = strtolower($job->category ?? '');
+            $jobLocation = strtolower($job->location ?? '');
+            $jobType = strtolower($job->type ?? '');
+            $combinedJobText = $jobTitle . ' ' . $jobDescription . ' ' . $jobRequirements . ' ' . $jobCategory;
+
+            // 1. Skills matching (high weight - 3 points per skill matched)
+            foreach ($userSkills as $skill) {
+                if ($skill && strlen($skill) > 2 && str_contains($combinedJobText, $skill)) {
+                    $score += 3;
+                }
+            }
+
+            // 2. Field of study / Category matching (medium-high weight - 5 points)
+            if ($userFieldOfStudy) {
+                // Direct field match
+                if (str_contains($combinedJobText, $userFieldOfStudy)) {
+                    $score += 5;
+                }
+                
+                // Category-based matching using field mapping
+                foreach ($fieldToCategories as $field => $keywords) {
+                    if (str_contains($userFieldOfStudy, $field)) {
+                        foreach ($keywords as $keyword) {
+                            if (str_contains($combinedJobText, $keyword)) {
+                                $score += 2;
+                                break; // Only count once per field match
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // 3. Location matching (medium weight - 4 points)
+            if ($userLocation) {
+                // Extract city/region from user location for partial matching
+                $locationParts = array_map('trim', preg_split('/[,\s]+/', $userLocation));
+                foreach ($locationParts as $part) {
+                    if (strlen($part) > 2 && str_contains($jobLocation, $part)) {
+                        $score += 4;
+                        break;
+                    }
+                }
+            }
+
+            // 4. Experience level matching (medium weight - 3 points)
+            if ($userExperienceLevel) {
+                $levelKeywords = [
+                    'entry' => ['entry', 'junior', 'graduate', 'intern', 'trainee', 'fresh', '0-2', '0 - 2', '1-2'],
+                    'intermediate' => ['mid', 'intermediate', '2-5', '3-5', '2 - 5', '3 - 5'],
+                    'senior' => ['senior', 'lead', 'principal', 'manager', 'head', '5+', '5 years+', 'experienced'],
+                ];
+                
+                if (isset($levelKeywords[$userExperienceLevel])) {
+                    foreach ($levelKeywords[$userExperienceLevel] as $keyword) {
+                        if (str_contains($combinedJobText, $keyword)) {
+                            $score += 3;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // 5. Boost for featured jobs (small bonus - 1 point)
+            if ($job->is_featured) {
+                $score += 1;
+            }
+
+            // 6. Recency boost - newer jobs get slight advantage
+            $daysOld = now()->diffInDays($job->created_at);
+            if ($daysOld <= 7) {
+                $score += 2;
+            } elseif ($daysOld <= 14) {
+                $score += 1;
+            }
+
+            $job->relevance_score = $score;
+            return $job;
+        });
+
+        // Filter to only jobs with some relevance, then sort by score
+        $recommendedJobs = $scoredJobs
+            ->filter(fn($job) => $job->relevance_score > 0)
+            ->sortByDesc('relevance_score')
+            ->take(6)
+            ->values();
+
+        return $recommendedJobs;
     }
 }

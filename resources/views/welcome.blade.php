@@ -166,115 +166,218 @@
                     </div>
                 </div>
                 
-                <!-- Right Side - Sandwich Layout: 3 Cards Top, Banner Middle, 3 Cards Bottom -->
-                <div class="hidden lg:block relative animate-fade-in-up animation-delay-500 -mt-8">
-                    <div class="flex flex-col gap-3 h-full" x-data="{
-                        currentBanner: 0,
-                        bannerCount: {{ $banners->count() }},
-                        autoplay: null,
-                        init() {
-                            if (this.bannerCount > 1) {
-                                this.autoplay = setInterval(() => this.next(), 5000);
-                            }
-                        },
-                        next() {
-                            this.currentBanner = (this.currentBanner + 1) % this.bannerCount;
-                        },
-                        prev() {
-                            this.currentBanner = (this.currentBanner - 1 + this.bannerCount) % this.bannerCount;
-                        },
-                        goTo(index) {
-                            this.currentBanner = index;
+                <!-- Right Side - Premium Featured Banner -->
+                <div class="hidden lg:block relative animate-fade-in-up animation-delay-500" x-data="{
+                    currentBanner: 0,
+                    bannerCount: {{ $banners->count() }},
+                    autoplay: null,
+                    init() {
+                        if (this.bannerCount > 1) {
+                            this.autoplay = setInterval(() => this.next(), 5000);
                         }
-                    }">
+                    },
+                    next() {
+                        this.currentBanner = (this.currentBanner + 1) % this.bannerCount;
+                    },
+                    prev() {
+                        this.currentBanner = (this.currentBanner - 1 + this.bannerCount) % this.bannerCount;
+                    },
+                    goTo(index) {
+                        this.currentBanner = index;
+                    }
+                }">
+                    <!-- Decorative Glow Effects -->
+                    <div class="absolute -inset-8 opacity-60 blur-3xl pointer-events-none">
+                        <div class="absolute top-0 right-0 w-72 h-72 bg-primary-500/30 rounded-full"></div>
+                        <div class="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/20 rounded-full"></div>
+                    </div>
+                    
+                    <!-- Floating Decorative Elements -->
+                    <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-400/20 to-emerald-400/20 rounded-2xl rotate-12 backdrop-blur-sm border border-white/10"></div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-amber-400/20 to-orange-400/20 rounded-xl -rotate-12 backdrop-blur-sm border border-white/10"></div>
+                    
+                    @if($banners->count() > 0)
+                    <div class="relative">
+                        <!-- Section Label -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-bold text-sm">Featured Programmes</h3>
+                                    <p class="text-gray-400 text-xs">Empowering your career journey</p>
+                                </div>
+                            </div>
+                            @if($banners->count() > 1)
+                            <div class="flex gap-2">
+                                <button @click="prev()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all border border-white/10">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <button @click="next()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all border border-white/10">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                            </div>
+                            @endif
+                        </div>
                         
-                        <!-- TOP SECTION: 3 Job Cards -->
-                        
-                        <!-- MIDDLE SECTION: Programme Banner Carousel -->
-                        @if($banners->count() > 0)
-                        <div class="relative h-[420px] xl:h-[460px] flex-shrink-0">
+                        <!-- Banner Carousel -->
+                        <div class="relative h-[400px] xl:h-[440px]">
                             @foreach($banners as $index => $banner)
                                 <div x-show="currentBanner === {{ $index }}"
                                      x-transition:enter="transition ease-out duration-500"
-                                     x-transition:enter-start="opacity-0"
-                                     x-transition:enter-end="opacity-100"
+                                     x-transition:enter-start="opacity-0 transform scale-95"
+                                     x-transition:enter-end="opacity-100 transform scale-100"
                                      x-transition:leave="transition ease-in duration-300"
-                                     x-transition:leave-start="opacity-100"
-                                     x-transition:leave-end="opacity-0"
-                                     class="absolute inset-0 flex rounded-3xl overflow-hidden border border-white/15 shadow-2xl shadow-black/40
-                                        @if($banner->type === 'training') bg-gradient-to-r from-emerald-600 to-teal-700
-                                        @elseif($banner->type === 'event') bg-gradient-to-r from-violet-600 to-purple-700
-                                        @elseif($banner->type === 'workshop') bg-gradient-to-r from-blue-600 to-indigo-700
-                                        @else bg-gradient-to-r from-slate-600 to-slate-700
-                                        @endif"
+                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                     x-transition:leave-end="opacity-0 transform scale-95"
+                                     class="absolute inset-0 group"
                                      x-cloak>
-                                    <!-- Left: Content -->
-                                    <div class="flex-1 p-7 flex flex-col">
-                                        <!-- Type Badge -->
-                                        <div class="flex items-center gap-2 mb-3">
-                                            <span class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">{{ $banner->type }}</span>
-                                            <span class="text-white/60 text-xs">Programme</span>
-                                        </div>
-                                        
-                                        <!-- Title & Description -->
-                                        <div class="flex-1">
-                                            <h4 class="font-black text-white text-2xl leading-tight mb-3">{{ $banner->title }}</h4>
-                                            <p class="text-white/75 text-base leading-relaxed line-clamp-3">{{ Str::limit($banner->description, 120) }}</p>
-                                        </div>
-                                        
-                                        <!-- Action Button + Navigation -->
-                                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
-                                            @auth
-                                                @php
-                                                    $hasApplied = \App\Models\BannerApplication::where('banner_id', $banner->id)->where('user_id', auth()->id())->exists();
-                                                @endphp
-                                                @if($hasApplied)
-                                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/20 text-white text-xs font-semibold rounded-lg">
-                                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                                        Applied
-                                                    </span>
-                                                @else
-                                                    <button onclick="document.getElementById('hero-apply-modal-{{ $banner->id }}').showModal()" 
-                                                            class="px-4 py-1.5 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
-                                                        Apply Now
-                                                    </button>
-                                                @endif
-                                            @else
-                                                <a href="{{ route('login') }}" class="inline-block px-4 py-2 bg-white text-gray-900 text-xs font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
-                                                    Login to Apply
-                                                </a>
-                                            @endauth
-                                            
-                                            <!-- Navigation Dots -->
-                                            @if($banners->count() > 1)
-                                            <div class="flex gap-1.5">
-                                                @foreach($banners as $dotIndex => $dotBanner)
-                                                    <button @click="goTo({{ $dotIndex }})" 
-                                                            :class="currentBanner === {{ $dotIndex }} ? 'bg-white w-4' : 'bg-white/30 w-1.5 hover:bg-white/50'"
-                                                            class="h-1.5 rounded-full transition-all duration-300">
-                                                    </button>
-                                                @endforeach
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </div>
                                     
-                                    <!-- Right: Image -->
-                                    @if($banner->image)
-                                    <div class="w-1/2 relative">
-                                        <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="absolute inset-0 w-full h-full object-cover">
-                                        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-black/5"></div>
+                                    <!-- Main Card -->
+                                    <div class="relative h-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl shadow-black/50 
+                                        @if($banner->type === 'training') bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800
+                                        @elseif($banner->type === 'event') bg-gradient-to-br from-violet-600 via-violet-700 to-purple-800
+                                        @elseif($banner->type === 'workshop') bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800
+                                        @else bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800
+                                        @endif">
+                                        
+                                        <!-- Background Pattern -->
+                                        <div class="absolute inset-0 opacity-10">
+                                            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                                <defs>
+                                                    <pattern id="hero-grid-{{ $index }}" width="10" height="10" patternUnits="userSpaceOnUse">
+                                                        <circle cx="1" cy="1" r="0.5" fill="currentColor"/>
+                                                    </pattern>
+                                                </defs>
+                                                <rect width="100" height="100" fill="url(#hero-grid-{{ $index }})"/>
+                                            </svg>
+                                        </div>
+                                        
+                                        <!-- Image Section (Top Half) -->
+                                        @if($banner->image)
+                                        <div class="relative h-[55%] overflow-hidden">
+                                            <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                            
+                                            <!-- Type Badge (Floating on Image) -->
+                                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                                <span class="px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-wider shadow-lg
+                                                    @if($banner->type === 'training') text-emerald-700
+                                                    @elseif($banner->type === 'event') text-violet-700
+                                                    @elseif($banner->type === 'workshop') text-blue-700
+                                                    @else text-slate-700
+                                                    @endif">
+                                                    <span class="flex items-center gap-1.5">
+                                                        <span class="w-1.5 h-1.5 rounded-full animate-pulse
+                                                            @if($banner->type === 'training') bg-emerald-500
+                                                            @elseif($banner->type === 'event') bg-violet-500
+                                                            @elseif($banner->type === 'workshop') bg-blue-500
+                                                            @else bg-slate-500
+                                                            @endif"></span>
+                                                        {{ $banner->type }}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <!-- Live indicator -->
+                                            <div class="absolute top-4 right-4">
+                                                <span class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-medium text-white flex items-center gap-1.5">
+                                                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                                                    Open for Applications
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        
+                                        <!-- Content Section (Bottom Half) -->
+                                        <div class="relative h-[45%] p-6 flex flex-col">
+                                            <!-- Title & Description -->
+                                            <div class="flex-1">
+                                                <h4 class="font-black text-white text-xl xl:text-2xl leading-tight mb-2 line-clamp-2">{{ $banner->title }}</h4>
+                                                <p class="text-white/70 text-sm leading-relaxed line-clamp-2">{{ Str::limit($banner->description, 100) }}</p>
+                                            </div>
+                                            
+                                            <!-- Action Row -->
+                                            <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                                                @auth
+                                                    @php
+                                                        $hasApplied = \App\Models\BannerApplication::where('banner_id', $banner->id)->where('user_id', auth()->id())->exists();
+                                                    @endphp
+                                                    @if($hasApplied)
+                                                        <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl backdrop-blur-sm">
+                                                            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                            Applied Successfully
+                                                        </span>
+                                                    @else
+                                                        <button onclick="document.getElementById('hero-apply-modal-{{ $banner->id }}').showModal()" 
+                                                                class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-900 text-sm font-bold rounded-xl hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                                            Apply Now
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                                        </button>
+                                                    @endif
+                                                @else
+                                                    <a href="{{ route('login') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-900 text-sm font-bold rounded-xl hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                                        Login to Apply
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                                    </a>
+                                                @endauth
+                                                
+                                                <!-- Navigation Dots -->
+                                                @if($banners->count() > 1)
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-white/50 text-xs font-medium" x-text="(currentBanner + 1) + '/' + bannerCount"></span>
+                                                    <div class="flex gap-1.5">
+                                                        @foreach($banners as $dotIndex => $dotBanner)
+                                                            <button @click="goTo({{ $dotIndex }})" 
+                                                                    :class="currentBanner === {{ $dotIndex }} ? 'bg-white w-6' : 'bg-white/30 w-2 hover:bg-white/50'"
+                                                                    class="h-2 rounded-full transition-all duration-300">
+                                                            </button>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                    @endif
                                 </div>
                             @endforeach
                         </div>
-                        @endif
                         
-                        <!-- BOTTOM SECTION: 3 Job Cards -->
-                        
-                        <!-- FOOTER: Notifications & Active Users -->
+                        <!-- Bottom Stats -->
+                        <div class="mt-4 grid grid-cols-3 gap-3">
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10 text-center">
+                                <div class="text-white font-bold text-lg">{{ $banners->count() }}+</div>
+                                <div class="text-gray-400 text-xs">Programmes</div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10 text-center">
+                                <div class="text-white font-bold text-lg">500+</div>
+                                <div class="text-gray-400 text-xs">Enrolled</div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10 text-center">
+                                <div class="text-white font-bold text-lg">98%</div>
+                                <div class="text-gray-400 text-xs">Success Rate</div>
+                            </div>
+                        </div>
                     </div>
+                    @else
+                    <!-- Fallback when no banners -->
+                    <div class="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 text-center">
+                        <div class="w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">Career Opportunities</h3>
+                        <p class="text-gray-400 text-sm mb-4">Explore training programmes and career development opportunities</p>
+                        <a href="{{ route('jobs.index') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-xl transition-all">
+                            Browse Jobs
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                    @endif
                 </div>
                 
                 <!-- Hero Apply Modals -->
