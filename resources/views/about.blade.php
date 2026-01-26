@@ -14,27 +14,7 @@
             </div>
         </div>
 
-        <!-- The Challenge & Opportunity -->
-        <div class="py-20 bg-gradient-to-b from-gray-50 to-white">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-sm font-bold rounded-full mb-4">Africa's Youth Energy</span>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-6">A Continent of Untapped Potential</h2>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            At SPEED Jobs Africa, we believe that every young person deserves a fair shot at building a dignified and fulfilling career. Our mission is to empower students, graduates, and job seekers with the tools, training, and networks they need to thrive in today's fast-changing world of work.
-                        </p>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Together, we can transform challenges into opportunities and build a continent where talent meets opportunity — at SPEED.
-                        </p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-amber-200 rounded-3xl transform rotate-3"></div>
-                        <img src="{{ asset('assets/images/youth energy.png') }}" alt="Africa's Youth Energy" class="relative rounded-3xl shadow-xl w-full object-cover transform -rotate-2 hover:rotate-0 transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Vision & Mission -->
         <div class="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
