@@ -14,8 +14,8 @@ class PaystackService
 
     public function __construct()
     {
-        $this->secretKey = config('services.paystack.secret_key');
-        $this->publicKey = config('services.paystack.public_key');
+        $this->secretKey = config('services.paystack.secret_key') ?? '';
+        $this->publicKey = config('services.paystack.public_key') ?? '';
     }
 
     /**

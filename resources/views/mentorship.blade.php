@@ -42,9 +42,9 @@
                         <li class="flex items-center text-gray-700"><svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Flexible scheduling</li>
                         <li class="flex items-center text-gray-700"><svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Build your personal brand</li>
                     </ul>
-                    <button class="w-full py-4 bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-700 transition-all">
+                    <a href="{{ route('mentorship.apply') }}" class="block w-full py-4 bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-700 transition-all text-center">
                         Apply as Mentor
-                    </button>
+                    </a>
                 </div>
             </div>
 

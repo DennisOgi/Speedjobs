@@ -64,61 +64,98 @@
                 <!-- Services Grid - 3 columns -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
-                    <!-- 1. Career Counseling -->
-                    <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-500"></div>
-                        <div class="relative">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white mb-5 shadow-lg">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <!-- AI Career Counselor - PRIMARY FEATURE -->
+                    <div class="group relative bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 rounded-3xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 overflow-hidden md:col-span-2 lg:col-span-3">
+                        <!-- Animated Background Elements -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32 animate-pulse"></div>
+                            <div class="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full -ml-24 -mb-24 animate-pulse delay-75"></div>
+                        </div>
+                        
+                        <div class="relative grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                            <!-- Left Column - Main Content -->
+                            <div class="text-white">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl border border-white/30">
+                                        <svg class="w-7 h-7 sm:w-9 sm:h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl sm:text-3xl font-bold mb-1">AI Career Counselor</h3>
+                                        <p class="text-emerald-50 text-sm">Your 24/7 Intelligent Career Guide</p>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-white/90 text-base sm:text-lg leading-relaxed mb-6">
+                                    Get instant, personalized career guidance powered by advanced AI. From assessments to interview prep, we've got you covered.
+                                </p>
+
+                                <!-- Quick Stats -->
+                                <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
+                                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                                        <div class="text-2xl sm:text-3xl font-bold">24/7</div>
+                                        <div class="text-xs text-emerald-50">Available</div>
+                                    </div>
+                                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                                        <div class="text-2xl sm:text-3xl font-bold">4+</div>
+                                        <div class="text-xs text-emerald-50">Features</div>
+                                    </div>
+                                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                                        <div class="text-2xl sm:text-3xl font-bold">AI</div>
+                                        <div class="text-xs text-emerald-50">Powered</div>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Career Counseling</h3>
-                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">One-on-one guidance from industry experts on career planning and interview preparation.</p>
-                            <ul class="space-y-2 mb-6 text-sm text-gray-600">
-                                <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Virtual & in-person sessions</li>
-                                <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Personalized career roadmap</li>
-                            </ul>
-                            @auth
-                                @if(auth()->user()->is_paid)
-                                    <a href="{{ route('counseling.create') }}" class="inline-flex items-center px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all text-sm">
-                                        Request Session <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                    </a>
+
+                            <!-- Right Column - Features & CTA -->
+                            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-2xl">
+                                <h4 class="font-bold text-gray-900 mb-4 text-base sm:text-lg flex items-center gap-2">
+                                    <span class="text-2xl">🎯</span>
+                                    What You Get:
+                                </h4>
+                                <ul class="space-y-2.5 sm:space-y-3 text-sm text-gray-700 mb-6">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                        <span><strong>Career DNA Assessment</strong> - Discover your ideal role</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                        <span><strong>Mock Interviews</strong> - Practice with AI feedback</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                        <span><strong>Resume Optimization</strong> - ATS analysis & tips</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                        <span><strong>Career Planning</strong> - Personalized pathways</span>
+                                    </li>
+                                </ul>
+                                
+                                @auth
+                                    @if(auth()->user()->is_paid)
+                                        <a href="{{ route('ai-counselor.index') }}" class="w-full inline-flex items-center justify-center px-5 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base">
+                                            Start Your AI Journey
+                                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('dashboard') }}" class="w-full inline-flex items-center justify-center px-5 py-3.5 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-xl hover:from-yellow-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base">
+                                            🔓 Upgrade to Access
+                                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        </a>
+                                        <p class="text-center text-xs text-gray-500 mt-2">Premium Feature</p>
+                                    @endif
                                 @else
-                                    <span class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-gray-500 font-semibold rounded-xl text-sm"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>Premium Only</span>
-                                @endif
-                            @else
-                                <a href="{{ route('register') }}" class="inline-flex items-center px-5 py-2.5 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-900 transition-all text-sm">Sign Up</a>
-                            @endauth
+                                    <a href="{{ route('register') }}" class="w-full inline-flex items-center justify-center px-5 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base">
+                                        Get Started Free
+                                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    </a>
+                                    <p class="text-center text-xs text-gray-500 mt-2">Create an account to get started</p>
+                                @endauth
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 2. Career Assessment -->
-                    <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-100 to-purple-50 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-500"></div>
-                        <div class="relative">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white mb-5 shadow-lg">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Career Assessment</h3>
-                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">Discover your strengths with psychometric tests and aptitude assessments.</p>
-                            <ul class="space-y-2 mb-6 text-sm text-gray-600">
-                                <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Personality & skills tests</li>
-                                <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Detailed results report</li>
-                            </ul>
-                            @auth
-                                @if(auth()->user()->is_paid)
-                                    <a href="{{ route('career-assessment') }}" class="inline-flex items-center px-5 py-2.5 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-all text-sm">
-                                        Take Assessment <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                    </a>
-                                @else
-                                    <span class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-gray-500 font-semibold rounded-xl text-sm"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>Premium Only</span>
-                                @endif
-                            @else
-                                <a href="{{ route('register') }}" class="inline-flex items-center px-5 py-2.5 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-900 transition-all text-sm">Sign Up</a>
-                            @endauth
-                        </div>
-                    </div>
-
-                    <!-- 3. Resume Builder -->
+                    <!-- Resume Builder -->
                     <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-500"></div>
                         <div class="relative">
@@ -200,48 +237,6 @@
                     </div>
 
                 </div>
-
-                <!-- Upgrade CTA for non-paid users -->
-                @auth
-                    @if(!auth()->user()->is_paid)
-                        <div class="mt-20 bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-64 h-64 bg-primary-500/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
-                            <div class="relative max-w-3xl mx-auto">
-                                <div class="inline-flex items-center px-4 py-2 bg-yellow-500/20 rounded-full mb-6">
-                                    <svg class="w-5 h-5 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <span class="text-yellow-400 font-semibold">Unlock All Features</span>
-                                </div>
-                                <h3 class="text-3xl font-bold text-white mb-4">Upgrade to Premium</h3>
-                                <p class="text-gray-300 text-lg mb-8">
-                                    Get unlimited access to all career services, counseling sessions, assessments, and exclusive resources.
-                                </p>
-                                <a href="{{ route('dashboard') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-xl hover:from-yellow-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl">
-                                    Upgrade Now
-                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                </a>
-                            </div>
-                        </div>
-                    @endif
-                @endauth
-
-                @guest
-                    <div class="mt-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-center shadow-2xl">
-                        <div class="max-w-3xl mx-auto">
-                            <h3 class="text-3xl font-bold text-white mb-4">Ready to Accelerate Your Career?</h3>
-                            <p class="text-blue-100 text-lg mb-8">
-                                Create a premium account to unlock all career services and start your journey to success.
-                            </p>
-                            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                <a href="{{ route('register') }}" class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
-                                    Create Premium Account
-                                </a>
-                                <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-8 py-4 bg-blue-500 text-white font-bold rounded-xl hover:bg-blue-400 transition-all border-2 border-white/30">
-                                    Login
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endguest
 
             </div>
         </div>

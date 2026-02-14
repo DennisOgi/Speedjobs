@@ -65,14 +65,11 @@ class JobseekerDashboardController extends Controller
         // Fetch resources
         $resources = \App\Models\Resource::where('is_active', true)->latest()->get();
 
-        // Fetch workshop registrations
-        $workshopRegistrations = $user->workshopRegistrations()
-            ->with('workshop')
-            ->whereHas('workshop', function($q) {
-                $q->where('start_date', '>=', now());
-            })
+        // Fetch banner applications (replaces workshop registrations)
+        $bannerApplications = \App\Models\BannerApplication::with('banner')
+            ->where('user_id', $user->id)
             ->latest()
-            ->take(3)
+            ->take(5)
             ->get();
 
         // Calculate profile completion percentage
@@ -93,7 +90,7 @@ class JobseekerDashboardController extends Controller
             'counselingRequests',
             'upcomingBookings',
             'resources',
-            'workshopRegistrations',
+            'bannerApplications',
             'profileCompletion'
         ));
     }

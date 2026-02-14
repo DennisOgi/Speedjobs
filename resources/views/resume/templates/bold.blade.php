@@ -6,8 +6,8 @@
                 <img src="{{ asset('storage/' . $resume->photo) }}" class="w-36 h-36 rounded-3xl object-cover shadow-2xl">
             @endif
             <div class="flex-1">
-                <h1 class="text-6xl font-black text-slate-900 leading-none tracking-tight">{{ $resume->full_name ?? 'YOUR NAME' }}</h1>
-                <p class="text-2xl font-bold mt-2" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'PROFESSIONAL TITLE' }}</p>
+                <h1 class="text-4xl font-black text-slate-900 leading-none tracking-tight">{{ $resume->full_name ?? 'YOUR NAME' }}</h1>
+                <p class="text-xl font-bold mt-2" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'PROFESSIONAL TITLE' }}</p>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@
         <div class="col-span-2 space-y-8">
             @if($resume->summary)
                 <div>
-                    <h2 class="text-3xl font-black text-slate-900 mb-4">PROFILE</h2>
-                    <p class="text-slate-600 leading-relaxed text-lg">{{ $resume->summary }}</p>
+                    <h2 class="text-xl font-black text-slate-900 mb-4">PROFILE</h2>
+                    <p class="text-slate-600 leading-relaxed text-base">{{ $resume->summary }}</p>
                 </div>
             @endif
 

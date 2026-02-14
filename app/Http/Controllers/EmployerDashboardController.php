@@ -121,8 +121,37 @@ class EmployerDashboardController extends Controller
             'status' => 'required|in:pending,reviewed,shortlisted,interviewed,offered,rejected',
         ]);
 
-        $application->update($validated);
+        $application->update([
+            'status' => $validated['status'],
+            'reviewed_at' => now(),
+        ]);
 
         return back()->with('success', 'Application status updated!');
+    }
+
+    public function showApplication(JobApplication $application)
+    {
+        // Ensure employer owns the job this application is for
+        if ($application->job->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('employer.applications.show', compact('application'));
+    }
+
+    public function updateApplicationNotes(Request $request, JobApplication $application)
+    {
+        // Ensure employer owns the job this application is for
+        if ($application->job->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'notes' => 'nullable|string|max:5000',
+        ]);
+
+        $application->update($validated);
+
+        return back()->with('success', 'Notes saved successfully!');
     }
 }

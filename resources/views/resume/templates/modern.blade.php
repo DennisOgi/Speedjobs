@@ -91,8 +91,8 @@
     <!-- Main Content -->
     <div class="col-span-8 p-10">
         <div class="mb-8">
-            <h1 class="text-4xl font-bold text-slate-900">{{ $resume->full_name ?? 'Your Name' }}</h1>
-            <p class="text-xl mt-1" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'Professional Title' }}</p>
+            <h1 class="text-3xl font-bold text-slate-900">{{ $resume->full_name ?? 'Your Name' }}</h1>
+            <p class="text-lg mt-1" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'Professional Title' }}</p>
         </div>
 
         @if($resume->summary)

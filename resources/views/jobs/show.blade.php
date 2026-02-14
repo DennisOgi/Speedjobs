@@ -68,6 +68,184 @@
 
                 <!-- Sidebar -->
                 <div class="lg:col-span-1 space-y-6">
+                    <!-- AI Analysis Card -->
+                    @auth
+                        <div x-data="jobAnalysis({{ $job->id }})" class="bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl shadow-lg border border-purple-700/50 p-6 text-white relative overflow-hidden group">
+                            <!-- Background Effects -->
+                            <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-purple-500 rounded-full blur-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                            
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="font-bold text-lg">AI Match Analysis</h3>
+                                </div>
+                                
+                                <p class="text-white/70 text-sm mb-6">Get a comprehensive analysis of how well your profile matches this job.</p>
+                                
+                                <button 
+                                    @click="analyze()"
+                                    class="w-full py-3 bg-white text-purple-900 font-bold rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                                    :disabled="loading"
+                                >
+                                    <span x-show="!loading">Analyze Match</span>
+                                    <span x-show="loading" class="flex items-center gap-2">
+                                        <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Analyzing...
+                                    </span>
+                                </button>
+                            </div>
+
+                            <!-- Analysis Modal -->
+                            <div x-show="showModal" x-transition.opacity x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                                <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="showModal = false"></div>
+                                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative z-10 text-gray-900">
+                                    <!-- Modal Header -->
+                                    <div class="p-6 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-20">
+                                        <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                                            <span class="text-purple-600">✨</span> Analysis Result
+                                        </h3>
+                                        <button @click="showModal = false" class="text-gray-400 hover:text-gray-600">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Modal Content -->
+                                    <div class="p-6 space-y-6">
+                                        <template x-if="result">
+                                            <div class="space-y-6">
+                                                <!-- Score -->
+                                                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+                                                    <div class="relative w-20 h-20 flex-shrink-0">
+                                                        <svg class="w-full h-full transform -rotate-90">
+                                                            <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="transparent" class="text-gray-200" />
+                                                            <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="transparent" 
+                                                                :class="getScoreColor(result.match_score)"
+                                                                :stroke-dasharray="226"
+                                                                :stroke-dashoffset="226 - (226 * result.match_score / 100)"
+                                                            />
+                                                        </svg>
+                                                        <span class="absolute inset-0 flex items-center justify-center text-xl font-bold" x-text="result.match_score + '%'"></span>
+                                                    </div>
+                                                    <div>
+                                                        <h4 class="font-bold text-gray-900">Match Score</h4>
+                                                        <p class="text-sm text-gray-500" x-text="getScoreText(result.match_score)"></p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Strengths -->
+                                                <div>
+                                                    <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                        Your Strengths
+                                                    </h4>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        <template x-for="strength in result.strengths" :key="strength">
+                                                            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg text-sm border border-green-100" x-text="strength"></span>
+                                                        </template>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Missing Skills -->
+                                                <div x-show="result.missing_skills && result.missing_skills.length > 0">
+                                                    <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                                        Missing Skills / Gaps
+                                                    </h4>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        <template x-for="skill in result.missing_skills" :key="skill">
+                                                            <span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-lg text-sm border border-amber-100" x-text="skill"></span>
+                                                        </template>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Advice -->
+                                                <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                                                    <h4 class="font-bold text-blue-900 mb-2 flex items-center gap-2">
+                                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                        AI Advice
+                                                    </h4>
+                                                    <p class="text-blue-800 text-sm leading-relaxed" x-text="result.advice"></p>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        
+                                        <!-- Error State -->
+                                        <div x-show="error" class="text-center py-8">
+                                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                            </div>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Analysis Failed</h3>
+                                            <p class="text-gray-500" x-text="error"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Modal Footer -->
+                                    <div class="p-6 border-t border-gray-100 bg-gray-50 flex justify-end">
+                                        <button @click="showModal = false" class="px-6 py-2 bg-white border border-gray-200 text-gray-700 font-bold rounded-xl hover:bg-gray-50 transition-colors">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function jobAnalysis(jobId) {
+                                return {
+                                    loading: false,
+                                    showModal: false,
+                                    result: null,
+                                    error: null,
+                                    
+                                    async analyze() {
+                                        this.loading = true;
+                                        this.error = null;
+                                        try {
+                                            const response = await fetch(`/ai-counselor/analyze-job/${jobId}`, {
+                                                headers: {
+                                                    'Accept': 'application/json',
+                                                    'X-Requested-With': 'XMLHttpRequest'
+                                                }
+                                            });
+                                            
+                                            if (!response.ok) {
+                                                if (response.status === 403) throw new Error("Please upgrade to Premium to use this feature.");
+                                                throw new Error("Failed to analyze job match.");
+                                            }
+                                            
+                                            this.result = await response.json();
+                                            this.showModal = true;
+                                        } catch (e) {
+                                            this.error = e.message;
+                                            this.showModal = true; // Show modal to display error
+                                        } finally {
+                                            this.loading = false;
+                                        }
+                                    },
+                                    
+                                    getScoreColor(score) {
+                                        if (score >= 80) return 'text-green-500';
+                                        if (score >= 60) return 'text-yellow-500';
+                                        return 'text-red-500';
+                                    },
+                                    
+                                    getScoreText(score) {
+                                        if (score >= 80) return 'Excellent Match! You are a strong candidate.';
+                                        if (score >= 60) return 'Good Match. You have most of the skills.';
+                                        return 'Low Match. You might need to upskill.';
+                                    }
+                                }
+                            }
+                        </script>
+                    @endauth
+
                     <!-- Apply Card -->
                     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sticky top-24">
                         <h3 class="font-bold text-gray-900 text-lg mb-2">Interested in this job?</h3>

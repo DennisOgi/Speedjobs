@@ -36,28 +36,15 @@
                 projects: false,
             },
             mobileView: 'editor',
-            previewScale: 0.7,
             saving: false,
             lastSaved: null,
             autosaveTimeout: null,
 
             init() {
-                this.calculatePreviewScale();
-                window.addEventListener('resize', () => this.calculatePreviewScale());
-                
                 // Auto-save on changes
                 this.$watch('resume', () => {
                     this.triggerAutosave();
                 }, { deep: true });
-            },
-
-            calculatePreviewScale() {
-                const container = document.querySelector('.flex-1.lg\\:h-\\[calc\\(100vh-10rem\\)\\]');
-                if (container) {
-                    const containerWidth = container.offsetWidth - 64;
-                    const a4Width = 210 * 3.78; // 210mm in pixels at 96dpi
-                    this.previewScale = Math.min(containerWidth / a4Width, 0.85);
-                }
             },
 
             toggleSection(section) {

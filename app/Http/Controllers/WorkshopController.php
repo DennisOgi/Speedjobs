@@ -49,11 +49,17 @@ class WorkshopController extends Controller
             return back()->with('error', 'Sorry, this workshop is fully booked.');
         }
 
+        // Validate optional reason
+        $validated = $request->validate([
+            'reason' => 'nullable|string|max:1000',
+        ]);
+
         // Create registration
         WorkshopRegistration::create([
             'user_id' => $user->id,
             'workshop_id' => $workshop->id,
             'status' => 'pending',
+            'notes' => $validated['reason'] ?? null,
         ]);
 
         return back()->with('success', 'You have successfully registered for this workshop! Your registration is pending approval.');

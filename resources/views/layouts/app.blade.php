@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @stack('scripts')
     </head>
     <body class="font-sans antialiased text-gray-900 bg-gray-50 selection:bg-primary-100 selection:text-primary-900 relative">
         <!-- Fixed Mesh Gradient Background -->
@@ -24,8 +25,17 @@
         <div class="min-h-screen flex flex-col">
             @include('components.navbar')
 
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white dark:bg-gray-800 shadow pt-20">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
             <!-- Page Content -->
-            <main class="flex-grow {{ request()->routeIs('welcome') ? '' : 'pt-20' }}">
+            <main class="flex-grow {{ request()->routeIs('welcome') ? '' : (isset($header) ? '' : 'pt-20') }}">
                 {{ $slot }}
             </main>
 

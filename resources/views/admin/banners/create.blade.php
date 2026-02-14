@@ -73,19 +73,21 @@
                             @enderror
                         </div>
 
-                        <!-- Dates -->
+                                        <!-- Dates -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="start_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Start Date</label>
+                                <label for="start_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Banner Display Start Date (Optional)</label>
                                 <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                                <p class="mt-1 text-sm text-gray-500">⚠️ This controls when the banner starts showing on the website, NOT the event date. Leave empty to show immediately.</p>
                                 @error('start_date')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div>
-                                <label for="end_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">End Date</label>
+                                <label for="end_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Banner Display End Date (Optional)</label>
                                 <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                                <p class="mt-1 text-sm text-gray-500">⚠️ This controls when the banner stops showing on the website, NOT the event date. Leave empty to show indefinitely.</p>
                                 @error('end_date')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror

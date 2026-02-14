@@ -117,4 +117,39 @@ class User extends Authenticatable
     {
         return $this->hasMany(Resume::class)->orderBy('updated_at', 'desc');
     }
+
+    public function mentorApplications()
+    {
+        return $this->hasMany(MentorApplication::class);
+    }
+
+    public function aiConversations()
+    {
+        return $this->hasMany(AiConversation::class)->orderBy('last_message_at', 'desc');
+    }
+
+    public function assessmentResults()
+    {
+        return $this->hasMany(AssessmentResult::class)->orderBy('completed_at', 'desc');
+    }
+
+    public function careerPathways()
+    {
+        return $this->hasMany(CareerPathway::class)->orderBy('created_at', 'desc');
+    }
+
+    public function activePathway()
+    {
+        return $this->hasOne(CareerPathway::class)->where('status', 'active')->latest();
+    }
+
+    public function resumeAnalyses()
+    {
+        return $this->hasMany(ResumeAnalysis::class)->orderBy('analyzed_at', 'desc');
+    }
+
+    public function interviewSessions()
+    {
+        return $this->hasMany(InterviewSession::class)->orderBy('started_at', 'desc');
+    }
 }

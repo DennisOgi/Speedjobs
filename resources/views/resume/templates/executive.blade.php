@@ -1,8 +1,8 @@
 <div class="h-full p-12 min-h-[297mm]" style="font-family: 'Georgia', serif;">
     <!-- Header -->
     <div class="text-center border-b-2 border-slate-200 pb-8 mb-8">
-        <h1 class="text-5xl font-normal tracking-wide text-slate-900">{{ $resume->full_name ?? 'Your Name' }}</h1>
-        <p class="text-xl mt-2 tracking-widest uppercase" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'Professional Title' }}</p>
+        <h1 class="text-4xl font-normal tracking-wide text-slate-900">{{ $resume->full_name ?? 'Your Name' }}</h1>
+        <p class="text-lg mt-2 tracking-widest uppercase" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'Professional Title' }}</p>
         <div class="flex justify-center flex-wrap gap-6 mt-4 text-sm text-slate-600">
             @if($resume->email)<span>{{ $resume->email }}</span>@endif
             @if($resume->phone)<span>• {{ $resume->phone }}</span>@endif

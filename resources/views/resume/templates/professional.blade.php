@@ -6,9 +6,9 @@
                 <img src="{{ asset('storage/' . $resume->photo) }}" class="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg">
             @endif
             <div class="flex-1">
-                <h1 class="text-4xl font-bold text-slate-900 tracking-tight">{{ $resume->full_name ?? 'Your Name' }}</h1>
-                <p class="text-xl mt-1 font-medium" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'Professional Title' }}</p>
-                <div class="flex flex-wrap gap-4 mt-4 text-sm text-slate-600">
+                <h1 class="text-3xl font-bold text-slate-900 tracking-tight">{{ $resume->full_name ?? 'Your Name' }}</h1>
+                <p class="text-lg mt-1 font-medium" style="color: {{ $colors['primary'] }}">{{ $resume->job_title ?? 'Professional Title' }}</p>
+                <div class="flex flex-wrap gap-4 mt-3 text-sm text-slate-600">
                     @if($resume->email)
                         <span class="flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>

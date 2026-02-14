@@ -1,0 +1,65 @@
+{
+  "ats_score": 0,
+  "overall_rating": "Poor",
+  "summary_feedback": "The primary issue is that your resume file is unreadable by the ATS. It appears to be an image-based PDF or empty, which prevents any content from being extracted or analyzed. This will cause your application to be immediately rejected by most automated systems.",
+  "section_scores": {
+    "summary": 0,
+    "experience": 0,
+    "skills": 0,
+    "education": 0,
+    "formatting": 0
+  },
+  "section_feedback": {
+    "summary": "No content could be extracted for the summary section due to the unreadable file format.",
+    "experience": "No content could be extracted for the experience section due to the unreadable file format.",
+    "skills": "No content could be extracted for the skills section due to the unreadable file format.",
+    "education": "No content could be extracted for the education section due to the unreadable file format.",
+    "formatting": "The resume's formatting is critically flawed as it's not text-searchable. This makes it impossible for an ATS to parse any information, leading to an automatic failure."
+  },
+  "keywords_found": [],
+  "keywords_missing": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "React",
+    "Computer Science",
+    "Entry-level Developer",
+    "Software Engineer",
+    "Web Development",
+    "Problem Solving",
+    "Data Structures",
+    "Algorithms",
+    "Git",
+    "API",
+    "SQL",
+    "HTML",
+    "CSS"
+  ],
+  "action_items": [
+    {
+      "priority": "high",
+      "section": "Formatting",
+      "suggestion": "Recreate your resume as a standard, text-searchable PDF or a Word document. Avoid image-only PDFs or scanned documents."
+    },
+    {
+      "priority": "high",
+      "section": "Skills",
+      "suggestion": "Once readable, ensure a dedicated 'Skills' section explicitly lists your technical proficiencies such as PHP, Laravel, JavaScript, and React."
+    },
+    {
+      "priority": "medium",
+      "section": "Experience",
+      "suggestion": "For an entry-level role, detail any relevant academic projects, internships, volunteer work, or personal projects. Highlight technologies used and your specific contributions."
+    },
+    {
+      "priority": "medium",
+      "section": "Education",
+      "suggestion": "Clearly state your degree, major (Computer Science), university, and graduation date. Include relevant coursework if applicable."
+    },
+    {
+      "priority": "low",
+      "section": "Summary",
+      "suggestion": "Add a concise professional summary (2-4 sentences) at the top, highlighting your career aspirations, key technical skills, and enthusiasm for a developer role."
+    }
+  ]
+}

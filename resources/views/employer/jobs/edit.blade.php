@@ -57,7 +57,8 @@
 
                             <div>
                                 <label for="salary_range" class="block text-sm font-medium text-gray-700 mb-1">Salary Range</label>
-                                <input type="text" name="salary_range" id="salary_range" value="{{ old('salary_range', $job->salary_range) }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="e.g. $2000 - $4000">
+                                <input type="text" name="salary_range" id="salary_range" value="{{ old('salary_range', $job->salary_range) }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="e.g. ₦200,000 - ₦400,000">
+                                <p class="mt-1 text-xs text-gray-500">Enter salary range in Nigerian Naira (₦)</p>
                                 @error('salary_range')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                             </div>
                         </div>

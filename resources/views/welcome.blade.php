@@ -52,12 +52,6 @@
                              :class="splashPhase >= 1 ? 'scale-100' : 'scale-90'">
                     </div>
                     
-                    <!-- Tagline -->
-                    <div :class="splashPhase >= 2 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'" 
-                         class="transition-all duration-700 delay-200">
-                        <p class="text-gray-300 text-lg md:text-xl font-medium">Connecting People, Skills & Opportunity</p>
-                    </div>
-                    
                     <!-- Loading Indicator -->
                     <div :class="splashPhase >= 3 ? 'opacity-100' : 'opacity-0'" 
                          class="transition-opacity duration-500 delay-300 mt-10">
@@ -95,6 +89,25 @@
             </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 md:pt-28 pb-12 md:pb-16">
+            <!-- Flash Messages -->
+            @if(session('success'))
+                <div class="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-xl text-green-400 font-medium backdrop-blur-sm">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 font-medium backdrop-blur-sm">
+                    {{ session('error') }}
+                </div>
+            @endif
+            
+            @if(session('info'))
+                <div class="mb-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-xl text-blue-400 font-medium backdrop-blur-sm">
+                    {{ session('info') }}
+                </div>
+            @endif
+            
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <!-- Left Content -->
                 <div class="text-center lg:text-left space-y-6 md:space-y-8">
@@ -259,7 +272,7 @@
                                         <!-- Image Section (Top Half) -->
                                         @if($banner->image)
                                         <div class="relative h-[55%] overflow-hidden">
-                                            <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                            <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                                             
                                             <!-- Type Badge (Floating on Image) -->
@@ -466,7 +479,7 @@
                         <!-- Banner Image (top portion) -->
                         @if($banner->image)
                         <div class="h-[120px] sm:h-[110px] relative">
-                            <img src="{{ asset($banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover">
+                            <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <!-- Type Badge -->
                             <div class="absolute top-3 left-3">
@@ -567,9 +580,6 @@
         @endauth
     </div>
     @endif
-
-    <!-- Sponsored Workshops Slider -->
-    <x-workshop-slider :workshops="$workshops" />
 
     <!-- Featured Categories - Redesigned -->
     <div class="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
@@ -802,18 +812,19 @@
         </div>
     </div>
 
-    <!-- Testimonials - Redesigned -->
-    <div class="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <!-- Testimonials - Mobile Optimized with Auto-Scroll -->
+    <div class="py-12 md:py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 md:mb-16">
+            <div class="text-center mb-8 md:mb-12">
                 <span class="inline-block px-4 py-1.5 bg-green-100 text-green-700 text-sm font-semibold rounded-full mb-4">Success Stories</span>
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-gray-900 tracking-tight">Loved by <span class="text-green-600">Thousands</span></h2>
-                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">Real stories from real people who transformed their careers</p>
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-black text-gray-900 tracking-tight">Loved by <span class="text-green-600">Thousands</span></h2>
+                <p class="mt-3 text-base md:text-xl text-gray-600 max-w-2xl mx-auto">Real stories from real people who transformed their careers</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <!-- Desktop Grid -->
+            <div class="hidden md:grid md:grid-cols-3 gap-8">
                 @php
                 $testimonials = [
                     ['name' => 'Adaeze Okonkwo', 'role' => 'Software Engineer at Flutterwave', 'image' => 'A', 'color' => 'from-primary-500 to-primary-600', 'quote' => 'SpeedJobs helped me land my dream job at a fintech company. The resume builder and career coaching were invaluable!'],
@@ -850,8 +861,60 @@
                 </div>
                 @endforeach
             </div>
+
+            <!-- Mobile Horizontal Scroll -->
+            <div class="md:hidden relative">
+                <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4" style="scroll-behavior: smooth;">
+                    @foreach($testimonials as $testimonial)
+                    <div class="flex-shrink-0 w-[85vw] snap-center">
+                        <div class="group relative bg-white p-6 rounded-2xl shadow-lg border border-gray-100 h-full">
+                            <!-- Quote Icon -->
+                            <div class="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br {{ $testimonial['color'] }} rounded-xl flex items-center justify-center shadow-lg">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                            </div>
+                            
+                            <p class="text-gray-600 text-base leading-relaxed mb-6 pt-3">"{{ $testimonial['quote'] }}"</p>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-gradient-to-br {{ $testimonial['color'] }} rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+                                    {{ $testimonial['image'] }}
+                                </div>
+                                <div class="min-w-0">
+                                    <h4 class="font-bold text-base text-gray-900 truncate">{{ $testimonial['name'] }}</h4>
+                                    <p class="text-xs text-gray-500 line-clamp-1">{{ $testimonial['role'] }}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Star Rating -->
+                            <div class="flex gap-1 mt-4">
+                                @foreach(range(1,5) as $star)
+                                <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                
+                <!-- Scroll Indicators -->
+                <div class="flex justify-center gap-2 mt-4">
+                    @foreach($testimonials as $index => $testimonial)
+                    <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 
     <!-- Recent Job Listings - Redesigned -->
     <div class="py-16 md:py-24 bg-white relative">

@@ -10,8 +10,8 @@
                 <img src="{{ asset('storage/' . $resume->photo) }}" class="w-32 h-32 rounded-2xl object-cover border-4 border-white/20 shadow-2xl">
             @endif
             <div>
-                <h1 class="text-5xl font-black tracking-tight">{{ $resume->full_name ?? 'YOUR NAME' }}</h1>
-                <p class="text-xl font-light tracking-widest text-white/80 mt-2 uppercase">{{ $resume->job_title ?? 'Professional Title' }}</p>
+                <h1 class="text-4xl font-black tracking-tight">{{ $resume->full_name ?? 'YOUR NAME' }}</h1>
+                <p class="text-lg font-light tracking-widest text-white/80 mt-2 uppercase">{{ $resume->job_title ?? 'Professional Title' }}</p>
             </div>
         </div>
     </div>
