@@ -15,13 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Seed test admin account (for Railway deployment)
+        $this->call([
+            TestAdminSeeder::class,
         ]);
 
+        // Seed sample data
         \App\Models\Job::factory(50)->create();
     }
 }

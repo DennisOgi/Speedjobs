@@ -136,7 +136,7 @@
                                 @if($banner->image)
                                     <div class="relative">
                                         <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-2xl"></div>
-                                        <img src="{{ asset($banner->image) }}" 
+                                        <img src="{{ asset('storage/' . $banner->image) }}" 
                                              alt="{{ $banner->title }}" 
                                              class="w-full h-48 md:h-64 lg:h-72 object-cover rounded-2xl shadow-2xl ring-4 ring-white/20"
                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
