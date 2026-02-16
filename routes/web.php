@@ -243,4 +243,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('mentor-applications/{application}/reject', [\App\Http\Controllers\Admin\MentorApplicationController::class, 'reject'])->name('mentor-applications.reject');
 });
 
+// TEMPORARY DEBUG ROUTE - Remove after fixing AI features
+Route::get('/debug-gemini-config', function () {
+    $apiKey = config('services.gemini.api_key');
+    $envKey = env('GEMINI_API_KEY');
+    
+    return response()->json([
+        'config_key_exists' => !empty($apiKey),
+        'config_key_length' => strlen($apiKey ?? ''),
+        'config_key_prefix' => $apiKey ? substr($apiKey, 0, 10) . '...' : 'NULL',
+        'env_key_exists' => !empty($envKey),
+        'env_key_length' => strlen($envKey ?? ''),
+        'env_key_prefix' => $envKey ? substr($envKey, 0, 10) . '...' : 'NULL',
+        'config_model' => config('services.gemini.model'),
+        'all_env_keys' => collect($_ENV)->keys()->filter(fn($k) => str_contains(strtoupper($k), 'GEMINI'))->values(),
+    ]);
+})->middleware('auth');
+
 require __DIR__.'/auth.php';
