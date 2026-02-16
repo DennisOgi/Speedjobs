@@ -156,9 +156,9 @@ Route::prefix('interview-coach')->name('interview-coach.')->middleware('throttle
 // Premium Features - Paid Users Only
 Route::middleware(['auth', 'paid'])->group(function () {
 
-    // Career Planning Tool
-    Route::get('/career-planning', [\App\Http\Controllers\CareerPlanningController::class, 'index'])->name('career-planning.index');
-    Route::post('/career-planning', [\App\Http\Controllers\CareerPlanningController::class, 'store'])->name('career-planning.store');
+    // Career Planning Tool (Simple Version)
+    Route::get('/career-planning', [\App\Http\Controllers\CareerPathwayController::class, 'create'])->name('career-planning.index');
+    Route::post('/career-planning', [\App\Http\Controllers\CareerPathwayController::class, 'store'])->name('career-planning.store');
 
     // Career Assessment
     Route::get('/career-assessment', function () {
@@ -243,77 +243,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('mentor-applications/{application}/reject', [\App\Http\Controllers\Admin\MentorApplicationController::class, 'reject'])->name('mentor-applications.reject');
 });
 
-// TEMPORARY DEBUG ROUTES - Remove after fixing AI features
-Route::get('/debug-gemini-config', function () {
-    $apiKey = config('services.gemini.api_key');
-    $envKey = env('GEMINI_API_KEY');
-    
-    return response()->json([
-        'config_key_exists' => !empty($apiKey),
-        'config_key_length' => strlen($apiKey ?? ''),
-        'config_key_prefix' => $apiKey ? substr($apiKey, 0, 10) . '...' : 'NULL',
-        'env_key_exists' => !empty($envKey),
-        'env_key_length' => strlen($envKey ?? ''),
-        'env_key_prefix' => $envKey ? substr($envKey, 0, 10) . '...' : 'NULL',
-        'config_model' => config('services.gemini.model'),
-        'all_env_keys' => collect($_ENV)->keys()->filter(fn($k) => str_contains(strtoupper($k), 'GEMINI'))->values(),
-    ]);
-})->middleware('auth');
 
-Route::get('/test-gemini-api-direct', function () {
-    $apiKey = config('services.gemini.api_key');
-    $model = config('services.gemini.model', 'gemini-2.5-flash');
-    
-    if (empty($apiKey)) {
-        return response()->json(['error' => 'API key not configured'], 500);
-    }
-    
-    try {
-        $client = new \GuzzleHttp\Client(['timeout' => 30]);
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key=" . $apiKey;
-        
-        $response = $client->post($url, [
-            'json' => [
-                'contents' => [
-                    [
-                        'parts' => [
-                            ['text' => 'Say "Hello from Railway!" in one sentence.']
-                        ]
-                    ]
-                ]
-            ],
-        ]);
-        
-        $body = json_decode($response->getBody(), true);
-        
-        return response()->json([
-            'success' => true,
-            'status_code' => $response->getStatusCode(),
-            'response_text' => $body['candidates'][0]['content']['parts'][0]['text'] ?? 'No text in response',
-            'full_response' => $body,
-        ]);
-    } catch (\GuzzleHttp\Exception\ClientException $e) {
-        return response()->json([
-            'error' => 'Gemini API Client Error',
-            'status_code' => $e->getCode(),
-            'message' => $e->getMessage(),
-            'response_body' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null,
-        ], 500);
-    } catch (\GuzzleHttp\Exception\ServerException $e) {
-        return response()->json([
-            'error' => 'Gemini API Server Error',
-            'status_code' => $e->getCode(),
-            'message' => $e->getMessage(),
-            'response_body' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null,
-        ], 500);
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => 'General Error',
-            'class' => get_class($e),
-            'message' => $e->getMessage(),
-            'trace' => $e->getTraceAsString(),
-        ], 500);
-    }
-})->middleware('auth');
 
 require __DIR__.'/auth.php';

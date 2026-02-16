@@ -136,13 +136,40 @@
                         </span>
                         Key Milestones
                     </h3>
-                    <div class="space-y-3">
+                    <div class="space-y-4">
                         @foreach($pathway->pathway_data['milestones'] as $index => $milestone)
-                        <div class="flex items-start p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm mr-4">
-                                {{ $index + 1 }}
-                            </span>
-                            <p class="text-gray-700 flex-1">{{ $milestone }}</p>
+                        <div class="border-l-4 border-blue-600 pl-6 py-4 bg-gray-50 rounded-r-lg hover:bg-blue-50 transition-colors">
+                            <div class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm mr-4 -ml-10">
+                                    {{ $index + 1 }}
+                                </span>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 text-lg mb-2">{{ $milestone['title'] ?? 'Milestone ' . ($index + 1) }}</h4>
+                                    <p class="text-gray-700 mb-3">{{ $milestone['description'] ?? '' }}</p>
+                                    
+                                    @if(isset($milestone['duration_weeks']))
+                                    <p class="text-sm text-blue-600 font-medium mb-2">
+                                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Duration: {{ $milestone['duration_weeks'] }} weeks
+                                    </p>
+                                    @endif
+                                    
+                                    @if(isset($milestone['skills_gained']) && is_array($milestone['skills_gained']) && count($milestone['skills_gained']) > 0)
+                                    <div class="mt-3">
+                                        <p class="text-sm font-semibold text-gray-700 mb-2">Skills You'll Gain:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            @foreach($milestone['skills_gained'] as $skill)
+                                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                                                {{ $skill }}
+                                            </span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         @endforeach
                     </div>
@@ -181,13 +208,33 @@
                         </span>
                         Recommended Resources
                     </h3>
-                    <div class="space-y-3">
-                        @foreach($pathway->pathway_data['resources'] as $index => $resource)
-                        <div class="flex items-start p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-sm mr-4">
-                                {{ $index + 1 }}
-                            </span>
-                            <p class="text-gray-700 flex-1">{{ $resource }}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        @foreach($pathway->pathway_data['resources'] as $resource)
+                        <div class="p-5 bg-gradient-to-br from-gray-50 to-green-50 rounded-xl border border-green-100 hover:shadow-md transition-all">
+                            @if(isset($resource['type']))
+                            <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3
+                                {{ $resource['type'] === 'course' ? 'bg-blue-100 text-blue-700' : '' }}
+                                {{ $resource['type'] === 'certification' ? 'bg-purple-100 text-purple-700' : '' }}
+                                {{ $resource['type'] === 'book' ? 'bg-green-100 text-green-700' : '' }}">
+                                @if($resource['type'] === 'course')
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                @elseif($resource['type'] === 'certification')
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                @endif
+                                {{ ucfirst($resource['type']) }}
+                            </div>
+                            @endif
+                            
+                            <h4 class="font-bold text-gray-900 mb-2">{{ $resource['title'] ?? 'Resource' }}</h4>
+                            <p class="text-gray-600 text-sm">{{ $resource['description'] ?? '' }}</p>
                         </div>
                         @endforeach
                     </div>

@@ -448,6 +448,77 @@
                         </div>
                         
                         @if(isset($bannerApplications) && $bannerApplications->count() > 0)
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <a href="{{ route('banner-applications.index') }}" class="text-sm font-bold text-green-600 hover:text-green-700 flex items-center gap-1">
+                                    View All Applications
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- My Career Pathways -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-sm border border-white/20 p-6">
+                        <h3 class="font-heading font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                            My Career Pathways
+                        </h3>
+
+                        <div class="space-y-3">
+                            @forelse($careerPathways ?? [] as $pathway)
+                                <a href="{{ route('pathways.show', $pathway) }}" class="block p-4 rounded-xl hover:bg-blue-50 transition-colors border border-gray-100 group">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                                {{ $pathway->target_role }}
+                                            </p>
+                                            <p class="text-xs text-gray-600 mt-1">
+                                                From {{ $pathway->current_role }}
+                                            </p>
+                                            <div class="flex items-center gap-3 mt-2">
+                                                <span class="text-xs text-gray-500">
+                                                    {{ $pathway->pathway_data['duration_months'] ?? 12 }} months
+                                                </span>
+                                                <span class="text-xs text-gray-400">•</span>
+                                                <span class="text-xs text-gray-500">
+                                                    {{ count($pathway->pathway_data['milestones'] ?? []) }} milestones
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="shrink-0 text-right">
+                                            <div class="text-2xl font-bold text-blue-600">{{ $pathway->progress_percentage }}%</div>
+                                            <p class="text-xs text-gray-500 mt-1">Progress</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Progress Bar -->
+                                    <div class="mt-3 bg-gray-100 rounded-full h-2 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-full transition-all duration-500" style="width: {{ $pathway->progress_percentage }}%"></div>
+                                    </div>
+                                </a>
+                            @empty
+                                <div class="text-center py-6">
+                                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">No career pathways yet</p>
+                                    <a href="{{ route('career-planning.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                        Create Your First Pathway
+                                    </a>
+                                </div>
+                            @endforelse
+                        </div>
+                        
+                        @if(isset($careerPathways) && $careerPathways->count() > 0)
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <a href="{{ route('pathways.index') }}" class="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                                    View All Pathways
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
                             <a href="{{ route('banner-applications.index') }}" class="block mt-4 text-center text-sm font-bold text-gray-500 hover:text-gray-700">View All Applications</a>
                         @endif
                     </div>

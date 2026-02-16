@@ -551,20 +551,55 @@ class GeminiService
      */
     public function generateCareerPathway(string $targetRole, array $currentSkills, string $experienceLevel): array
     {
-        $prompt = "Create a detailed career pathway for someone wanting to become a {$targetRole}.\n\n";
-        $prompt .= "Current Experience Level: {$experienceLevel}\n";
-        $prompt .= "Current Skills: " . implode(', ', $currentSkills) . "\n\n";
-        $prompt .= "Return JSON with these exact keys:\n";
-        $prompt .= "- title: string (pathway title)\n";
-        $prompt .= "- description: string (2-3 sentence overview)\n";
-        $prompt .= "- duration_months: int (estimated time to complete)\n";
-        $prompt .= "- milestones: array of 5-7 objects with { title (string), description (string), duration_weeks (int), skills_gained (array of strings) }\n";
-        $prompt .= "- required_skills: array of strings (skills needed)\n";
-        $prompt .= "- recommended_resources: array of 3-5 objects with { type ('course'|'book'|'certification'), title (string), description (string) }";
+        $skillsList = implode(', ', $currentSkills);
+        
+        $prompt = "You are a career counselor creating a personalized career development plan.\n\n";
+        $prompt .= "CLIENT PROFILE:\n";
+        $prompt .= "- Target Role: {$targetRole}\n";
+        $prompt .= "- Current Experience: {$experienceLevel}\n";
+        $prompt .= "- Current Skills: {$skillsList}\n\n";
+        
+        $prompt .= "Create a SPECIFIC, ACTIONABLE career pathway with:\n\n";
+        
+        $prompt .= "1. MILESTONES (5-7 detailed steps):\n";
+        $prompt .= "   - Each milestone should be SPECIFIC to {$targetRole}\n";
+        $prompt .= "   - Include concrete actions, not generic advice\n";
+        $prompt .= "   - List 3-5 SPECIFIC skills for each milestone\n";
+        $prompt .= "   - Example: Instead of 'Learn fundamentals', say 'Master React hooks, state management, and component lifecycle'\n\n";
+        
+        $prompt .= "2. RESOURCES (3-5 specific recommendations):\n";
+        $prompt .= "   - Provide REAL course names, book titles, or certification names\n";
+        $prompt .= "   - Example: 'AWS Certified Solutions Architect' not 'Industry Certification'\n";
+        $prompt .= "   - Example: 'The Pragmatic Programmer by Hunt & Thomas' not 'Career Development Book'\n";
+        $prompt .= "   - Example: 'Complete {$targetRole} Bootcamp on Udemy' not 'Online Course'\n\n";
+        
+        $prompt .= "Return ONLY valid JSON with these exact keys:\n";
+        $prompt .= "{\n";
+        $prompt .= "  \"title\": \"Career Path to {$targetRole}\",\n";
+        $prompt .= "  \"description\": \"2-3 sentence personalized overview based on their current skills and target role\",\n";
+        $prompt .= "  \"duration_months\": 12-24,\n";
+        $prompt .= "  \"milestones\": [\n";
+        $prompt .= "    {\n";
+        $prompt .= "      \"title\": \"Specific milestone name\",\n";
+        $prompt .= "      \"description\": \"Detailed description with concrete actions\",\n";
+        $prompt .= "      \"duration_weeks\": 8-16,\n";
+        $prompt .= "      \"skills_gained\": [\"Specific skill 1\", \"Specific skill 2\", \"Specific skill 3\"]\n";
+        $prompt .= "    }\n";
+        $prompt .= "  ],\n";
+        $prompt .= "  \"required_skills\": [\"List of specific technical and soft skills for {$targetRole}\"],\n";
+        $prompt .= "  \"recommended_resources\": [\n";
+        $prompt .= "    {\n";
+        $prompt .= "      \"type\": \"course|book|certification\",\n";
+        $prompt .= "      \"title\": \"REAL, specific resource name\",\n";
+        $prompt .= "      \"description\": \"Why this resource is valuable for {$targetRole}\"\n";
+        $prompt .= "    }\n";
+        $prompt .= "  ]\n";
+        $prompt .= "}\n\n";
+        $prompt .= "IMPORTANT: Be specific and actionable. Avoid generic advice.";
 
         $config = $this->getGenerationConfig();
         $config['responseMimeType'] = 'application/json';
-        $config['maxOutputTokens'] = 3000;
+        $config['maxOutputTokens'] = 4000;
 
         return $this->sendStructuredPrompt($prompt, $config);
     }

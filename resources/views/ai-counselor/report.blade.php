@@ -34,7 +34,43 @@
 
             @php
                 $report = $session->report_data ?? [];
+                
+                // Check if report is empty or missing critical data
+                $hasValidReport = !empty($report) && (
+                    ($session->module === 'career_assessment' && (isset($report['career_dna']) || isset($report['work_style']))) ||
+                    ($session->module === 'interview_prep' && isset($report['overall_score']))
+                );
             @endphp
+
+            @if(!$hasValidReport)
+                <!-- Missing Report Data - Show Helpful Message -->
+                <div class="text-center py-12">
+                    <div class="w-20 h-20 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3">Report Data Not Available</h2>
+                    <p class="text-gray-600 mb-6 max-w-md mx-auto">
+                        This session was completed before the latest AI improvements. Please retake the assessment to generate a new comprehensive report.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{{ route('ai-counselor.index') }}" class="px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all">
+                            Back to Modules
+                        </a>
+                        <form action="{{ route('ai-counselor.start') }}" method="POST" class="inline">
+                            @csrf
+                            <input type="hidden" name="module" value="{{ $session->module }}">
+                            @if($session->module === 'interview_prep' && isset($session->context_data['target_role']))
+                                <input type="hidden" name="target_role" value="{{ $session->context_data['target_role'] }}">
+                            @endif
+                            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg">
+                                Retake {{ ucwords(str_replace('_', ' ', $session->module)) }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @else
 
             <!-- Career Assessment Report -->
             @if($session->module === 'career_assessment')
@@ -193,10 +229,13 @@
                     </a>
                 </div>
             @endif
+            
+            @endif {{-- End of hasValidReport check --}}
 
         </div>
 
-        <!-- Actions -->
+        <!-- Actions (only show if report is valid) -->
+        @if($hasValidReport ?? false)
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('ai-counselor.index') }}" class="px-8 py-3 bg-white border border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all text-center">
                 Back to Modules
@@ -212,6 +251,7 @@
                 </button>
             </form>
         </div>
+        @endif
 
     </div>
 </div>

@@ -72,6 +72,12 @@ class JobseekerDashboardController extends Controller
             ->take(5)
             ->get();
 
+        // Fetch career pathways
+        $careerPathways = $user->careerPathways()
+            ->latest('ai_generated_at')
+            ->take(3)
+            ->get();
+
         // Calculate profile completion percentage
         $profileFields = ['name', 'email', 'phone', 'location', 'university', 'field_of_study', 'graduation_year', 'skills', 'experience_level'];
         $completedFields = 0;
@@ -91,6 +97,7 @@ class JobseekerDashboardController extends Controller
             'upcomingBookings',
             'resources',
             'bannerApplications',
+            'careerPathways',
             'profileCompletion'
         ));
     }
