@@ -262,6 +262,7 @@ Route::get('/debug-gemini-config', function () {
 
 Route::get('/test-gemini-api-direct', function () {
     $apiKey = config('services.gemini.api_key');
+    $model = config('services.gemini.model', 'gemini-2.5-flash');
     
     if (empty($apiKey)) {
         return response()->json(['error' => 'API key not configured'], 500);
@@ -269,7 +270,7 @@ Route::get('/test-gemini-api-direct', function () {
     
     try {
         $client = new \GuzzleHttp\Client(['timeout' => 30]);
-        $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' . $apiKey;
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key=" . $apiKey;
         
         $response = $client->post($url, [
             'json' => [
