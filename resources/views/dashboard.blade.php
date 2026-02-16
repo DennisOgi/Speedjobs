@@ -519,9 +519,6 @@
                             </div>
                         @endif
                     </div>
-                            <a href="{{ route('banner-applications.index') }}" class="block mt-4 text-center text-sm font-bold text-gray-500 hover:text-gray-700">View All Applications</a>
-                        @endif
-                    </div>
 
                     <!-- Profile Completion -->
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-sm border border-white/20 p-6">
