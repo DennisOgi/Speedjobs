@@ -4,6 +4,93 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResumeController;
 use Illuminate\Support\Facades\Route;
 
+// Diagnostic route for Railway debugging
+Route::get('/diagnostic-check', function () {
+    $diagnostics = [];
+    
+    // 1. Environment
+    $diagnostics['environment'] = [
+        'APP_ENV' => env('APP_ENV'),
+        'RAILWAY_ENVIRONMENT' => env('RAILWAY_ENVIRONMENT', 'not detected'),
+    ];
+    
+    // 2. Gemini API Key
+    $envKey = env('GEMINI_API_KEY');
+    $configKey = config('services.gemini.api_key');
+    
+    $diagnostics['gemini_config'] = [
+        'env_key_set' => !empty($envKey),
+        'env_key_length' => $envKey ? strlen($envKey) : 0,
+        'config_key_set' => !empty($configKey),
+        'config_key_length' => $configKey ? strlen($configKey) : 0,
+        'model' => config('services.gemini.model'),
+    ];
+    
+    // 3. Config cache
+    $diagnostics['config_cache'] = [
+        'cached' => file_exists(base_path('bootstrap/cache/config.php')),
+    ];
+    
+    // 4. GeminiService
+    try {
+        $gemini = app(\App\Services\GeminiService::class);
+        $reflection = new ReflectionClass($gemini);
+        $property = $reflection->getProperty('apiKey');
+        $property->setAccessible(true);
+        $serviceApiKey = $property->getValue($gemini);
+        
+        $diagnostics['gemini_service'] = [
+            'initialized' => true,
+            'api_key_in_service' => !empty($serviceApiKey),
+            'api_key_length' => $serviceApiKey ? strlen($serviceApiKey) : 0,
+        ];
+    } catch (Exception $e) {
+        $diagnostics['gemini_service'] = [
+            'initialized' => false,
+            'error' => $e->getMessage(),
+        ];
+    }
+    
+    // 5. API test
+    if (!empty($configKey)) {
+        try {
+            $response = \Illuminate\Support\Facades\Http::withoutVerifying()
+                ->timeout(10)
+                ->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$configKey}", [
+                    'contents' => [['parts' => [['text' => 'Reply with: API Working']]]]
+                ]);
+            
+            $diagnostics['api_test'] = [
+                'success' => $response->successful(),
+                'status' => $response->status(),
+                'response' => $response->successful() ? 
+                    substr($response->json()['candidates'][0]['content']['parts'][0]['text'] ?? 'No text', 0, 100) : 
+                    substr($response->body(), 0, 300),
+            ];
+        } catch (Exception $e) {
+            $diagnostics['api_test'] = [
+                'success' => false,
+                'error' => $e->getMessage(),
+            ];
+        }
+    } else {
+        $diagnostics['api_test'] = ['skipped' => 'No API key'];
+    }
+    
+    // Summary
+    $issues = [];
+    if (empty($envKey)) $issues[] = 'GEMINI_API_KEY not in env';
+    if (empty($configKey)) $issues[] = 'GEMINI_API_KEY not in config';
+    if ($envKey !== $configKey) $issues[] = 'Keys do not match';
+    
+    $diagnostics['summary'] = [
+        'status' => empty($issues) ? 'OK' : 'ISSUES',
+        'issues' => $issues,
+    ];
+    
+    return response()->json($diagnostics, 200, [], JSON_PRETTY_PRINT);
+});
+
 // Temporary route to create admin account on Railway
 Route::get('/setup-admin-account', function () {
     try {
